@@ -11,7 +11,6 @@
 games played on chess.com: 268
 games played on lichess: 0
 example game:
-Game
   time_control: 60+0
     player:   
       color: Color.White
