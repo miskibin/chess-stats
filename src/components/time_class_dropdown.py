@@ -4,21 +4,22 @@ from src.components import ids
 from dash.dependencies import Input, Output
 
 def get_years(df: pd.DataFrame) -> list:
-    return [int(v) for v in df['date'].dt.year.unique()]
+    labels = [v for v in df['time_class'].unique()]
+    return labels
 
 
-def render(app: Dash, df: pd.DataFrame, id = ids.YEAR_DROPDOWN) -> html.Div:
+def render(app: Dash, df: pd.DataFrame, id = ids.TIME_CLASS_DROPDOWN) -> html.Div:
     return html.Div(
         className='app-div',
         style={'margin': '10px'},
         children=[
-            html.H4('year'),
+            html.H4('time class'),
             dcc.Dropdown(
                 id=id,
                 multi=True,
-                clearable=False,
                 options=get_years(df),
-                value=[get_years(df)[0]],
+                value='rapid',
+                clearable=False,
                 style={'width': '20vw', 'color': 'black'}
             )
         ])
