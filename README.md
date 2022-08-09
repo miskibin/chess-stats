@@ -7,5 +7,6 @@
 3. convert python objects to dataframe
 4. shows all of information about games on charts using simple web app.
 ### examples:
-![image](https://user-images.githubusercontent.com/77834536/183668550-caf7fdf3-b893-43cf-b015-20e4cb9fdd2d.png)
-![image](https://user-images.githubusercontent.com/77834536/183668898-624de0b4-9138-4d25-a556-88f4312c083c.png)
+![image](https://user-images.githubusercontent.com/77834536/183727330-bcbe7061-d95b-438b-a95f-ec1f9ce3d6b4.png)
+![image](https://user-images.githubusercontent.com/77834536/183727357-6fc63b62-4ad5-4e60-acce-79d39fd13bee.png)
+
