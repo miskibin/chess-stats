@@ -1,0 +1,12 @@
+dataframe_schema:
+  headers:
+    {
+      "player_elo": [],
+      "opponent_elo": [],
+      "result": [],
+      "date": [],
+      "time_control": [],
+      "mean_player_time_per_move": [],
+      "mean_opponent_time_per_move": [],
+      "player_color": [],
+    }

@@ -1,0 +1,6 @@
+YEAR_DROPDOWN = 'year-dropdown'
+SELECT_ALL_YEARS_BUTTON = 'select-all-years-button'
+BAR_CHART = 'bar-chart'
+X_DROPDOWN = 'x-dropdown'
+Y_DROPDOWN = 'y-dropdown'
+GROUP_DROPDOWN = 'group-dropdown'
