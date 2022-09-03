@@ -5,15 +5,14 @@ import dash_bootstrap_components as dbc
 import pandas as pd 
 
 def get_df() -> pd.DataFrame:
-    if not df:
-        return None
-    df =  pd.read_csv('data/games.csv')
+
+    df =  pd.read_csv('Barabasz60.csv')
     df['date'] = pd.to_datetime(df['date'])
     df.index = df['date']
     return df
 
-def create_layout(app: Dash, df) -> html.Div:
-
+def create_layout(app: Dash, df: pd.DataFrame) -> html.Div:
+    df = get_df()
     tab1 = dbc.Card(
         dbc.CardBody([
             section.create_section(

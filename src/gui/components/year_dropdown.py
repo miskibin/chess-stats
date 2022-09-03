@@ -3,7 +3,9 @@ import pandas as pd
 import ids
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
+
 def get_years(df: pd.DataFrame) -> list:
+    print(df['date'].dtype)
     return [int(v) for v in df['date'].dt.year.unique()]
 
 
