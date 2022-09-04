@@ -1,0 +1,117 @@
+date,player_elo,opponent_elo,opening,result,time_control,player_color,mean_player_time_per_move,mean_opponent_time_per_move,moves,time_class,player_result
+2021-12-04 11:59:20,1605,1445,"Sicilian Defense: Alapin Variation, Barmen Defense",0.0,15+10,0,35.42,34.83,26,rapid,0.0
+2021-12-04 18:04:52,1595,1571,Caro-Kann Defense,0.0,15+10,0,30.08,12.99,39,rapid,0.0
+2021-12-04 19:23:38,1596,1629,Sicilian Defense: Modern Variations,0.5,10+0,1,6.71,4.04,87,rapid,0.5
+2021-12-04 19:42:58,1588,1606,"Trompowsky Attack: Classical Defense, Big Center Variation",1.0,10+0,1,11.51,9.93,50,rapid,0.0
+2021-12-05 10:58:23,1598,1652,Vienna Game,1.0,10+0,0,13.26,14.19,42,rapid,1.0
+2021-12-05 12:05:39,1589,1569,Queen's Pawn Game: Colle System,1.0,10+0,1,12.43,7.22,43,rapid,0.0
+2021-12-05 14:24:29,1597,1582,Sicilian Defense,0.0,10+0,1,11.97,12.49,48,rapid,1.0
+2021-12-05 17:42:47,1606,1649,Alekhine Defense,1.0,10+0,0,0.0,0.0,1,rapid,1.0
+2021-12-05 17:43:49,1598,1632,Vienna Game,0.0,10+0,0,11.45,8.4,42,rapid,0.0
+2021-12-05 18:01:31,1605,1547,Vienna Game: Vienna Gambit,1.0,10+0,0,13.35,15.86,23,rapid,1.0
+2021-12-05 20:35:18,1597,1625,Vienna Game: Max Lange Defense,0.0,10+0,0,12.24,3.5,31,rapid,0.0
+2021-12-06 12:58:13,1589,1613,Sicilian Defense: Modern Variations,1.0,10+0,1,15.78,8.12,21,rapid,0.0
+2021-12-06 13:46:59,1597,1572,Caro-Kann Defense,1.0,10+0,0,6.89,5.8,83,rapid,1.0
+2021-12-06 14:08:45,1597,1618,Indian Defense: London System,0.5,10+0,1,8.32,4.47,67,rapid,0.5
+2021-12-07 14:22:21,1606,1625,Sicilian Defense: McDonnell Attack,0.0,10+0,1,10.75,11.32,53,rapid,1.0
+2021-12-07 20:51:47,1597,1589,Caro-Kann Defense,0.0,10+0,0,10.51,9.92,57,rapid,0.0
+2021-12-08 11:02:17,1605,1573,Vienna Game: Vienna Gambit,1.0,10+0,0,12.62,22.46,16,rapid,1.0
+2021-12-08 11:39:24,1614,1659,"Sicilian Defense: Alapin Variation, Barmen Defense",1.0,10+0,0,8.02,6.12,69,rapid,1.0
+2021-12-08 12:01:27,1606,1639,Sicilian Defense: McDonnell Attack,1.0,10+0,1,11.65,7.41,49,rapid,0.0
+2021-12-08 20:15:16,1615,1637,Caro-Kann Defense,1.0,10+0,0,11.42,4.26,25,rapid,1.0
+2021-12-08 20:27:41,1607,1603,Sicilian Defense: Modern Variations,1.0,10+0,1,11.83,7.87,49,rapid,0.0
+2021-12-10 14:51:34,1613,1506,Vienna Game,1.0,15+10,0,30.48,31.15,33,rapid,1.0
+2021-12-10 20:39:23,1620,1560,Sicilian Defense: McDonnell Attack,0.0,15+10,1,20.33,19.99,22,rapid,1.0
+2021-12-10 20:59:48,1625,1490,Sicilian Defense: Old Sicilian,0.0,15+10,1,19.95,12.97,58,rapid,1.0
+2021-12-11 17:17:10,1632,1586,Sicilian Defense: Closed,1.0,15+10,0,33.84,38.01,25,rapid,1.0
+2021-12-11 18:25:34,1632,957,Sicilian Defense: Accelerated Dragon,0.0,15+10,1,2.08,11.43,6,rapid,1.0
+2021-12-11 18:27:48,1640,1609,"Sicilian Defense: Alapin Variation, Barmen Defense",1.0,15+10,0,13.34,17.37,7,rapid,1.0
+2021-12-11 18:37:43,1631,1626,Alekhine Defense: Scandinavian Variation,0.0,15+10,0,18.72,18.29,73,rapid,0.0
+2021-12-11 19:49:12,1638,1573,Vienna Game: Vienna Gambit,1.0,15+10,0,39.1,41.39,29,rapid,1.0
+2021-12-11 21:25:07,1628,1577,Caro-Kann Defense,0.0,15+10,0,28.69,28.49,39,rapid,0.0
+2021-12-15 15:29:38,1637,1642,Sicilian Defense: Bowdler Attack,0.0,30+0,1,42.82,20.88,30,classical,1.0
+2021-12-15 19:56:50,1644,1599,Sicilian Defense: Alapin Variation,1.0,30+0,0,42.73,32.22,38,classical,1.0
+2021-12-17 17:23:38,1652,1627,Sicilian Defense: Accelerated Dragon,0.0,30+0,1,39.37,34.54,44,classical,1.0
+2021-12-22 10:16:32,1658,1547,Caro-Kann Defense,1.0,10+0,0,19.35,20.87,23,rapid,1.0
+2021-12-25 13:53:06,1651,1689,Sicilian Defense: Alapin Variation,0.0,10+0,0,11.17,9.07,53,rapid,0.0
+2021-12-25 17:07:48,1658,1597,Sicilian Defense: Alapin Variation,1.0,10+0,0,10.83,8.84,52,rapid,1.0
+2021-12-25 17:55:13,1657,1602,French Defense: Queen's Knight,0.5,10+0,0,10.65,8.43,52,rapid,0.5
+2021-12-25 19:57:43,1650,1712,French Defense: Queen's Knight,0.0,10+0,0,12.84,12.75,46,rapid,0.0
+2021-12-26 16:45:39,1658,1634,Sicilian Defense,0.0,10+0,1,8.58,2.91,59,rapid,1.0
+2021-12-27 18:47:59,1650,1662,Sicilian Defense: Bowdler Attack,1.0,10+0,1,14.9,7.33,34,rapid,0.0
+2021-12-28 19:31:28,1641,1636,Sicilian Defense: Moscow Variation,1.0,10+0,1,10.71,9.72,57,rapid,0.0
+2021-12-28 19:51:41,1632,1628,Pirc Defense,0.0,10+0,0,8.16,8.12,73,rapid,0.0
+2021-12-29 12:46:25,1625,1670,Sicilian Defense: Alapin Variation,0.0,10+0,0,10.82,4.88,43,rapid,0.0
+2021-12-29 12:58:30,1615,1556,"Vienna Game: Vienna Gambit, Main Line",0.0,10+0,0,17.31,9.14,26,rapid,0.0
+2021-12-29 13:11:31,1608,1648,"Sicilian Defense: Smith-Morra Gambit Accepted, Scheveningen Formation",1.0,10+0,1,16.25,11.46,12,rapid,0.0
+2021-12-30 19:58:02,1616,1610,Vienna Game: Anderssen Defense,1.0,10+0,0,12.67,14.94,41,rapid,1.0
+2021-12-30 20:56:57,1607,1559,"Sicilian Defense: Alapin Variation, Smith-Morra Declined",0.0,10+0,0,11.99,10.23,50,rapid,0.0
+2021-12-31 12:37:18,1597,1530,Sicilian Defense: Halasz Gambit,1.0,10+0,1,13.45,10.34,45,rapid,0.0
+2021-12-31 15:59:21,1589,1587,Sicilian Defense: Moscow Variation,1.0,10+0,1,7.09,3.3,85,rapid,0.0
+2021-11-22 21:30:27,1602,1521,Queen's Gambit Declined: Three Knights Variation,0.0,10+0,1,7.35,7.4,81,rapid,1.0
+2021-11-23 14:44:45,1589,1580,Four Knights Game: Italian Variation,0.0,10+0,0,8.82,4.52,68,rapid,0.0
+2021-11-23 15:31:15,1601,1615,Queen's Gambit Declined: Normal Defense,0.0,10+0,1,10.22,10.16,54,rapid,1.0
+2021-11-23 18:14:58,1613,1632,French Defense: Queen's Knight,1.0,10+0,0,16.44,8.77,35,rapid,1.0
+2021-11-23 18:42:07,1622,1553,Queen's Gambit Declined: Normal Defense,0.0,10+0,1,7.97,2.22,9,rapid,1.0
+2021-11-23 19:02:53,1612,1619,"Sicilian Defense: Alapin Variation, Smith-Morra Declined",0.0,10+0,0,9.88,8.05,59,rapid,0.0
+2021-11-24 13:37:21,1621,1560,Pirc Defense,1.0,10+0,0,10.68,11.07,48,rapid,1.0
+2021-11-24 14:10:57,1610,1590,Scandinavian Defense: Main Line,0.0,10+0,0,15.72,11.28,36,rapid,0.0
+2021-11-24 17:01:00,1609,1571,Queen's Gambit Declined,0.5,10+0,1,10.09,7.94,57,rapid,0.5
+2021-11-24 18:24:01,1617,1562,Sicilian Defense: Alapin Variation,1.0,10+0,0,10.53,10.35,48,rapid,1.0
+2021-11-24 18:48:09,1625,1587,Vienna Game: Vienna Gambit,1.0,10+0,0,12.16,6.52,14,rapid,1.0
+2021-11-24 19:55:55,1633,1589,Zukertort Opening: Sicilian Invitation,0.0,10+0,1,10.18,5.7,45,rapid,1.0
+2021-11-24 20:21:50,1632,1612,Sicilian Defense: Smith-Morra Gambit,0.5,15+10,1,30.66,24.19,41,rapid,0.5
+2021-11-29 15:04:44,1623,1614,"Sicilian Defense: Alapin Variation, Smith-Morra Declined",1.0,15+10,1,25.58,27.29,45,rapid,0.0
+2021-11-30 18:14:06,1618,1775,Queen's Pawn Game: Colle System,1.0,15+10,1,29.97,28.6,42,rapid,0.0
+2021-10-02 14:33:03,1592,1617,Sicilian Defense: Moscow Variation,0.0,15+10,1,37.15,23.71,30,rapid,1.0
+2021-09-17 14:46:48,1554,1543,Pirc Defense: Classical Variation,1.0,15+10,0,25.62,20.59,55,rapid,1.0
+2021-09-18 14:00:07,1542,1528,Vienna Game: Vienna Gambit,0.0,15+10,0,25.59,15.85,29,rapid,0.0
+2021-09-19 16:03:14,1532,1546,Vienna Game: Vienna Gambit,0.0,15+10,0,39.35,36.98,28,rapid,0.0
+2021-09-20 16:58:18,1521,1501,"Sicilian Defense: Dragon Variation, Modern Bc4 Variation",1.0,15+10,1,20.16,12.3,20,rapid,0.0
+2021-09-20 17:11:28,1511,1536,Vienna Game: Vienna Gambit,0.0,15+10,0,32.0,14.78,23,rapid,0.0
+2021-09-22 14:09:56,1522,1551,"Sicilian Defense: Alapin Variation, Smith-Morra Declined",0.0,15+10,1,33.59,27.94,27,rapid,1.0
+2021-09-23 11:57:20,1510,1455,Caro-Kann Defense,0.0,15+10,0,33.26,22.02,27,rapid,0.0
+2021-09-23 14:03:55,1518,1438,Sicilian Defense: Accelerated Dragon,0.0,15+10,1,32.62,16.88,36,rapid,1.0
+2021-09-23 17:25:19,1526,1486,Slav Defense: Three Knights Variation,0.0,15+10,1,11.13,11.75,70,rapid,1.0
+2021-09-24 12:47:46,1516,1507,Sicilian Defense: Closed,1.0,15+10,1,40.31,32.0,30,rapid,0.0
+2021-09-24 14:27:01,1523,1447,"Sicilian Defense: Canal Attack, Main Line",0.0,15+10,1,9.12,33.86,5,rapid,1.0
+2021-09-24 14:41:50,1530,1445,Vienna Game: Vienna Gambit,1.0,15+10,0,30.08,18.12,13,rapid,1.0
+2021-09-24 15:53:55,1537,1452,Sicilian Defense: Staunton-Cochrane Variation,0.0,15+10,1,28.65,16.67,27,rapid,1.0
+2021-09-25 16:54:14,1546,1541,Hungarian Opening: Sicilian Invitation,0.0,15+10,1,23.02,18.03,63,rapid,1.0
+2021-09-26 10:59:31,1552,1435,French Defense: Queen's Knight,1.0,15+10,0,19.78,17.44,48,rapid,1.0
+2021-09-26 16:32:49,1559,1519,Queen's Gambit Declined: Ragozin Defense,0.0,15+10,1,41.58,19.25,23,rapid,1.0
+2021-09-27 10:45:53,1559,1580,"Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange",0.5,15+10,0,23.23,15.35,63,rapid,0.5
+2021-09-27 12:40:44,1569,1650,"Catalan Opening: Open Defense, Tarrasch Defense",0.0,15+10,1,30.09,25.27,42,rapid,1.0
+2021-09-28 09:15:25,1565,1752,Sicilian Defense: Moscow Variation,1.0,15+10,1,29.2,18.69,41,rapid,0.0
+2021-09-28 09:56:06,1573,1536,Sicilian Defense: Modern Variations,0.0,15+10,1,28.38,17.41,23,rapid,1.0
+2021-09-29 08:44:25,1580,1503,Sicilian Defense: Smith-Morra Gambit,0.0,15+10,1,51.27,51.54,21,rapid,1.0
+2021-09-29 11:11:49,1591,1705,Sicilian Defense,0.0,15+10,1,35.07,10.48,13,rapid,1.0
+2021-09-29 11:35:30,1583,1600,Sicilian Defense: Delayed Alapin,1.0,15+10,1,36.78,35.31,28,rapid,0.0
+2021-07-01 14:13:21,1546,1568,Caro-Kann Defense,1.0,15+10,0,21.67,13.91,59,rapid,1.0
+2021-07-01 15:25:18,1545,1493,Sicilian Defense: McDonnell Attack,0.5,15+10,1,23.69,18.97,61,rapid,0.5
+2021-07-03 09:13:21,1538,1585,Sicilian Defense: Alapin Variation,0.0,15+10,0,31.87,28.03,39,rapid,0.0
+2021-07-03 10:22:30,1535,1418,Queen's Pawn Game: Chigorin Variation,0.5,15+10,1,21.79,18.62,48,rapid,0.5
+2021-07-07 18:48:15,1540,1382,Zukertort Opening: Sicilian Invitation,0.0,15+10,1,33.96,34.62,24,rapid,1.0
+2021-07-11 17:14:25,1552,1696,French Defense: Knight Variation,1.0,15+10,0,22.69,22.06,64,rapid,1.0
+2021-07-12 12:06:06,1562,1628,Four Knights Game: Italian Variation,1.0,15+10,0,22.13,11.18,67,rapid,1.0
+2021-07-12 15:23:25,1553,1527,Sicilian Defense: Modern Variations,1.0,15+10,1,18.15,11.88,16,rapid,0.0
+2021-07-13 16:17:58,1549,1732,Queen's Pawn Game: Zukertort Variation,1.0,15+10,1,27.07,34.29,16,rapid,0.0
+2021-07-14 10:07:36,1556,1512,Caro-Kann Defense: Main Line,1.0,15+10,0,35.83,38.94,29,rapid,1.0
+2021-07-14 11:18:44,1548,1570,Sicilian Defense: Alapin Variation,1.0,15+10,1,33.33,9.21,38,rapid,0.0
+2021-07-14 15:12:11,1537,1418,Sicilian Defense: Smith-Morra Gambit,1.0,15+10,1,38.17,16.16,20,rapid,0.0
+2021-07-15 10:35:06,1526,1419,Vienna Game: Max Lange Defense,0.0,15+10,0,25.77,14.03,15,rapid,0.0
+2021-07-15 15:49:20,1533,1460,Scandinavian Defense: Mieses-Kotroc Variation,1.0,15+10,0,33.59,11.08,33,rapid,1.0
+2021-07-15 16:43:50,1539,1429,Sicilian Defense: Open,0.0,15+10,1,29.22,15.74,32,rapid,1.0
+2021-07-17 13:52:08,1532,1572,"Queen's Pawn Game: Colle System, Traditional Colle",1.0,15+10,1,22.46,20.69,63,rapid,0.0
+2021-07-18 15:19:20,1533,1562,"Vienna Game: Vienna Gambit, Modern Variation",0.5,15+10,0,31.66,31.03,23,rapid,0.5
+2021-07-18 17:48:59,1526,1603,Bishop's Opening: Vienna Hybrid,0.0,15+10,0,22.43,22.68,48,rapid,0.0
+2021-07-19 17:05:50,1530,1335,Vienna Game: Vienna Gambit,1.0,15+10,0,27.46,12.99,27,rapid,1.0
+2021-07-19 17:32:04,1522,1524,Zukertort Opening: Sicilian Invitation,1.0,15+10,1,25.39,11.03,55,rapid,0.0
+2021-07-20 15:56:15,1531,1536,"Vienna Game: Stanley Variation, Meitner-Mieses Gambit",1.0,15+10,0,18.31,52.0,7,rapid,1.0
+2021-07-20 17:40:54,1538,1473,Sicilian Defense: Alapin Variation,1.0,15+10,0,15.64,21.75,64,rapid,1.0
+2021-07-20 18:35:01,1531,1588,Vienna Game: Vienna Gambit,0.0,15+10,0,22.41,18.7,65,rapid,0.0
+2021-07-22 16:53:05,1533,1611,Sicilian Defense: McDonnell Attack,0.5,15+10,1,23.12,12.59,45,rapid,0.5
+2021-07-25 16:22:54,1543,1629,Sicilian Defense: Delayed Alapin,0.0,15+10,1,17.87,16.92,19,rapid,1.0
+2021-07-25 19:18:44,1532,1433,"Nimzo-Indian Defense: Normal Variation, Gligoric System",1.0,15+10,1,29.57,20.24,44,rapid,0.0
+2021-07-26 15:20:32,1538,1418,Four Knights Game: Italian Variation,1.0,15+10,0,31.27,21.09,39,rapid,1.0
+2021-07-26 17:37:49,1543,1398,Sicilian Defense: Bowdler Attack,0.0,15+10,1,30.28,23.21,42,rapid,1.0
