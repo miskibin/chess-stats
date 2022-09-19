@@ -1,7 +1,7 @@
 # chess_analyse_app
 ! project still under development
 
-### how it is work
+### how does it work
 1. send get request to chess.com api with given username to get all of the player games
 2. convert png strings to python objects
 3. convert python objects to dataframe
