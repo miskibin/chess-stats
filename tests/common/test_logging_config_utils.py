@@ -16,16 +16,3 @@ import pytest
 def test_find_part_of_dispacher_name(test_input, expected):
     assert find_part_of_dispacher_name(test_input) == expected
 
-
-def test_set_log_file_path():
-    path = "tests/tmp"
-    name = None
-    if not os.path.exists(path):
-        os.makedirs(path)
-    file_handler = set_log_file_path(path, name)
-    assert isinstance(file_handler, logging.FileHandler)
-    name = "testsing"
-    file_handler = set_log_file_path(path, name)
-    assert name in file_handler.baseFilename
-    if os.path.exists(path):
-        os.rmdir(path)
