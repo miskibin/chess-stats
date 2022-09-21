@@ -2,9 +2,11 @@
 # For more information see: https://github.com/MishaKav/pytest-coverage-comment/
 name: pytest-coverage-comment
 on:
+  push:
+    branches: ["main"]
   pull_request:
-    branches:
-      - '*'
+    branches: ["main"]
+
 jobs:
   build:
     runs-on: ubuntu-latest
