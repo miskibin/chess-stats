@@ -35,8 +35,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with pytest
         run: |
-          export PYTHONPATH="$PYTHONPATH:."
-          python -m "import os, sys;sys.path.append(os.getcwd())"
+          echo 'PYTHONPATH="$PYTHONPATH:."' >> $GITHUB_ENV
           pytest
       - name: Build coverage file
         run: |
