@@ -20,8 +20,9 @@ def test_find_part_of_dispacher_name(test_input, expected):
 def test_set_log_file_path():
     path = "tests/tmp"
     name = None
+    if not os.path.exists(path):
+        os.makedirs(path)
     file_handler = set_log_file_path(path, name)
-    assert os.path.exists(path)
     assert isinstance(file_handler, logging.FileHandler)
     name = "testsing"
     file_handler = set_log_file_path(path, name)
