@@ -1,10 +1,8 @@
 import logging.config
 import os
 from logging import Logger, getLogger
-
 import yaml
-from marshmallow.exceptions import ValidationError
-from yamldataclassconfig.config import YamlDataClassConfig as YDMC
+
 
 from src.common.logging_config_utils import PackagePathFilter
 
