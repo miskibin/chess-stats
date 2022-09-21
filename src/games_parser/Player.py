@@ -1,9 +1,8 @@
 from enum import IntEnum
 from logging import Logger
-from typing import NewType
 
 import chess.pgn
-from utils import get_field_value, get_pgn
+from src.games_parser.utils import get_field_value, get_pgn
 
 
 class InvalidTimeControlException(Exception):

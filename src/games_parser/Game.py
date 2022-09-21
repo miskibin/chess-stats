@@ -8,7 +8,7 @@ import chess.pgn
 import numpy as np
 from stockfish import Stockfish
 
-from games_parser.player import Color, Player
+from src.games_parser.player import Color, Player
 from src.games_parser.utils import get_field_value, get_pgn
 
 

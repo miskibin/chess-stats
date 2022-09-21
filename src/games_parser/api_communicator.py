@@ -8,7 +8,7 @@ from pprint import pprint
 import chessdotcom
 import pandas as pd
 
-from games_parser.game import Game
+from src.games_parser.game import Game
 from src.games_parser.utils import get_field_value, get_pgn
 
 
