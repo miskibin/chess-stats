@@ -8,8 +8,8 @@ from pprint import pprint
 import chessdotcom
 import pandas as pd
 
-from src.games_parser.game import Game
-from src.games_parser.utils import get_field_value, get_pgn
+from .game import Game
+from .utils import get_field_value, get_pgn
 
 
 class FailedToGetResponseException(Exception):
@@ -111,4 +111,3 @@ class GamesHolder:
         for game in self.chess_com_games:
             tree += str(game) + "\n"
         return tree
-
