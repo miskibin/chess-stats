@@ -3,3 +3,6 @@ pylintrc
 notes.ipynb
 .vscode/
 .env
+.data/
+data/
+stockfish.exe

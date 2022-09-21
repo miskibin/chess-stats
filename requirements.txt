@@ -1,0 +1,7 @@
+chess.com
+pytest
+coloredlogs
+numpy
+stockfish
+pandas
+chess

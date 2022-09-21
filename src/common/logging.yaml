@@ -1,78 +1,24 @@
 version: 1
-disable_existing_loggers: true
-
-
-
+disable_existing_loggers: True
 formatters:
-    standard:
-        format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    error:
-        format: "%(levelname)s  %(name)s.%(funcName)s(): %(message)s"
+    dispatcher_format:
+        format: '%(asctime)s ::%(levelname)-8s ::%(pathname)-20s:: %(filename)-20s ::%(message)s'
+
 
 handlers:
-    console:
+    console_handler:
         class: logging.StreamHandler
         level: DEBUG
-        formatter: standard
+        formatter: dispatcher_format
         stream: ext://sys.stdout
 
-    info_file_handler:
-        class: logging.handlers.RotatingFileHandler
-        level: INFO
-        formatter: standard
-        filename: /tmp/info.log
-        maxBytes: 10485760 # 10MB
-        backupCount: 20
-        encoding: utf8
-
-    error_file_handler:
-        class: logging.handlers.RotatingFileHandler
-        level: ERROR
-        formatter: error
-        filename: /tmp/errors.log
-        maxBytes: 10485760 # 10MB
-        backupCount: 20
-        encoding: utf8
-
-    debug_file_handler:
-        class: logging.handlers.RotatingFileHandler
+    file_handler:
+        formatter: dispatcher_format
         level: DEBUG
-        formatter: standard
-        filename: /tmp/debug.log
-        maxBytes: 10485760 # 10MB
-        backupCount: 20
-        encoding: utf8
-
-    critical_file_handler:
-        class: logging.handlers.RotatingFileHandler
-        level: CRITICAL
-        formatter: standard
-        filename: /tmp/critical.log
-        maxBytes: 10485760 # 10MB
-        backupCount: 20
-        encoding: utf8
-
-    warn_file_handler:
-        class: logging.handlers.RotatingFileHandler
-        level: WARN
-        formatter: standard
-        filename: /tmp/warn.log
-        maxBytes: 10485760 # 10MB
-        backupCount: 20
-        encoding: utf8
-
-root:
-    level: NOTSET
-    handlers: [console]
-    propogate: yes
+        name: null
+        path: './logs'
+        (): src.common.logging_config_utils.set_log_file_path
 
 loggers:
-    <module>:
-        level: INFO
-        handlers: [console, info_file_handler, error_file_handler, critical_file_handler, debug_file_handler, warn_file_handler]
-        propogate: no
-
-    <module.x>:
-        level: DEBUG
-        handlers: [info_file_handler, error_file_handler, critical_file_handler, debug_file_handler, warn_file_handler]
-        propogate: yes
+    dispatcher_logger:
+        handlers: ["console_handler", "file_handler"]
