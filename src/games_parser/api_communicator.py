@@ -118,15 +118,3 @@ class GamesHolder:
         for game in self.chess_com_games:
             tree += str(game) + "\n"
         return tree
-
-
-from src.common.utils import get_logger
-import logging
-
-logger = get_logger(logging.DEBUG)
-g = GamesHolder(logger)
-
-g.get_games("Barabasz60", 1, "blitz")
-from pprint import pprint
-
-pprint(g)
