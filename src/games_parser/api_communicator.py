@@ -3,14 +3,11 @@ import os
 from datetime import datetime
 from logging import Logger
 from pathlib import Path
-from pprint import pprint
 
 import chessdotcom
 import pandas as pd
 from chessdotcom.types import ChessDotComError
-
 from games_parser.game import Game
-from games_parser.utils import get_field_value, get_pgn
 
 
 class InvalidResponseFormatException(Exception):
@@ -32,6 +29,7 @@ class GamesHolder:
         """
         self._logger = logger
         self.eco = self.__set_eco()
+        self.chess_com_games = None
 
     def get_games(self, chess_com_usr: str, games: int, time_class: str):
         """
@@ -43,8 +41,8 @@ class GamesHolder:
             list[Game]: list of `Game` objects
         """
 
-        chess_com_games = self.__set_chess_com_games(chess_com_usr, games, time_class)
-        return chess_com_games
+        self.__set_chess_com_games(chess_com_usr, games, time_class)
+        return self.chess_com_games
 
     def __set_eco(self) -> list[str]:
         with open(
@@ -53,9 +51,7 @@ class GamesHolder:
             eco = json.load(f)
         return eco
 
-    def __set_chess_com_games(
-        self, usr: str, games_num: int, time_class: str
-    ) -> list[Game]:
+    def __set_chess_com_games(self, usr: str, games_num: int, time_class: str) -> None:
         if not usr:
             self._logger.error("No username provided")
             return []
@@ -78,14 +74,15 @@ class GamesHolder:
                 resp = chessdotcom.get_player_games_by_month(usr, y, m).json
                 self._logger.debug(f"{y}-{m} : {len(resp)}")
                 games += self.__set_games(
-                    resp["games"], games_num - len(games), time_class
+                    resp["games"], games_num - len(games), time_class, usr
                 )
                 if len(games) >= games_num:
-                    return games
-        return games
+                    self.chess_com_games = games
+                    break
+        self.chess_com_games = games
 
     def __set_games(
-        self, json_with_games: list, games_num: int, time_class: str
+        self, json_with_games: list, games_num: int, time_class: str, usr: str
     ) -> list[Game]:
         if not json_with_games:
             self._logger.error("No response from chess.com")
@@ -99,9 +96,7 @@ class GamesHolder:
         for game in json_with_games:
             if game["time_class"] == time_class:
                 self._logger.debug(f" {games_num - len(games)} games to go")
-                games.append(
-                    Game(game["pgn"], self.chess_com_usr, self._logger, self.eco)
-                )
+                games.append(Game(game["pgn"], usr, self._logger, self.eco))
             if len(games) >= games_num:
                 return games
         return games
@@ -111,10 +106,6 @@ class GamesHolder:
         df = pd.DataFrame(data)
         df = df.set_index("date")
         return df
-
-    def save_to_csv(self):
-        df = self.convert_to_dataframe()
-        df.to_csv(f"data/{self.chess_com_usr}.csv")
 
     def __str__(self) -> str:
         return str(
@@ -127,3 +118,15 @@ class GamesHolder:
         for game in self.chess_com_games:
             tree += str(game) + "\n"
         return tree
+
+
+from src.common.utils import get_logger
+import logging
+
+logger = get_logger(logging.DEBUG)
+g = GamesHolder(logger)
+
+g.get_games("Barabasz60", 1, "blitz")
+from pprint import pprint
+
+pprint(g)

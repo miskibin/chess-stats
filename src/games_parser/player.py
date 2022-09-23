@@ -28,7 +28,7 @@ class Player:
         self.elo = self.__set_rating()
 
     def __set_rating(self) -> int:
-        RATINGS = {0: "WHITEElo", 1: "BlackElo"}
+        RATINGS = {0: "WhiteElo", 1: "BlackElo"}
         return int(get_field_value(self._pgn.headers, RATINGS[self.color]))
 
     def __set_time_per_move(self, color: Color, time_control: list) -> list[float]:

@@ -6,9 +6,9 @@ from logging import Logger
 import chess
 import chess.pgn
 import numpy as np
-from player import Color, Player
+from games_parser.player import Color, Player
 from stockfish import Stockfish
-from utils import get_field_value, get_pgn
+from games_parser.utils import get_field_value, get_pgn
 
 
 class InvalidResultException(Exception):
@@ -142,7 +142,7 @@ class Game:
         for move in board.move_stack:
             stockfish.make_moves_from_current_position([move.uci()])
             evaluation = stockfish.get_evaluation()
-            if eval["type"] == "mate":
+            if evaluation["type"] == "mate":
                 evaluation = evaluation["value"] * 1000
             else:
                 evaluation = evaluation["value"]
@@ -232,7 +232,7 @@ class Game:
 
     def __str__(self) -> str:
         tree = str(type(self).__name__) + ":\n"
-        for key, val in self.__dict__.items():
+        for key, val in self.asdict().items():
             if key[0] != "_":
                 tree += "\t" + key + ": " + str(val) + "\n"
         return tree

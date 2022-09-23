@@ -1,24 +1,23 @@
 version: 1
 disable_existing_loggers: True
 formatters:
-    dispatcher_format:
-        format: '%(asctime)s ::%(levelname)-8s ::%(pathname)-20s:: %(filename)-20s ::%(message)s'
-
+  dispatcher_format:
+    format: "%(asctime)s ::%(levelname)-8s ::%(pathname)-20s:: %(filename)-20s ::%(message)s"
 
 handlers:
-    console_handler:
-        class: logging.StreamHandler
-        level: DEBUG
-        formatter: dispatcher_format
-        stream: ext://sys.stdout
+  console_handler:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: dispatcher_format
+    stream: ext://sys.stdout
 
-    file_handler:
-        formatter: dispatcher_format
-        level: DEBUG
-        name: null
-        path: './logs'
-        (): src.common.logging_config_utils.set_log_file_path
+  file_handler:
+    formatter: dispatcher_format
+    level: DEBUG
+    name: null
+    path: "./logs"
+    (): src.common.logging_config_utils.set_log_file_path
 
 loggers:
-    dispatcher_logger:
-        handlers: ["console_handler", "file_handler"]
+  root:
+    handlers: ["console_handler", "file_handler"]
