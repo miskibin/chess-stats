@@ -27,4 +27,4 @@ Game:
     mistakes: [(0, 0, 0), (6, 1, 3), (0, 0, 5)]
 ```
 
-
+You can track progress of work here. [trello dashboard](https://trello.com/b/Gj2Rr5D2/chess-app)
