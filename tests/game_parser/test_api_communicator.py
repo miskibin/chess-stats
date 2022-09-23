@@ -20,7 +20,7 @@ class TestGamesHolder:
         games = self.holder._GamesHolder__set_games(None, 10, "blitz")
         assert len(games) == 0
         with pytest.raises(InvalidResponseFormatException):
-            GamesHolder._GamesHolder__set_games(["some game"], -1, "blitz")
+            self.holder._GamesHolder__set_games(["some game"], -1, "blitz")
 
     def test_set_chess_com_games(self):
         with pytest.raises(SystemExit):
