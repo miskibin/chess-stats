@@ -1,6 +1,5 @@
 
 ![example workflow](https://github.com/michalskibinski109/chess_analyse_app/actions/workflows/python-app.yml/badge.svg)
-![example workflow](https://github.com/michalskibinski109/chess_analyse_app/actions/workflows/pylint-check.yml/pylint.svg)
 # chess_analyse_app
 ! project still under development
 
