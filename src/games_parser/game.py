@@ -16,10 +16,10 @@ class InvalidResultException(Exception):
 
 
 class Result(Enum):
-    White = 0
-    Black = 1
-    Draw = 0.5
-    OnGoing = -1
+    WHITE = 0
+    BLACK = 1
+    DRAW = 0.5
+    ON_GOING = -1
 
 
 class Game:
@@ -38,6 +38,8 @@ class Game:
         self.phases = self.__set_phases(moves + 2, pgn)
         self.evaluations = self.__set_evaluations(pgn)
 
+    INACCURACY, MISTAKE, BLUNDER = 50, 120, 200
+    RESULT = {"1-0": 1, "0-1": 0, "1/2-1/2": 0.5, "*": -1}
     PIECE_VALUES = {
         "p": 1,
         "P": 1,
@@ -67,9 +69,7 @@ class Game:
         board = chess.Board()
         for index, move in enumerate(game.move_stack):
             board.push(move)
-            points = sum(
-                [self.PIECE_VALUES[str(i)] for i in board.piece_map().values()]
-            )
+            points = sum(self.PIECE_VALUES[str(i)] for i in board.piece_map().values())
             if points < 28:  # if more it is endgame
                 if index > middlegame:
                     return (middlegame, index, len(game.move_stack))
@@ -90,7 +90,8 @@ class Game:
             tuple: (opening_name, moves(this is needed for `__set_phases` method))
         """
         board = chess.pgn.read_game(io.StringIO(pgn), Visitor=chess.pgn.BoardBuilder)
-        [board.pop() for _ in range(len(board.move_stack) - len(openings))]
+        for _ in range(len(board.move_stack) - len(openings)):
+            board.pop()
         for i in range(len(board.move_stack) - 1, -1, -1):
             for opening in openings[i]:
                 if opening["fen"] in board.fen():
@@ -101,14 +102,14 @@ class Game:
 
     def __set_color(self, username: str) -> Color:
         if username in get_field_value(self._pgn.headers, "White"):
-            return Color.White
-        return Color.Black
+            return Color.WHITE
+        return Color.BLACK
 
     def __set_result(self) -> Result:
-        RESULT = {"1-0": 1, "0-1": 0, "1/2-1/2": 0.5, "*": -1}
+
         result = get_field_value(self._pgn.headers, "Result")
         try:
-            return Result(RESULT.get(result, -1))
+            return Result(self.RESULT.get(result, -1))
         except KeyError as exc:
             self._logger.error("Invalid result: " + result)
             raise InvalidResultException("Invalid result: " + result) from exc
@@ -140,14 +141,14 @@ class Game:
         evaluations = []
         for move in board.move_stack:
             stockfish.make_moves_from_current_position([move.uci()])
-            eval = stockfish.get_evaluation()
+            evaluation = stockfish.get_evaluation()
             if eval["type"] == "mate":
-                eval = eval["value"] * 1000
+                evaluation = evaluation["value"] * 1000
             else:
-                eval = eval["value"]
-            if abs(eval) > 1000:
-                eval = eval / abs(eval) * 1000
-            evaluations.append(eval)
+                evaluation = evaluation["value"]
+            if abs(evaluation) > 1000:
+                evaluation = evaluation / abs(evaluation) * 1000
+            evaluations.append(evaluation)
         return evaluations
 
     def __mistakes_per_phase(self):
@@ -159,7 +160,7 @@ class Game:
             ]
         """
         mistakes = []
-        INACCURACY, MISTAKE, BLUNDER = 50, 120, 200
+
         prev = 0
         for phase in self.phases:
             inacc, mist, blund = 0, 0, 0
@@ -168,11 +169,11 @@ class Game:
                     loss = -((-self.player.color * 2) + 1) * (
                         self.evaluations[move_num] - self.evaluations[move_num - 1]
                     )
-                    if loss > BLUNDER:
+                    if loss > self.BLUNDER:
                         blund += 1
-                    elif loss > MISTAKE:
+                    elif loss > self.MISTAKE:
                         mist += 1
-                    elif loss > INACCURACY:
+                    elif loss > self.INACCURACY:
                         inacc += 1
             mistakes.append((inacc, mist, blund))
             prev = phase

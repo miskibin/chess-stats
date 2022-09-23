@@ -1,9 +1,7 @@
-import os
 from logging import getLogger
-from unittest import mock
-from unittest.mock import MagicMock
 
 import pytest
+from chessdotcom.types import ChessDotComError
 
 from games_parser.api_communicator import GamesHolder, InvalidResponseFormatException
 
@@ -21,7 +19,7 @@ class TestGamesHolder:
             self.holder._GamesHolder__set_games(["some game"], -1, "blitz")
 
     def test_set_chess_com_games(self):
-        with pytest.raises(SystemExit):
+        with pytest.raises(ChessDotComError):
             self.holder._GamesHolder__set_chess_com_games(
                 "not existing username X2345fdgJDed", 10, "blitz"
             )

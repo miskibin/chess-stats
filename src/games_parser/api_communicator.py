@@ -8,8 +8,9 @@ from pprint import pprint
 import chessdotcom
 import pandas as pd
 from chessdotcom.types import ChessDotComError
-from game import Game
-from utils import get_field_value, get_pgn
+
+from games_parser.game import Game
+from games_parser.utils import get_field_value, get_pgn
 
 
 class InvalidResponseFormatException(Exception):
@@ -62,7 +63,7 @@ class GamesHolder:
             response = chessdotcom.get_player_profile(usr)
         except ChessDotComError as err:
             self._logger.error(f"Failed to get response from chess.com: {err.text}")
-            raise SystemExit(err)
+            raise err
         joined = response.json["player"]["joined"]
         year = datetime.fromtimestamp(joined).year
         games = []

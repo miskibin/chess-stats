@@ -2,7 +2,8 @@ from enum import IntEnum
 from logging import Logger
 
 import chess.pgn
-from utils import get_field_value, get_pgn
+
+from games_parser.utils import get_field_value, get_pgn
 
 
 class InvalidTimeControlException(Exception):
@@ -10,8 +11,8 @@ class InvalidTimeControlException(Exception):
 
 
 class Color(IntEnum):
-    White = 0
-    Black = 1
+    WHITE = 0
+    BLACK = 1
 
 
 class Player:
@@ -27,7 +28,7 @@ class Player:
         self.elo = self.__set_rating()
 
     def __set_rating(self) -> int:
-        RATINGS = {0: "WhiteElo", 1: "BlackElo"}
+        RATINGS = {0: "WHITEElo", 1: "BlackElo"}
         return int(get_field_value(self._pgn.headers, RATINGS[self.color]))
 
     def __set_time_per_move(self, color: Color, time_control: list) -> list[float]:
