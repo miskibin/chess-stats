@@ -6,8 +6,9 @@ from logging import Logger
 import chess
 import chess.pgn
 import numpy as np
-from games_parser.player import Color, Player
 from stockfish import Stockfish
+
+from games_parser.player import Color, Player
 from games_parser.utils import get_field_value, get_pgn
 
 
@@ -25,7 +26,14 @@ class Result(Enum):
 class Game:
     """Class representing a game."""
 
-    def __init__(self, pgn: str, username: str, logger: Logger, openings: list) -> None:
+    def __init__(
+        self,
+        pgn: str,
+        username: str,
+        logger: Logger,
+        openings: list,
+        stockfish: Stockfish = None,
+    ) -> None:
         self._logger = logger
         self._pgn = get_pgn(pgn)
         self.time_control = self.__set_time_control()
@@ -36,7 +44,7 @@ class Game:
         self.date = self.__set_date()
         self.opening, moves = self.__set_opening(pgn, openings)
         self.phases = self.__set_phases(moves + 2, pgn)
-        self.evaluations = self.__set_evaluations(pgn)
+        self.evaluations = self.__set_evaluations(pgn, stockfish)
 
     INACCURACY, MISTAKE, BLUNDER = 50, 120, 200
     RESULT = {"1-0": 1, "0-1": 0, "1/2-1/2": 0.5, "*": -1}
@@ -131,14 +139,19 @@ class Game:
             raise Exception("Invalid time control: " + temp)
         return temp
 
-    def __set_evaluations(self, pgn: str, depth: int = 10) -> list:
+    def __set_evaluations(self, pgn: str, stockfish: Stockfish) -> list:
         """Method to set evaluations of the game. It uses stockfish to find evaluations.
         Returns:
             list with evaluations for every move.
+        Note:
+            Stockfish is not perfect, so it can make mistakes. :(
+            If stockfish is null return list of zeros.
         """
-        stockfish = Stockfish("stockfish.exe", depth=depth)
         board = chess.pgn.read_game(io.StringIO(pgn), Visitor=chess.pgn.BoardBuilder)
+        if not stockfish:
+            return len(board.move_stack) * [0]
         evaluations = []
+        stockfish.set_position()
         for move in board.move_stack:
             stockfish.make_moves_from_current_position([move.uci()])
             evaluation = stockfish.get_evaluation()

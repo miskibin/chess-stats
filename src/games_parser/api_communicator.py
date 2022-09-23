@@ -7,6 +7,8 @@ from pathlib import Path
 import chessdotcom
 import pandas as pd
 from chessdotcom.types import ChessDotComError
+from stockfish import Stockfish
+
 from games_parser.game import Game
 
 
@@ -20,16 +22,17 @@ class GamesHolder:
 
     """
 
-    def __init__(self, logger: Logger) -> None:
+    def __init__(self, logger: Logger, depth: int = 10) -> None:
         """_summary_
 
         Args:
             logger (Logger): logger to log to
-
+            depth (int, optional): depth of stockfish engine. Defaults to 10.
         """
         self._logger = logger
         self.eco = self.__set_eco()
-        self.chess_com_games = None
+        self.stockfish = Stockfish("stockfish.exe", depth=depth)
+        self.chess_com_games = []
 
     def get_games(self, chess_com_usr: str, games: int, time_class: str):
         """
@@ -96,12 +99,19 @@ class GamesHolder:
         for game in json_with_games:
             if game["time_class"] == time_class:
                 self._logger.debug(f" {games_num - len(games)} games to go")
-                games.append(Game(game["pgn"], usr, self._logger, self.eco))
+                games.append(
+                    Game(game["pgn"], usr, self._logger, self.eco, self.stockfish)
+                )
             if len(games) >= games_num:
                 return games
         return games
 
-    def convert_to_dataframe(self):
+    def convert_to_dataframe(self) -> pd.DataFrame:
+        if not self.chess_com_games:
+            self._logger.error(
+                "No games to convert to dataframe. Did you called get_games function?"
+            )
+            return
         data = [game.asdict() for game in self.chess_com_games]
         df = pd.DataFrame(data)
         df = df.set_index("date")
