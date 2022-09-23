@@ -9,7 +9,7 @@
 3. convert python objects to dataframe
 4. shows all of information about games on charts using django web app. (TODO)
 
-### example convert module output:
+### example output for games_parser module:
 ```
 games played on chess.com: 268
 games played on lichess: 0
