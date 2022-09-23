@@ -15,7 +15,7 @@ class PackagePathFilter(logging.Filter):
 
 def find_part_of_dispacher_name(path: str) -> str:
     """To make the logs more readable, the function will return name of  part
-    from the generated log is coming. 
+    from the generated log is coming.
     Assuming each component is in a `src` or` tests` folder.
     """
     orginal_path = copy.copy(path)

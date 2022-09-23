@@ -1,8 +1,8 @@
 import logging.config
 import os
 from logging import Logger, getLogger
-import yaml
 
+import yaml
 
 from src.common.logging_config_utils import PackagePathFilter
 
@@ -26,4 +26,3 @@ def get_logger(lvl: int = None, config_path: str = "src/common/logging.yaml") ->
     if lvl:
         logger.setLevel(lvl)
     return logger
-

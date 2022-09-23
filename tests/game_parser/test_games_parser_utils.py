@@ -1,5 +1,6 @@
 import pytest
-from games_parser.utils import get_field_value, get_pgn, InvalidVieldNameException
+
+from games_parser.utils import InvalidVieldNameException, get_field_value, get_pgn
 
 
 def test_get_field_value():

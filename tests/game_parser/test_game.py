@@ -1,7 +1,9 @@
-import pytest
 import os
-from games_parser.game import Game, InvalidResultException
 from logging import getLogger
+
+import pytest
+
+from games_parser.game import Game, InvalidResultException
 
 
 class TestGame:

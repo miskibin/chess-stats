@@ -6,10 +6,9 @@ from logging import Logger
 import chess
 import chess.pgn
 import numpy as np
+from player import Color, Player
 from stockfish import Stockfish
-
-from .player import Color, Player
-from .utils import get_field_value, get_pgn
+from utils import get_field_value, get_pgn
 
 
 class InvalidResultException(Exception):

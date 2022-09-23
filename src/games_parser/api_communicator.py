@@ -7,9 +7,8 @@ from pprint import pprint
 
 import chessdotcom
 import pandas as pd
-
-from .game import Game
-from .utils import get_field_value, get_pgn
+from game import Game
+from utils import get_field_value, get_pgn
 
 
 class FailedToGetResponseException(Exception):

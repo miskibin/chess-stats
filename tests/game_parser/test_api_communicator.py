@@ -1,9 +1,11 @@
-import pytest
 import os
+from logging import getLogger
 from unittest import mock
 from unittest.mock import MagicMock
-from games_parser.api_communicator import GamesHolder, FailedToGetResponseException
-from logging import getLogger
+
+import pytest
+
+from games_parser.api_communicator import FailedToGetResponseException, GamesHolder
 
 
 class TestGamesHolder:
