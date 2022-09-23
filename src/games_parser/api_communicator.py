@@ -31,7 +31,13 @@ class GamesHolder:
         """
         self._logger = logger
         self.eco = self.__set_eco()
-        self.stockfish = Stockfish("stockfish.exe", depth=depth)
+        try:
+            self.stockfish = Stockfish("stockfish.exe", depth=depth)
+        except AttributeError as err:
+            self._logger.error(
+                f"Failed to load stockfish engine: Do you have it installed? and named `stockfish.exe`? {err}"
+            )
+            self.stockfish = None
         self.chess_com_games = []
 
     def get_games(self, chess_com_usr: str, games: int, time_class: str):
@@ -111,7 +117,7 @@ class GamesHolder:
             self._logger.error(
                 "No games to convert to dataframe. Did you called get_games function?"
             )
-            return
+            return pd.DataFrame()
         data = [game.asdict() for game in self.chess_com_games]
         df = pd.DataFrame(data)
         df = df.set_index("date")
