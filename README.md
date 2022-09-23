@@ -9,23 +9,22 @@
 3. convert python objects to dataframe
 4. shows all of information about games on charts using django web app. (TODO)
 
-### example output for games_parser module:
+### example output for single game parsed by `games_parser` module:
 ```
 Game:
-    time_control: 180+0
-    player:
-        color: Color.WHITE
-        elo: 1419
-
-    opponent:
-        color: Color.BLACK
-        elo: 1492
-
-    result: Result.BLACK
-    date: 2021-12-08 13:40:06
-    opening: Caro-Kann Defense
-    phases: (6, 22, 22)
-    evaluations: [30, 54, 29, 52, -20, 0, -9, 33, 13, 16, -15, -8, -10, -9, -19, -5, -2, 71, 7, 119, 96, 702]
+    player_elo: 1354
+    opponent_elo: 1433
+    opening: Vienna Game: Max Lange Defense
+    result: 0
+    date: 2021-12-02 11:35:59
+    time_control: 3+2
+    player_color: 0
+    mean_player_time_per_move: 4.99
+    mean_opponent_time_per_move: 4.82
+    moves: 57
+    time_class: blitz
+    phases: (6, 60, 114)
+    mistakes: [(0, 0, 0), (6, 1, 3), (0, 0, 5)]
 ```
 
 
