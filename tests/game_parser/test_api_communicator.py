@@ -12,9 +12,7 @@ class TestGamesHolder:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.logger = getLogger()
-        self.holder = GamesHolder(
-            chess_com_usr="Barabasz60", logger=self.logger, games=0, time_class="blitz"
-        )
+        self.holder = GamesHolder(logger=self.logger)
 
     def test_set_games(self):
         games = self.holder._GamesHolder__set_games(None, 10, "blitz")

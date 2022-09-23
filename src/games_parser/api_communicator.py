@@ -6,8 +6,8 @@ from pathlib import Path
 from pprint import pprint
 
 import chessdotcom
-from chessdotcom.types import ChessDotComError
 import pandas as pd
+from chessdotcom.types import ChessDotComError
 from game import Game
 from utils import get_field_value, get_pgn
 
@@ -22,23 +22,28 @@ class GamesHolder:
 
     """
 
-    def __init__(
-        self, chess_com_usr: str, logger: Logger, games: int, time_class
-    ) -> None:
+    def __init__(self, logger: Logger) -> None:
         """_summary_
 
         Args:
-            chess_com_usr (str): username on chess.com to get games from
             logger (Logger): logger to log to
-            games (int): number of lastest games to get
-            time_class (_type_): time class of games to get (blitz, rapid, bullet, daily)
+
         """
         self._logger = logger
-        self.chess_com_usr = chess_com_usr
         self.eco = self.__set_eco()
-        self.chess_com_games = self.__set_chess_com_games(
-            chess_com_usr, games, time_class
-        )
+
+    def get_games(self, chess_com_usr: str, games: int, time_class: str):
+        """
+        Args:
+            chess_com_usr (str): username on chess.com to get games from
+            games (int): number of lastest games to get
+            time_class (_type_): time class of games to get (blitz, rapid, bullet, daily)
+        returns:
+            list[Game]: list of `Game` objects
+        """
+
+        chess_com_games = self.__set_chess_com_games(chess_com_usr, games, time_class)
+        return chess_com_games
 
     def __set_eco(self) -> list[str]:
         with open(
