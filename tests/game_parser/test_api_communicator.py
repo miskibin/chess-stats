@@ -13,11 +13,13 @@ class TestGamesHolder:
         self.holder = GamesHolder(logger=self.logger)
 
     def test_set_games(self):
-        games = self.holder._GamesHolder__set_games(None, 10, "blitz")
+        games = self.holder._GamesHolder__set_games(
+            None, 10, "blitz", "not existing username"
+        )
         assert len(games) == 0
         with pytest.raises(InvalidResponseFormatException):
             self.holder._GamesHolder__set_games(
-                ["some game"], -1, "blitz", "not existing username X2345fdgJDed"
+                ["some game"], -1, "blitz", "not existing username"
             )
 
     def test_set_chess_com_games(self):
