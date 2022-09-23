@@ -1,3 +1,4 @@
+![example workflow](https://github.com/github/docs/actions/workflows/python-app.yml/badge.svg)
 # chess_analyse_app
 ! project still under development
 
