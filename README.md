@@ -11,18 +11,21 @@
 
 ### example output for games_parser module:
 ```
-games played on chess.com: 268
-games played on lichess: 0
-example game:
-  time_control: 60+0
-    player:   
-      color: Color.White
-      elo: 1459
+Game:
+    time_control: 180+0
+    player:
+        color: Color.WHITE
+        elo: 1419
+
     opponent:
-      color: Color.Black
-      elo: 1327
-result: Result.Black
-date: 2018-09-28 18:10:30
+        color: Color.BLACK
+        elo: 1492
+
+    result: Result.BLACK
+    date: 2021-12-08 13:40:06
+    opening: Caro-Kann Defense
+    phases: (6, 22, 22)
+    evaluations: [30, 54, 29, 52, -20, 0, -9, 33, 13, 16, -15, -8, -10, -9, -19, -5, -2, 71, 7, 119, 96, 702]
 ```
 
 
