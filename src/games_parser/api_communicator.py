@@ -33,7 +33,7 @@ class GamesHolder:
         self.eco = self.__set_eco()
         try:
             self.stockfish = Stockfish("stockfish.exe", depth=depth)
-        except AttributeError as err:
+        except (AttributeError, FileNotFoundError) as err:
             self._logger.error(
                 f"Failed to load stockfish engine: Do you have it installed? and named `stockfish.exe`? {err}"
             )
