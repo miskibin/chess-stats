@@ -6,12 +6,13 @@ from pathlib import Path
 from pprint import pprint
 
 import chessdotcom
+from chessdotcom.types import ChessDotComError
 import pandas as pd
 from game import Game
 from utils import get_field_value, get_pgn
 
 
-class FailedToGetResponseException(Exception):
+class InvalidResponseFormatException(Exception):
     pass
 
 
@@ -52,7 +53,11 @@ class GamesHolder:
         if not usr:
             self._logger.error("No username provided")
             return []
-        response = chessdotcom.get_player_profile(usr)
+        try:
+            response = chessdotcom.get_player_profile(usr)
+        except ChessDotComError as err:
+            self._logger.error(f"Failed to get response from chess.com: {err.text}")
+            raise SystemExit(err)
         joined = response.json["player"]["joined"]
         year = datetime.fromtimestamp(joined).year
         games = []
@@ -64,22 +69,28 @@ class GamesHolder:
             while m > 0:
                 if y == int(datetime.now().year) and m >= int(datetime.now().month):
                     break
-                resp = chessdotcom.get_player_games_by_month(usr, y, m).json["games"]
+                resp = chessdotcom.get_player_games_by_month(usr, y, m).json
                 self._logger.debug(f"{y}-{m} : {len(resp)}")
-                games += self.__set_games(resp, games_num - len(games), time_class)
+                games += self.__set_games(
+                    resp["games"], games_num - len(games), time_class
+                )
                 if len(games) >= games_num:
                     return games
         return games
 
     def __set_games(
-        self, response: dict, games_num: int, time_class: str
+        self, json_with_games: list, games_num: int, time_class: str
     ) -> list[Game]:
-        if not response:
+        if not json_with_games:
             self._logger.error("No response from chess.com")
             return []
+        if not isinstance(json_with_games, list) or not isinstance(
+            json_with_games[0], dict
+        ):
+            self._logger.error("Invalid response format")
+            raise InvalidResponseFormatException
         games = []
-        for game in response:
-
+        for game in json_with_games:
             if game["time_class"] == time_class:
                 self._logger.debug(f" {games_num - len(games)} games to go")
                 games.append(
