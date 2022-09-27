@@ -1,7 +1,20 @@
 from django.db import models
 
 
+class Raport(models.Model):
+    name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    username = models.CharField(max_length=100)
+    time_class = models.CharField(max_length=100)
+    games_num = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+
 class ChessGame(models.Model):
+    raport = models.ForeignKey(Raport, on_delete=models.CASCADE)
     player_elo = models.IntegerField(null=True, help_text="Player's ELO")
     opponent_elo = models.IntegerField(null=True, help_text="Opponent's ELO")
     opening = models.CharField(max_length=100, null=True, help_text="Opening name")
@@ -23,3 +36,4 @@ class ChessGame(models.Model):
     mistakes = models.JSONField(
         help_text="mistakes of the player in phases of the game"
     )
+    created = models.DateTimeField(auto_now_add=True)

@@ -20,12 +20,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-bd%anxjyjw5fmk0dnv8ogbrgk%$d1_l9zd2lz%+@gk!4rc(fi%"
+SECRET_KEY = "django-insecure-wjawz6e=ung9&z=@$n@1ixl8g+&dpfr7pab#)+_)4q3627bx(m"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+Q_CLUSTER = {
+    "retry": 120,
+    "workers": 4,
+    "orm": "default",
+    "timeout": 120,
+}
+
 
 # Application definition
 
@@ -36,9 +44,32 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "analyze_app",
+    "analyze_app.apps.AnalyzeAppConfig",
+    "django_q",
 ]
+import os
 
+import os
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "level": "DEBUG",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        },
+    },
+}
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

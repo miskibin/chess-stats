@@ -40,7 +40,7 @@ class GamesHolder:
             self.stockfish = None
         self.chess_com_games = []
 
-    def get_games(self, chess_com_usr: str, games: int, time_class: str):
+    def get_games(self, chess_com_usr: str, games: int, time_class: str) -> list[Game]:
         """
         Args:
             chess_com_usr (str): username on chess.com to get games from

@@ -9,11 +9,11 @@ class PackagePathFilter(logging.Filter):
     """Logging filter. change: pathname to app_name in log message."""
 
     def filter(self, record):
-        record.pathname = find_part_of_dispacher_name(record.pathname)
+        record.pathname = find_part_of_app_name(record.pathname)
         return True  # needs to be returned.
 
 
-def find_part_of_dispacher_name(path: str) -> str:
+def find_part_of_app_name(path: str) -> str:
     """To make the logs more readable, the function will return name of  part
     from the generated log is coming.
     Assuming each component is in a `src` or` tests` folder.
