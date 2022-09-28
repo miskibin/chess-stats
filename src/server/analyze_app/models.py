@@ -7,7 +7,8 @@ class Raport(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     username = models.CharField(max_length=100)
     time_class = models.CharField(max_length=100)
-    games_num = models.IntegerField(default=0)
+    games_num = models.IntegerField()
+    analyzed_games = models.IntegerField(default=0, null=True)
 
     def __str__(self):
         return self.name
@@ -18,7 +19,9 @@ class ChessGame(models.Model):
     player_elo = models.IntegerField(null=True, help_text="Player's ELO")
     opponent_elo = models.IntegerField(null=True, help_text="Opponent's ELO")
     opening = models.CharField(max_length=100, null=True, help_text="Opening name")
-    result = models.CharField(max_length=10, help_text="Result of the game")
+    result = models.CharField(
+        choices=[(1, "white"), (0, "black"), (0.5, "draw")], max_length=10
+    )
     date = models.DateField(help_text="Date of the game")
     time_control = models.CharField(max_length=20, help_text="Time control of the game")
     player_color = models.CharField(

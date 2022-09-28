@@ -49,9 +49,14 @@ class GamesHolder:
         returns:
             list[Game]: list of `Game` objects
         """
-
-        self.__set_chess_com_games(chess_com_usr, games, time_class)
-        return self.chess_com_games
+        list_of_games = self.__set_chess_com_games(chess_com_usr, games, time_class)
+        for game in list_of_games:
+            game = Game(
+                game["pgn"], chess_com_usr, self._logger, self.eco, self.stockfish
+            )
+            self._logger.debug(f"{games - len(self.chess_com_games)} games left")
+            self.chess_com_games.append(game)
+            yield game
 
     def __set_eco(self) -> list[str]:
         with open(
@@ -74,42 +79,27 @@ class GamesHolder:
         games = []
         for y in range(datetime.now().year, year - 1, -1):
             if y == datetime.now().year:
-                m = datetime.now().month
+                m = int(datetime.now().month)
             else:
                 m = 12
             while m > 0:
-                if y == int(datetime.now().year) and m >= int(datetime.now().month):
+                if int(y) == int(datetime.now().year) and m > int(datetime.now().month):
                     break
                 resp = chessdotcom.get_player_games_by_month(usr, y, m).json
-                self._logger.debug(f"{y}-{m} : {len(resp)}")
-                games += self.__set_games(
-                    resp["games"], games_num - len(games), time_class, usr
+                if not isinstance(resp["games"], list) or not isinstance(
+                    resp["games"][0], dict
+                ):
+                    self._logger.error(f"Invalid response format {resp}")
+                    raise InvalidResponseFormatException(resp)
+                self._logger.debug(
+                    f"In {y}-{m} : {len(resp['games'])} games was played"
                 )
-                if len(games) >= games_num:
-                    self.chess_com_games = games
-                    break
-        self.chess_com_games = games
-
-    def __set_games(
-        self, json_with_games: list, games_num: int, time_class: str, usr: str
-    ) -> list[Game]:
-        if not json_with_games:
-            self._logger.error("No response from chess.com")
-            return []
-        if not isinstance(json_with_games, list) or not isinstance(
-            json_with_games[0], dict
-        ):
-            self._logger.error("Invalid response format")
-            raise InvalidResponseFormatException
-        games = []
-        for game in json_with_games:
-            if game["time_class"] == time_class:
-                self._logger.debug(f" {games_num - len(games)} games to go")
-                games.append(
-                    Game(game["pgn"], usr, self._logger, self.eco, self.stockfish)
-                )
-            if len(games) >= games_num:
-                return games
+                for g in resp["games"]:
+                    if len(games) >= games_num:
+                        return games
+                    if g["time_class"] == time_class:
+                        games.append(g)
+                m -= 1
         return games
 
     def convert_to_dataframe(self) -> pd.DataFrame:
