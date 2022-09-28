@@ -5,7 +5,6 @@ from logging import Logger
 from pathlib import Path
 
 import chessdotcom
-import pandas as pd
 from chessdotcom.types import ChessDotComError
 from stockfish import Stockfish
 
@@ -35,10 +34,9 @@ class GamesHolder:
             self.stockfish = Stockfish("stockfish.exe", depth=depth)
         except (AttributeError, FileNotFoundError) as err:
             self._logger.error(
-                f"Failed to load stockfish engine: Do you have it installed? and named `stockfish.exe`? {err}"
+                f"Failed to load stockfish engine: Do you have it installed?  {err}"
             )
             self.stockfish = None
-        self.chess_com_games = []
 
     def get_games(self, chess_com_usr: str, games: int, time_class: str) -> list[Game]:
         """
@@ -49,9 +47,12 @@ class GamesHolder:
         returns:
             list[Game]: list of `Game` objects
         """
-
-        self.__set_chess_com_games(chess_com_usr, games, time_class)
-        return self.chess_com_games
+        list_of_games = self.__get_chess_com_games(chess_com_usr, games, time_class)
+        for game in list_of_games:
+            game = Game(
+                game["pgn"], chess_com_usr, self._logger, self.eco, self.stockfish
+            )
+            yield game
 
     def __set_eco(self) -> list[str]:
         with open(
@@ -60,7 +61,7 @@ class GamesHolder:
             eco = json.load(f)
         return eco
 
-    def __set_chess_com_games(self, usr: str, games_num: int, time_class: str) -> None:
+    def __get_joined_year(self, usr: str) -> int:
         if not usr:
             self._logger.error("No username provided")
             return []
@@ -71,66 +72,37 @@ class GamesHolder:
             raise err
         joined = response.json["player"]["joined"]
         year = datetime.fromtimestamp(joined).year
+        return year
+
+    def __get_chess_com_response(self, usr: str, y: int, m: int) -> list:
+        try:
+            resp = chessdotcom.get_player_games_by_month(usr, y, m).json
+            games = resp["games"]
+        except (ChessDotComError, KeyError) as err:
+            self._logger.error(f"Failed to get response from chess.com: {err.text}")
+            raise err
+
+        if not isinstance(games, list) or not isinstance(games[0], dict):
+            self._logger.error(f"Invalid response format {resp}")
+            raise InvalidResponseFormatException(resp)
+        self._logger.debug(f"In {y}-{m} : {len(games)} games was played")
+        return games
+
+    def __get_chess_com_games(self, usr: str, games_num: int, time_class: str) -> None:
+        joined_year = self.__get_joined_year(usr)
         games = []
-        for y in range(datetime.now().year, year - 1, -1):
+        for y in range(datetime.now().year, joined_year - 1, -1):
             if y == datetime.now().year:
-                m = datetime.now().month
+                m = int(datetime.now().month)
             else:
                 m = 12
             while m > 0:
-                if y == int(datetime.now().year) and m >= int(datetime.now().month):
-                    break
-                resp = chessdotcom.get_player_games_by_month(usr, y, m).json
-                self._logger.debug(f"{y}-{m} : {len(resp)}")
-                games += self.__set_games(
-                    resp["games"], games_num - len(games), time_class, usr
-                )
-                if len(games) >= games_num:
-                    self.chess_com_games = games
-                    break
-        self.chess_com_games = games
+                games_json = self.__get_chess_com_response(usr, y, m)
 
-    def __set_games(
-        self, json_with_games: list, games_num: int, time_class: str, usr: str
-    ) -> list[Game]:
-        if not json_with_games:
-            self._logger.error("No response from chess.com")
-            return []
-        if not isinstance(json_with_games, list) or not isinstance(
-            json_with_games[0], dict
-        ):
-            self._logger.error("Invalid response format")
-            raise InvalidResponseFormatException
-        games = []
-        for game in json_with_games:
-            if game["time_class"] == time_class:
-                self._logger.debug(f" {games_num - len(games)} games to go")
-                games.append(
-                    Game(game["pgn"], usr, self._logger, self.eco, self.stockfish)
-                )
-            if len(games) >= games_num:
-                return games
+                for g in games_json:
+                    if len(games) >= games_num:
+                        return games
+                    if g["time_class"] == time_class:
+                        games.append(g)
+                m -= 1
         return games
-
-    def convert_to_dataframe(self) -> pd.DataFrame:
-        if not self.chess_com_games:
-            self._logger.error(
-                "No games to convert to dataframe. Did you called get_games function?"
-            )
-            return pd.DataFrame()
-        data = [game.asdict() for game in self.chess_com_games]
-        df = pd.DataFrame(data)
-        df = df.set_index("date")
-        return df
-
-    def __str__(self) -> str:
-        return str(
-            f"games played on chess.com: {len(self.chess_com_games)}\
-                   \nexample game:\n{str(self.chess_com_games[0])}"
-        )
-
-    def __repr__(self) -> str:
-        tree = ""
-        for game in self.chess_com_games:
-            tree += str(game) + "\n"
-        return tree

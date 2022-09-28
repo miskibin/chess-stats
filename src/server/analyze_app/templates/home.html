@@ -1,0 +1,36 @@
+{% extends 'main.html' %} {% block content %}
+
+<h1>home page</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">created_at</th>
+      <th scope="col">username</th>
+      <th scope="col">time_class</th>
+      <th scope="col">status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for raport in raports %}
+    <tr>
+      <th scope="row">{{raport.id}}</th>
+      <td>
+        <a href="raport/{{raport.pk}}">{{raport.created_at}}<a/>  
+        
+          </td>
+      <td>{{raport.username}}</td>
+      <td>{{raport.time_class}}</td>
+      
+      {% if raport.analyzed_games == raport.games_num %}
+      <td>{{raport.analyzed_games}}/{{raport.games_num}} Ready</td>
+      {% else %}
+      <td>{{raport.analyzed_games}}/{{raport.games_num}}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  <a class="btn btn-primary"  href="raport/create" role="button" class="fw-normal"> create new Raport</a>
+  {% endblock %}

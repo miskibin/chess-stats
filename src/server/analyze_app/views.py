@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from . import models
 from django_q.tasks import async_task, result
@@ -18,6 +18,4 @@ def raport(request: HttpRequest, pk: int) -> HttpResponse:
 def create_raport(request: HttpRequest) -> HttpResponse:
     print("creating raport")
     task = async_task("analyze_app.tasks.get_games", "Barabasz60", 5, "rapid")
-
-    print("creating raport")
-    return render(request, "create_raport.html", {"task result": result(task)})
+    return redirect("/")

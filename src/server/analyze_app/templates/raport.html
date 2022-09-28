@@ -1,0 +1,24 @@
+{% extends 'main.html' %} {% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">game</th>
+      <th scope="col">result</th>
+      <th scope="col">opening</th>
+      <th scope="col">time_class</th>
+    </tr>
+  </thead>
+  {% for game in games %}
+  <tbody>
+
+    <tr>
+      <th scope="row">{{game.id}}</th>
+      <td>{{game.result}}</td>
+      <td>{{game.opening}}</td>
+      <td>{{game.time_class}}</td>
+
+    {% endfor %}
+  </li>
+</ul>
+
+{% endblock %}
