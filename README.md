@@ -30,7 +30,7 @@ Game:
     mistakes: [(0, 0, 0), (6, 1, 3), (0, 0, 5)]
 ```
 # view images from the GUI
-![image](https://user-images.githubusercontent.com/77834536/193069663-669bae4c-a4ef-45a9-9f0d-f79b80d13e46.png)
+![image](https://user-images.githubusercontent.com/77834536/193069968-3149afd5-29af-4152-9d20-c2c5dfdf2c29.png)
 ![image](https://user-images.githubusercontent.com/77834536/193069693-4500db90-2ad3-4cc7-a3eb-4b2aa5213d88.png)
 ![image](https://user-images.githubusercontent.com/77834536/193069709-86ba6e3b-bfc3-4d03-8a2e-d9a24fd56b9e.png)
 ![image](https://user-images.githubusercontent.com/77834536/193069813-0123b543-da88-415b-a6b6-63137809cddc.png)
