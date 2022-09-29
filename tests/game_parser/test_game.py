@@ -24,8 +24,7 @@ class TestGame:
         assert self.game.player.elo == 994
         assert self.game.opponent.elo == 1017
         assert self.game.time_control == "60+0"
-        assert self.game.result.value == 1
         assert self.game.date == datetime.datetime(2018, 12, 2, 15, 20, 55)
         assert self.game.opening == None
-        assert self.game.result.value == 1
+        assert self.game.result.value == 0
         assert self.game.phases == (2, 47, 77)

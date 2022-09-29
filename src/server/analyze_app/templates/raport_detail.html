@@ -1,4 +1,4 @@
-{% extends 'main.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <table class="table">
   <thead>
     <tr>
@@ -8,7 +8,7 @@
       <th scope="col">time_class</th>
     </tr>
   </thead>
-  {% for game in games %}
+  {% for game in object %}
   <tbody>
 
     <tr>

@@ -1,4 +1,6 @@
-{% extends 'main.html' %} {% block content %}
-<h1>creating raport . . .</h1>
-
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+<form method="post" novalidate>
+  {% csrf_token %} {{ form|crispy }}
+  <button type="submit" class="btn btn-success">create raport</button>
+</form>
 {% endblock %}

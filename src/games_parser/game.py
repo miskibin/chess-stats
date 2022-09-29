@@ -46,7 +46,7 @@ class Game:
         self.evaluations = self.__set_evaluations(pgn, stockfish)
 
     INACCURACY, MISTAKE, BLUNDER = 50, 120, 200
-    RESULT = {"1-0": 1, "0-1": 0, "1/2-1/2": 0.5, "*": -1}
+    RESULT = {"1-0": 0, "0-1": 1, "1/2-1/2": 0.5, "*": -1}
     PIECE_VALUES = {
         "p": 1,
         "P": 1,
@@ -113,7 +113,6 @@ class Game:
         return Color.BLACK
 
     def __set_result(self) -> Result:
-
         result = get_field_value(self._pgn.headers, "Result")
         try:
             return Result(self.RESULT.get(result, -1))

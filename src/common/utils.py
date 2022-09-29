@@ -4,8 +4,6 @@ from logging import Logger, getLogger
 
 import yaml
 
-from src.common.logging_config_utils import PackagePathFilter
-
 
 class FailedToLoadLoggingConfigException(Exception):
     pass
@@ -26,7 +24,6 @@ def get_logger(
     except ValueError as exc:
         raise FailedToLoadLoggingConfigException from exc
     logger = getLogger("chess_logger")
-    logger.addFilter(PackagePathFilter())
     if lvl:
         logger.setLevel(lvl)
     return logger

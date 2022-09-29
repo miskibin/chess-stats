@@ -2,16 +2,15 @@ from django.db import models
 
 
 class Raport(models.Model):
-    name = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     username = models.CharField(max_length=100)
     time_class = models.CharField(max_length=100)
     games_num = models.IntegerField()
     analyzed_games = models.IntegerField(default=0, null=True)
+    engine_depth = models.IntegerField(default=10)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class ChessGame(models.Model):
@@ -19,14 +18,12 @@ class ChessGame(models.Model):
     player_elo = models.IntegerField(null=True, help_text="Player's ELO")
     opponent_elo = models.IntegerField(null=True, help_text="Opponent's ELO")
     opening = models.CharField(max_length=100, null=True, help_text="Opening name")
-    result = models.CharField(
+    result = models.FloatField(
         choices=[(1, "white"), (0, "black"), (0.5, "draw")], max_length=10
     )
     date = models.DateField(help_text="Date of the game")
     time_control = models.CharField(max_length=20, help_text="Time control of the game")
-    player_color = models.CharField(
-        max_length=10, help_text="Player's color 0-White, 1-Black"
-    )
+    player_color = models.IntegerField(help_text="Player's color 0-White, 1-Black")
     mean_player_time_per_move = models.IntegerField(
         null=True, help_text="Mean player time per move"
     )

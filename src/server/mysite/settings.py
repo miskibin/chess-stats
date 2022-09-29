@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "analyze_app.apps.AnalyzeAppConfig",
     "django_q",
+    "crispy_forms",
 ]
-import os
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 import os
 
