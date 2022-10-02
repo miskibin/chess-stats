@@ -4,17 +4,11 @@ from src.common.utils import get_logger
 from . import models
 
 
-def get_games(
-    username: str, games: int, time_class: str, depth: int, *args, **kwargs
-) -> None:
+def get_games(raport: models.Raport, *args, **kwargs) -> None:
     logger = get_logger()
-    raport = models.Raport(
-        username=username, time_class=time_class, games_num=games, engine_depth=depth
-    )
-    raport.save()
-    g = GamesHolder(logger, depth=depth)
+    g = GamesHolder(logger, depth=raport.engine_depth)
     try:
-        for game in g.get_games(username, games, time_class):
+        for game in g.get_games(raport.username, raport.games_num, raport.time_class):
             obj = models.ChessGame(**game.asdict(), raport=raport)
             raport.analyzed_games += 1
             raport.save()

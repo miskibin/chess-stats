@@ -29,8 +29,9 @@ ALLOWED_HOSTS = []
 
 Q_CLUSTER = {
     "retry": 120,
-    "workers": 4,
+    "workers": 2,
     "orm": "default",
+    "max_attempts": 1,
     "timeout": 120,
 }
 
@@ -141,7 +142,7 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

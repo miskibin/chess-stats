@@ -22,6 +22,17 @@ def get_win_ratio_per_color(raport: Raport) -> list:
     return white + black
 
 
+def get_player_elo_over_time(raport: Raport) -> list:
+    games = Game.objects.filter(raport=raport).order_by("-date")
+    data = []
+    day = games[0].date.day
+    for game in games:
+        if game.date.day != day:
+            day = game.date.day
+            data.append({"x": game.date, "y": game.player_elo})
+    return data
+
+
 def get_win_ratio_per_oppening(raport: Raport, max_oppenings=5) -> list:
     openings = (
         Game.objects.filter(raport=raport)

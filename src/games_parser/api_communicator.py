@@ -81,10 +81,6 @@ class GamesHolder:
         except (ChessDotComError, KeyError) as err:
             self._logger.error(f"Failed to get response from chess.com: {err.text}")
             raise err
-
-        if not isinstance(games, list) or not isinstance(games[0], dict):
-            self._logger.error(f"Invalid response format {resp}")
-            raise InvalidResponseFormatException(resp)
         self._logger.debug(f"In {y}-{m} : {len(games)} games was played")
         return games
 

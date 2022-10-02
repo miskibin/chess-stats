@@ -21,18 +21,15 @@ class RaportCreateView(CreateView):
 
     def post(self, request):
         form = forms.RaportForm(request.POST)
-        async_task(
-            get_games,
-            form.data["username"],
-            int(form.data["games_num"]),
-            form.data["time_class"],
-            int(form.data["engine_depth"]),
+        raport = models.Raport(
+            username=form.data["username"],
+            time_class=form.data["time_class"],
+            games_num=int(form.data["games_num"]),
+            engine_depth=int(form.data["engine_depth"]),
         )
-
-        return redirect("raport:raport-list")
-
-    def get_success_url(self):
-        return reverse("raport:raport-list")
+        raport.save()
+        async_task(get_games, raport)
+        return redirect(f"/{raport.id}/visualized")  # TODO CHANGE THIS TO REVERSE
 
     def get_absolute_url(self):
         return reverse("raport:raport-list")
@@ -66,9 +63,13 @@ class VisualizedRaportDetailView(DetailView):
         raport = get_object_or_404(models.Raport, id=id)
         win_ratio = queries.get_win_ratio_per_color(raport)
         openings = queries.get_win_ratio_per_oppening(raport)
-        # mistakes = queries.get_mean_mistakes_num_per_phase(raport)
-        pprint(win_ratio)
-        return {"win_ratio": win_ratio}
+        player_elo_over_time = queries.get_player_elo_over_time(raport)
+        return {
+            "username": raport.username,
+            "win_ratio": win_ratio,
+            "openings": openings,
+            "elo_over_time": player_elo_over_time,
+        }
 
     def get_absolute_url(self):
         return reverse("raport:raport-visualized", kwargs={"id": self.id})

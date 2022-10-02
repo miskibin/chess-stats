@@ -42,6 +42,8 @@ class Player:
             if index % 2 == color:
                 times.append(round(time_left - move.clock() + add_time, 2))
                 time_left = move.clock()
+        if not times:
+            return [0]
         return times
 
     def __str__(self) -> str:
