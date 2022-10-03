@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{object.username}}</h1>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<div>
+  <canvas id="bar_chart"></canvas>
+</div>
+<div>
+  <canvas id="elo_over_time_chart"></canvas>
+</div>
+<h4>{{ object|json_script:"data" }}</h1>
+<hr class="mt-0 mb-4" />
+{% load static %}
+<script src="{% static 'js/win_ratio_chart.js' %}"></script>
+<script src="{% static 'js/elo_over_time_chart.js' %}"></script>
+
+{% endblock %}

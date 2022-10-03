@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block content %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">created_at</th>
+      <th scope="col">username</th>
+      <th scope="col">time_class</th>
+      <th scope="col">games</th>
+      <th scope="col">depth</th>
+      <th scope="col">status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for report in object_list %}
+    <tr>
+      <th scope="row">{{report.id}}</th>
+      <td>
+        <a href="{{ report.id }}/visualized">{{report.created}}<a/>  
+        
+          </td>
+      <td>{{report.username}}</td>
+      <td>{{report.time_class}}</td>
+      <td>{{report.games_num}}</td>
+      <td>{{report.engine_depth}}</td>
+       
+      {% if report.analyzed_games == report.games_num %}
+      <td>SUCCESS</td>
+      {% elif  report.analyzed_games == -1%}
+      <td>FAILED</td>
+      {% else %}
+      <td>{{report.analyzed_games}}/{{report.games_num}}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  {% endblock %}
