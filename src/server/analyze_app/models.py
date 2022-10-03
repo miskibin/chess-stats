@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Raport(models.Model):
+class Report(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     username = models.CharField(max_length=100)
     time_class = models.CharField(max_length=100)
@@ -14,7 +14,7 @@ class Raport(models.Model):
 
 
 class ChessGame(models.Model):
-    raport = models.ForeignKey(Raport, on_delete=models.CASCADE)
+    report = models.ForeignKey(Report, on_delete=models.CASCADE)
     player_elo = models.IntegerField(null=True, help_text="Player's ELO")
     opponent_elo = models.IntegerField(null=True, help_text="Opponent's ELO")
     opening = models.CharField(max_length=100, null=True, help_text="Opening name")

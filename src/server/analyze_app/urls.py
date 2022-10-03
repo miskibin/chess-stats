@@ -1,15 +1,15 @@
 from . import views
 from django.urls import path
 
-app_name = "raport"
+app_name = "report"
 urlpatterns = [
-    path("", views.RaportListView.as_view(), name="raport-list"),
-    path("create/", views.RaportCreateView.as_view(), name="raport-create"),
-    path("<int:id>/", views.RaportDetailView.as_view(), name="raport-detail"),
+    path("", views.ReportListView.as_view(), name="report-list"),
+    path("create/", views.ReportCreateView.as_view(), name="report-create"),
+    path("<int:id>/", views.ReportDetailView.as_view(), name="report-detail"),
     path(
         "<int:id>/visualized",
-        views.VisualizedRaportDetailView.as_view(),
-        name="raport-visualized",
+        views.VisualizedReportDetailView.as_view(),
+        name="report-visualized",
     ),
-    # path("<int:id>/games", views, name="raport-games"),
+    # path("<int:id>/games", views, name="report-games"),
 ]

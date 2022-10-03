@@ -11,65 +11,65 @@ from django.views.generic import (
     ListView,
     ListView,
 )
-from pprint import pprint
 
 
-class RaportCreateView(CreateView):
-    model = models.Raport
-    form_class = forms.RaportForm
-    template_name = "create_raport.html"
+class ReportCreateView(CreateView):
+    model = models.Report
+    form_class = forms.ReportForm
+    template_name = "create_report.html"
 
     def post(self, request):
-        form = forms.RaportForm(request.POST)
-        raport = models.Raport(
+        form = forms.ReportForm(request.POST)
+        report = models.Report(
             username=form.data["username"],
             time_class=form.data["time_class"],
             games_num=int(form.data["games_num"]),
             engine_depth=int(form.data["engine_depth"]),
         )
-        raport.save()
-        async_task(get_games, raport)
-        return redirect(f"/{raport.id}/visualized")  # TODO CHANGE THIS TO REVERSE
+        report.save()
+        async_task(get_games, report)
+        return redirect(f"/{report.pk}/visualized")  # TODO CHANGE THIS TO REVERSE
 
     def get_absolute_url(self):
-        return reverse("raport:raport-list")
+        return reverse("report:report-list")
 
 
-class RaportListView(ListView):
-    template_name = "raports.html"
-    queryset = models.Raport.objects.all()
+class ReportListView(ListView):
+    template_name = "reports.html"
+    queryset = models.Report.objects.all()
 
 
-class RaportDetailView(DetailView):
-    template_name = "raport_detail.html"
+class ReportDetailView(DetailView):
+    template_name = "report_detail.html"
 
     def get_object(self):
         id = self.kwargs.get("id")
         print(id)
-        raport = get_object_or_404(models.Raport, id=id)
-        games = models.ChessGame.objects.filter(raport=raport)
-        print(games)
+        report = get_object_or_404(models.Report, id=id)
+        games = models.ChessGame.objects.filter(report=report)
         return games
 
     def get_absolute_url(self):
-        return reverse("raport:raport-detail", kwargs={"id": self.id})
+        return reverse("report:report-detail", kwargs={"id": self.id})
 
 
-class VisualizedRaportDetailView(DetailView):
-    template_name = "raport_visualized.html"
+class VisualizedReportDetailView(DetailView):
+    template_name = "report_visualized.html"
 
     def get_object(self):
+        if not models.ChessGame.objects.filter(report=self.kwargs.get("id")).exists():
+            return {}
         id = self.kwargs.get("id")
-        raport = get_object_or_404(models.Raport, id=id)
-        win_ratio = queries.get_win_ratio_per_color(raport)
-        openings = queries.get_win_ratio_per_oppening(raport)
-        player_elo_over_time = queries.get_player_elo_over_time(raport)
+        report = get_object_or_404(models.Report, id=id)
+        win_ratio = queries.get_win_ratio_per_color(report)
+        openings = queries.get_win_ratio_per_oppening(report)
+        player_elo_over_time = queries.get_player_elo_over_time(report)
         return {
-            "username": raport.username,
+            "username": report.username,
             "win_ratio": win_ratio,
             "openings": openings,
             "elo_over_time": player_elo_over_time,
         }
 
     def get_absolute_url(self):
-        return reverse("raport:raport-visualized", kwargs={"id": self.id})
+        return reverse("report:report-visualized", kwargs={"id": self.id})

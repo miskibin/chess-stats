@@ -4,7 +4,7 @@
 
     ```
     {
-    raport: Models.Raport.Object
+    report: Models.Report.Object
 
     data: [
     white_wins:(int),

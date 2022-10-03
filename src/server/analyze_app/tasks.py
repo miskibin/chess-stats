@@ -4,22 +4,22 @@ from src.common.utils import get_logger
 from . import models
 
 
-def get_games(raport: models.Raport, *args, **kwargs) -> None:
+def get_games(report: models.Report, *args, **kwargs) -> None:
     logger = get_logger()
-    g = GamesHolder(logger, depth=raport.engine_depth)
+    g = GamesHolder(logger, depth=report.engine_depth)
     try:
-        for game in g.get_games(raport.username, raport.games_num, raport.time_class):
-            obj = models.ChessGame(**game.asdict(), raport=raport)
-            raport.analyzed_games += 1
-            raport.save()
+        for game in g.get_games(report.username, report.games_num, report.time_class):
+            obj = models.ChessGame(**game.asdict(), report=report)
+            report.analyzed_games += 1
+            report.save()
             obj.save()
-            logger.debug(f"Analyzed {raport.analyzed_games} games")
+            logger.debug(f"Analyzed {report.analyzed_games} games")
     except Exception as exc:
         logger.error(exc)
-        raport.analyzed_games = -1
-        raport.save()
+        report.analyzed_games = -1
+        report.save()
         raise exc
-    logger.debug(f"Analyzed {raport.analyzed_games} games")
+    logger.debug(f"Analyzed {report.analyzed_games} games")
 
 
 def convert_data(games: list[models.ChessGame]) -> list[dict]:
