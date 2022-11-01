@@ -65,7 +65,7 @@ python src/server/manage.py qcluster
 
 <img src="https://user-images.githubusercontent.com/77834536/199268209-236ae7b8-0dd8-4075-8442-25338a8cd8a1.png" width="800" />
 
-### ... and list games in report
+### ... and get list of games that are in report
 
 <img src="https://user-images.githubusercontent.com/77834536/199354452-44d45dcb-e3df-4b7a-8086-fbd4bc9ee87e.png" width="800" />
 
