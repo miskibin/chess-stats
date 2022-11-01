@@ -31,11 +31,20 @@ python src/server/manage.py qcluster
 ```
 
 ## examples
-![image](https://user-images.githubusercontent.com/77834536/199267740-acb1cbb4-ffbb-4cf8-97fb-23c199e91621.png)
-![image](https://user-images.githubusercontent.com/77834536/199268054-d3fbb50d-da08-44b3-a81c-1e98cc2812db.png)
-![image](https://user-images.githubusercontent.com/77834536/199268106-5f8f5264-4309-4e69-a57d-e95773fe332e.png)
-![image](https://user-images.githubusercontent.com/77834536/199268132-2263e22c-d170-4edc-8f28-a145c66b5106.png)
-![image](https://user-images.githubusercontent.com/77834536/199268209-236ae7b8-0dd8-4075-8442-25338a8cd8a1.png)
+
+### create report (you don't need to be logged in)
+
+<img src="https://user-images.githubusercontent.com/77834536/199267740-acb1cbb4-ffbb-4cf8-97fb-23c199e91621.png" width="800" />
+
+### view statistics
+
+<img src="https://user-images.githubusercontent.com/77834536/199268054-d3fbb50d-da08-44b3-a81c-1e98cc2812db.png" width="800" />
+<img src="https://user-images.githubusercontent.com/77834536/199268106-5f8f5264-4309-4e69-a57d-e95773fe332e.png" width="800" />
+<img src="https://user-images.githubusercontent.com/77834536/199268132-2263e22c-d170-4edc-8f28-a145c66b5106.png" width="800" />
+
+### You can check all reports
+
+<img src="https://user-images.githubusercontent.com/77834536/199268209-236ae7b8-0dd8-4075-8442-25338a8cd8a1.png" width="800" />
 
 ### how does it work
 
