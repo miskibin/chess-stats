@@ -58,7 +58,7 @@ python src/server/manage.py qcluster
 
 <img src="https://user-images.githubusercontent.com/77834536/199268054-d3fbb50d-da08-44b3-a81c-1e98cc2812db.png" width="800" />
 <img src="https://user-images.githubusercontent.com/77834536/199268106-5f8f5264-4309-4e69-a57d-e95773fe332e.png" width="800" />
-<img src="https://user-images.githubusercontent.com/77834536/199268132-2263e22c-d170-4edc-8f28-a145c66b5106.png" width="800" />
+<img src="https://user-images.githubusercontent.com/77834536/199322726-27a0c203-15a2-49db-ba53-465bc7ceb6b9.png" width="800" />
 
 ### You can check all reports
 
@@ -74,22 +74,21 @@ python src/server/manage.py qcluster
 ### example output for single game parsed by `games_parser` module:
 
 ```
-
 Game:
-player_elo: 1354
-opponent_elo: 1433
-opening: Vienna Game: Max Lange Defense
-result: 0
-date: 2021-12-02 11:35:59
-time_control: 3+2
-player_color: 0
-mean_player_time_per_move: 4.99
-mean_opponent_time_per_move: 4.82
-moves: 57
-time_class: blitz
-phases: (6, 60, 114)
-mistakes: [(0, 0, 0), (6, 1, 3), (0, 0, 5)]
-
+  player_elo: 1399
+  opponent_elo: 1335
+  opening: Bishop's Opening: Vienna Hybrid
+  short_opening: Bishop's Opening
+  result: 0
+  date: 2022-10-05 16:23:40
+  time_control: 5+5
+  player_color: 0
+  mean_player_time_per_move: 6.0
+  mean_opponent_time_per_move: 7.01
+  moves: 24
+  time_class: blitz
+  phases: (9, 47, 47)
+  mistakes: [(0, 2, 0), (1, 1, 5), (0, 0, 0)]
 ```
 
 - `phases` - tuple of 3 values, first value is number of moves in opening, second value is number of moves in middle game, third value is number of moves in end game
