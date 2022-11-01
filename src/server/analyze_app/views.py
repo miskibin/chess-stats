@@ -11,6 +11,9 @@ from django.views.generic import (
     ListView,
     ListView,
 )
+from miskibin.utils import get_logger
+
+LOGGER = get_logger(lvl="DEBUG")
 
 
 class ReportCreateView(CreateView):
@@ -27,7 +30,7 @@ class ReportCreateView(CreateView):
             engine_depth=int(form.data["engine_depth"]),
         )
         report.save()
-        async_task(get_games, report)
+        async_task(get_games, report, LOGGER)
         return redirect(f"/{report.pk}/visualized")  # TODO CHANGE THIS TO REVERSE
 
     def get_absolute_url(self):
@@ -61,15 +64,9 @@ class VisualizedReportDetailView(DetailView):
             return {}
         id = self.kwargs.get("id")
         report = get_object_or_404(models.Report, id=id)
-        win_ratio = queries.get_win_ratio_per_color(report)
-        openings_per_color = queries.get_win_ratio_per_opening(report)
-        player_elo_over_time = queries.get_player_elo_over_time(report)
-        return {
-            "username": report.username,
-            "win_ratio": win_ratio,
-            "openings_per_color": openings_per_color,
-            "elo_over_time": player_elo_over_time,
-        }
+        queries_maker = queries.QueriesMaker(report, LOGGER)
+        print(queries_maker.asdict().keys())
+        return queries_maker.asdict()
 
     def get_absolute_url(self):
         return reverse("report:report-visualized", kwargs={"id": self.id})

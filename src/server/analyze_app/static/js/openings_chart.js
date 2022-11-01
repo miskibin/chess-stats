@@ -1,80 +1,3 @@
-[
-  [
-    {
-      opening: "Sicilian Defense: Alapin Variation",
-      count: 19,
-      win: 9,
-      lost: 7,
-      draws: 4,
-    },
-    {
-      opening: "Vienna Game: Vienna Gambit",
-      count: 17,
-      win: 8,
-      lost: 9,
-      draws: 0,
-    },
-    {
-      opening: "Caro-Kann Defense",
-      count: 11,
-      win: 3,
-      lost: 7,
-      draws: 1,
-    },
-    {
-      opening: "Vienna Game",
-      count: 8,
-      win: 3,
-      lost: 4,
-      draws: 1,
-    },
-    {
-      opening: "French Defense: Queen's Knight",
-      count: 4,
-      win: 2,
-      lost: 1,
-      draws: 1,
-    },
-  ],
-  [
-    {
-      opening: "Sicilian Defense: Old Sicilian",
-      count: 10,
-      win: 6,
-      lost: 4,
-      draws: 0,
-    },
-    {
-      opening: "Sicilian Defense: Bowdler Attack",
-      count: 7,
-      win: 4,
-      lost: 3,
-      draws: 0,
-    },
-    {
-      opening: "Sicilian Defense: McDonnell Attack",
-      count: 6,
-      win: 3,
-      lost: 2,
-      draws: 1,
-    },
-    {
-      opening: "Queen's Gambit Declined: Normal Defense",
-      count: 4,
-      win: 3,
-      lost: 1,
-      draws: 0,
-    },
-    {
-      opening: "Sicilian Defense",
-      count: 4,
-      win: 3,
-      lost: 1,
-      draws: 0,
-    },
-  ],
-];
-
 function openings_chart(openings, title, id) {
   console.log(openings);
   let data = {
@@ -95,7 +18,7 @@ function openings_chart(openings, title, id) {
         borderWidth: 1,
       },
       {
-        label: "Draws",
+        label: "Draw",
         data: openings.map((opening) => opening.draws),
         backgroundColor: "rgba(0, 0, 255, 0.2)",
         borderColor: "rgba(0, 0, 255, 1)",
@@ -125,7 +48,7 @@ function openings_chart(openings, title, id) {
   });
 }
 let openings = JSON.parse(document.getElementById("data").textContent)[
-  "openings_per_color"
+  "win_ratio_per_opening_and_color"
 ];
-openings_chart(openings[0], "White openings", "white_openings_chart");
-openings_chart(openings[1], "Black openings", "black_openings_chart");
+openings_chart(openings[0], "Openings score as white", "white_openings_chart");
+openings_chart(openings[1], "Openings score as black", "black_openings_chart");

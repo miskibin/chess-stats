@@ -208,6 +208,7 @@ class Game:
             `player_elo` (int): elo of the player
             `opponent_elo` (int): elo of the opponent
             `opening` (str): opening of the game
+            `short_opening` (str): eg. `Ruy Lopez: Open` -> `Ruy Lopez`
             `result` (Result): result of the game
             `date` (datetime): date of the game
             `time_control` (str): time control of the game
@@ -225,6 +226,7 @@ class Game:
             "player_elo": self.player.elo,
             "opponent_elo": self.opponent.elo,
             "opening": self.opening,
+            "short_opening": self.opening.split(":")[0],
             "result": self.result.value,
             "date": self.date,
             "time_control": t_c,

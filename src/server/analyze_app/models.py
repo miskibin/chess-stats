@@ -4,7 +4,7 @@ from django.db import models
 class Report(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     username = models.CharField(max_length=100)
-    time_class = models.CharField(max_length=100)
+    time_class = models.CharField(max_length=20)
     games_num = models.IntegerField()
     analyzed_games = models.IntegerField(default=0, null=True)
     engine_depth = models.IntegerField(default=10)
@@ -17,7 +17,10 @@ class ChessGame(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
     player_elo = models.IntegerField(null=True, help_text="Player's ELO")
     opponent_elo = models.IntegerField(null=True, help_text="Opponent's ELO")
-    opening = models.CharField(max_length=100, null=True, help_text="Opening name")
+    opening = models.CharField(max_length=70, null=True, help_text="Opening name")
+    short_opening = models.CharField(
+        max_length=40, null=True, help_text="Short opening name"
+    )
     result = models.FloatField(
         choices=[(1, "white"), (0, "black"), (0.5, "draw")], max_length=10
     )

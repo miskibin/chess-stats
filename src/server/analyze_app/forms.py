@@ -8,7 +8,7 @@ class ReportForm(forms.ModelForm):
         initial="rapid",
     )
     username = forms.CharField(initial="Barabasz60", max_length=40)
-    games_num = forms.IntegerField(initial=5)
+    games_num = forms.IntegerField(initial=50)
     engine_depth = forms.IntegerField(initial=5)
 
     class Meta:

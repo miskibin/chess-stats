@@ -1,8 +1,8 @@
 function win_ratio_chart() {
   let win_ratio = JSON.parse(document.getElementById("data").textContent)[
-    "win_ratio"
+    "win_ratio_per_color"
   ];
-
+  console.log(win_ratio);
   const labels = ["Win", "Draw", "Loss"];
   const data = {
     labels: labels,

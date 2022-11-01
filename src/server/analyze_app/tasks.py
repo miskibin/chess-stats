@@ -1,11 +1,10 @@
 from games_parser.api_communicator import GamesHolder
 from miskibin.utils import get_logger
-
+from logging import Logger
 from . import models
 
 
-def get_games(report: models.Report, *args, **kwargs) -> None:
-    logger = get_logger(lvl=10)
+def get_games(report: models.Report, logger: Logger, *args, **kwargs) -> None:
     g = GamesHolder(logger, depth=report.engine_depth)
     try:
         for game in g.get_games(report.username, report.games_num, report.time_class):
