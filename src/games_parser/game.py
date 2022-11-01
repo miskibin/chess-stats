@@ -221,22 +221,6 @@ class Game:
         """
         temp = self.time_control.split("+")
         t_c = str(int(temp[0]) // 60) + "+" + str(temp[1])
-        # return ChessGame(
-        #     player_elo=self.player.elo,
-        #     opponent_elo=self.opponent.elo,
-        #     opening=self.opening,
-        #     result=self.result,
-        #     date=self.date,
-        #     time_control=t_c,
-        #     player_color=self.player.color,
-        #     mean_player_time_per_move=round(np.mean(self.player.time_per_move), 2),
-        #     mean_opponent_time_per_move=round(np.mean(self.opponent.time_per_move), 2),
-        #     moves=max(len(self.player.time_per_move), len(self.opponent.time_per_move)),
-        #     time_class=self.get_time_class(t_c),
-        #     phases=self.phases,
-        #     mistakes=self.__mistakes_per_phase(),
-        # )
-
         return {
             "player_elo": self.player.elo,
             "opponent_elo": self.opponent.elo,

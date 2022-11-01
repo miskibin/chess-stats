@@ -62,12 +62,12 @@ class VisualizedReportDetailView(DetailView):
         id = self.kwargs.get("id")
         report = get_object_or_404(models.Report, id=id)
         win_ratio = queries.get_win_ratio_per_color(report)
-        openings = queries.get_win_ratio_per_oppening(report)
+        openings_per_color = queries.get_win_ratio_per_opening(report)
         player_elo_over_time = queries.get_player_elo_over_time(report)
         return {
             "username": report.username,
             "win_ratio": win_ratio,
-            "openings": openings,
+            "openings_per_color": openings_per_color,
             "elo_over_time": player_elo_over_time,
         }
 

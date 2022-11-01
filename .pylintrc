@@ -1,4 +1,4 @@
 [MASTER]
 disable = missing-function-docstring, missing-class-docstring, missing-module-docstring,too-many-arguments no-member, import-error, too-few-public-methods, too-many-instance-attributes
 [FORMAT]
-good-names = i,j,x,y,id, m,y,f,df
+good-names = i,j,x,y,id

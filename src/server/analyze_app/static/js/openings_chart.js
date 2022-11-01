@@ -1,45 +1,82 @@
-openings = [
-  {
-    opening: "Sicilian Defense: Alapin Variation",
-    count: 10,
-    win: 3,
-    lost: 3,
-    draws: 4,
-  },
-  {
-    opening: "Vienna Game: Vienna Gambit",
-    count: 8,
-    win: 4,
-    lost: 4,
-    draws: 0,
-  },
-  {
-    opening: "Sicilian Defense: Old Sicilian",
-    count: 7,
-    win: 4,
-    lost: 3,
-    draws: 0,
-  },
-  {
-    opening: "Sicilian Defense: Bowdler Attack",
-    count: 4,
-    win: 2,
-    lost: 2,
-    draws: 0,
-  },
-  {
-    opening: "Caro-Kann Defense",
-    count: 3,
-    win: 0,
-    lost: 2,
-    draws: 1,
-  },
+[
+  [
+    {
+      opening: "Sicilian Defense: Alapin Variation",
+      count: 19,
+      win: 9,
+      lost: 7,
+      draws: 4,
+    },
+    {
+      opening: "Vienna Game: Vienna Gambit",
+      count: 17,
+      win: 8,
+      lost: 9,
+      draws: 0,
+    },
+    {
+      opening: "Caro-Kann Defense",
+      count: 11,
+      win: 3,
+      lost: 7,
+      draws: 1,
+    },
+    {
+      opening: "Vienna Game",
+      count: 8,
+      win: 3,
+      lost: 4,
+      draws: 1,
+    },
+    {
+      opening: "French Defense: Queen's Knight",
+      count: 4,
+      win: 2,
+      lost: 1,
+      draws: 1,
+    },
+  ],
+  [
+    {
+      opening: "Sicilian Defense: Old Sicilian",
+      count: 10,
+      win: 6,
+      lost: 4,
+      draws: 0,
+    },
+    {
+      opening: "Sicilian Defense: Bowdler Attack",
+      count: 7,
+      win: 4,
+      lost: 3,
+      draws: 0,
+    },
+    {
+      opening: "Sicilian Defense: McDonnell Attack",
+      count: 6,
+      win: 3,
+      lost: 2,
+      draws: 1,
+    },
+    {
+      opening: "Queen's Gambit Declined: Normal Defense",
+      count: 4,
+      win: 3,
+      lost: 1,
+      draws: 0,
+    },
+    {
+      opening: "Sicilian Defense",
+      count: 4,
+      win: 3,
+      lost: 1,
+      draws: 0,
+    },
+  ],
 ];
 
-function openings_chart() {
-  let openings = JSON.parse(document.getElementById("data").textContent)[
-    "openings"
-  ];
+function openings_chart(openings, title, id) {
+  console.log(openings);
   let data = {
     labels: openings.map((opening) => opening.opening),
     datasets: [
@@ -66,7 +103,7 @@ function openings_chart() {
       },
     ],
   };
-  let ctx = document.getElementById("openings_chart").getContext("2d");
+  let ctx = document.getElementById(id).getContext("2d");
   let myChart = new Chart(ctx, {
     type: "bar",
     data: data,
@@ -76,7 +113,7 @@ function openings_chart() {
         legend: {},
         title: {
           display: true,
-          text: "Win ratio per opening",
+          text: title,
           font: {
             size: 50,
             weight: "bold",
@@ -87,4 +124,8 @@ function openings_chart() {
     },
   });
 }
-openings_chart();
+let openings = JSON.parse(document.getElementById("data").textContent)[
+  "openings_per_color"
+];
+openings_chart(openings[0], "White openings", "white_openings_chart");
+openings_chart(openings[1], "Black openings", "black_openings_chart");

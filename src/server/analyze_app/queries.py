@@ -33,22 +33,25 @@ def get_player_elo_over_time(report: Report) -> list:
     return data
 
 
-def get_win_ratio_per_oppening(report: Report, max_oppenings=5) -> list:
-    openings = (
-        Game.objects.filter(report=report)
-        .values("opening")
-        .annotate(count=models.Count("opening"))
-    )
-    openings = sorted(openings, key=lambda x: x["count"], reverse=True)
-    openings = openings[:max_oppenings]
-    for opening in openings:
-        opening["win"] = Game.objects.filter(
-            report=report, opening=opening["opening"], result=F("player_color")
-        ).count()
-        opening["lost"] = Game.objects.filter(
-            report=report, opening=opening["opening"], result=1 - F("player_color")
-        ).count()
-        opening["draws"] = Game.objects.filter(
-            report=report, opening=opening["opening"], result=0.5
-        ).count()
-    return openings
+def get_win_ratio_per_opening(report: Report, max_oppenings=5) -> tuple[dict]:
+    openings_per_color = [{}, {}]
+    for color in [0, 1]:
+        openings = (
+            Game.objects.filter(report=report, player_color=color)
+            .values("opening")
+            .annotate(count=models.Count("opening"))
+        )
+        openings = sorted(openings, key=lambda x: x["count"], reverse=True)
+        openings = openings[:max_oppenings]
+        for opening in openings:
+            opening["win"] = Game.objects.filter(
+                report=report, opening=opening["opening"], result=F("player_color")
+            ).count()
+            opening["lost"] = Game.objects.filter(
+                report=report, opening=opening["opening"], result=1 - F("player_color")
+            ).count()
+            opening["draws"] = Game.objects.filter(
+                report=report, opening=opening["opening"], result=0.5
+            ).count()
+        openings_per_color[color] = openings
+    return openings_per_color
