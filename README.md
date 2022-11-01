@@ -4,6 +4,14 @@
 
 # chess_analyse_app
 
+1. [Description](#description)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [examples](#examples)
+5. [how does it work](#how-does-it-work)
+
+## description
+
 Create reports from your chess games that you played on `chess.com` (in future also `lichess.org`) for free. Track your progress and improve your game. Check your win ratio per opening,
 per time control,per day of the week, check in which stage of the game you are losing the most, and much more.
 
@@ -46,7 +54,7 @@ python src/server/manage.py qcluster
 
 <img src="https://user-images.githubusercontent.com/77834536/199268209-236ae7b8-0dd8-4075-8442-25338a8cd8a1.png" width="800" />
 
-### how does it work
+## how does it work
 
 1. send get request to chess.com api with given username to get all of the player games
 2. convert png strings to python objects
