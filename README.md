@@ -30,10 +30,16 @@ If you want stockfish engine to analyze your app and enable some more features, 
 
 ## usage
 
+to initialize database (you need to do it only once)
+
+```bash
+python src/server/manage.py makemigrations; python src/server/manage.py migrate
+```
+
 to run server
 
 ```bash
-$env:pythonpath += python src/server/manage.py makemigrations; python src/server/manage.py migrate; python src/server/manage.py runserver
+python src/server/manage.py runserver
 ```
 
 to run queuing system
