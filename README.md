@@ -24,6 +24,10 @@ pip install -e .
 pip install -r requirements.txt
 ```
 
+### Optionall
+
+If you want stockfish engine to analyze your app and enable some more features, you need to download it from [here](https://stockfishchess.org/download/) and put it in the project folder.
+
 ## usage
 
 to run server
@@ -81,3 +85,10 @@ phases: (6, 60, 114)
 mistakes: [(0, 0, 0), (6, 1, 3), (0, 0, 5)]
 
 ```
+
+- `phases` - tuple of 3 values, first value is number of moves in opening, second value is number of moves in middle game, third value is number of moves in end game
+- `mistakes` - tuple of 3 values, first value is number of mistakes in opening, second value is number of mistakes in middle game, third value is number of mistakes in end game
+
+## Note
+
+In this project I use logger from my other package. You can check it [here](https://github.com/michalskibinski109/miskibin) if you want to use collored logs in your project.
