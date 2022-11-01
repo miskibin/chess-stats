@@ -48,6 +48,7 @@ class GamesHolder:
             list[Game]: list of `Game` objects
         """
         list_of_games = self.__get_chess_com_games(chess_com_usr, games, time_class)
+        self._logger.info(f"Collected {len(list_of_games)} games from chess.com")
         for game in list_of_games:
             game = Game(
                 game["pgn"], chess_com_usr, self._logger, self.eco, self.stockfish

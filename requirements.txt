@@ -1,8 +1,10 @@
 chess.com
 pytest
-coloredlogs
+miskibin
+django_q
+django
 numpy
 stockfish
-pandas
 chess
 PyYAML
+django-crispy-forms

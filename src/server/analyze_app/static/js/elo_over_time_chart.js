@@ -40,6 +40,11 @@ const config = {
       title: {
         display: true,
         text: "your elo over time",
+        font: {
+          size: 50,
+          weight: "bold",
+          lineHeight: 1.2,
+        },
       },
     },
   },

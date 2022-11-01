@@ -9,6 +9,7 @@ import numpy as np
 from stockfish import Stockfish
 from games_parser.player import Color, Player
 from games_parser.utils import get_field_value, get_pgn
+from typing import Union
 
 
 class InvalidResultException(Exception):
@@ -137,7 +138,7 @@ class Game:
             raise Exception("Invalid time control: " + temp)
         return temp
 
-    def __set_evaluations(self, pgn: str, stockfish: Stockfish) -> list:
+    def __set_evaluations(self, pgn: str, stockfish: Union[Stockfish, None]) -> list:
         """Method to set evaluations of the game. It uses stockfish to find evaluations.
         Returns:
             list with evaluations for every move.

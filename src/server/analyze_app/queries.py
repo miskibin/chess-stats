@@ -40,7 +40,7 @@ def get_win_ratio_per_oppening(report: Report, max_oppenings=5) -> list:
         .annotate(count=models.Count("opening"))
     )
     openings = sorted(openings, key=lambda x: x["count"], reverse=True)
-    openings = openings[:5]
+    openings = openings[:max_oppenings]
     for opening in openings:
         opening["win"] = Game.objects.filter(
             report=report, opening=opening["opening"], result=F("player_color")
@@ -51,4 +51,4 @@ def get_win_ratio_per_oppening(report: Report, max_oppenings=5) -> list:
         opening["draws"] = Game.objects.filter(
             report=report, opening=opening["opening"], result=0.5
         ).count()
-    return openings[:max_oppenings]
+    return openings

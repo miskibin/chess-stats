@@ -1,11 +1,11 @@
 from games_parser.api_communicator import GamesHolder
-from src.common.utils import get_logger
+from miskibin.utils import get_logger
 
 from . import models
 
 
 def get_games(report: models.Report, *args, **kwargs) -> None:
-    logger = get_logger()
+    logger = get_logger(lvl=10)
     g = GamesHolder(logger, depth=report.engine_depth)
     try:
         for game in g.get_games(report.username, report.games_num, report.time_class):
@@ -19,7 +19,7 @@ def get_games(report: models.Report, *args, **kwargs) -> None:
         report.analyzed_games = -1
         report.save()
         raise exc
-    logger.debug(f"Analyzed {report.analyzed_games} games")
+    logger.info(f"Analyzed {report.analyzed_games} games. Report is ready 😍 ")
 
 
 def convert_data(games: list[models.ChessGame]) -> list[dict]:

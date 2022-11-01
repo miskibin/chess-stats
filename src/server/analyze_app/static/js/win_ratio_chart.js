@@ -41,6 +41,11 @@ function win_ratio_chart() {
         title: {
           display: true,
           text: "Win ratio",
+          font: {
+            size: 50,
+            weight: "bold",
+            lineHeight: 1.2,
+          },
         },
       },
     },
