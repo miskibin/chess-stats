@@ -30,7 +30,7 @@ class ReportCreateView(CreateView):
             engine_depth=int(form.data["engine_depth"]),
         )
         report.save()
-        async_task(get_games, report, LOGGER)
+        async_task(get_games, report)
         return redirect(f"/{report.pk}/visualized")  # TODO CHANGE THIS TO REVERSE
 
     def get_absolute_url(self):
@@ -65,7 +65,7 @@ class VisualizedReportDetailView(DetailView):
         id = self.kwargs.get("id")
         report = get_object_or_404(models.Report, id=id)
         queries_maker = queries.QueriesMaker(report, LOGGER)
-        print(queries_maker.asdict().keys())
+        # print(queries_maker.asdict().keys())
         return queries_maker.asdict()
 
     def get_absolute_url(self):

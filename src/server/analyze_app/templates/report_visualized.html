@@ -24,11 +24,17 @@
   <canvas id="black_openings_chart"></canvas>
 </div>
 </section>
+<section>
+<div>
+  <canvas id="mistakes_per_phase_chart"></canvas>
+</div>
+</section>
 <h4>{{ object|json_script:"data" }}</h1>
 <hr class="mt-0 mb-4" />
 {% load static %}
 <script src="{% static 'js/elo_over_time_chart.js' %}"></script>
 <script src="{% static 'js/win_ratio_chart.js' %}"></script>
 <script src="{% static 'js/openings_chart.js' %}"></script>
+<script src="{% static 'js/mistakes_per_phase_chart.js' %}"></script>
 
 {% endblock %}

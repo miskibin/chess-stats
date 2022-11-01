@@ -28,11 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 Q_CLUSTER = {
-    "retry": 120,
+    "retry": 9999,
     "workers": 2,
     "orm": "default",
     "max_attempts": 1,
-    "timeout": 120,
+    "timeout": 1200,
 }
 
 
