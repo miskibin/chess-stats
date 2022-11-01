@@ -22,8 +22,7 @@ class GamesHolder:
     """
 
     def __init__(self, logger: Logger, depth: int = 10) -> None:
-        """_summary_
-
+        """
         Args:
             logger (Logger): logger to log to
             depth (int, optional): depth of stockfish engine. Defaults to 10.
@@ -45,7 +44,7 @@ class GamesHolder:
             games (int): number of lastest games to get
             time_class (_type_): time class of games to get (blitz, rapid, bullet, daily)
         returns:
-            list[Game]: list of `Game` objects
+            generator of Game objects, each representing a game played on chess.com
         """
         list_of_games = self.__get_chess_com_games(chess_com_usr, games, time_class)
         self._logger.info(f"Collected {len(list_of_games)} games from chess.com")
