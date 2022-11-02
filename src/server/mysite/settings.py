@@ -71,6 +71,13 @@ LOGGING = {
             "propagate": False,
         },
     },
+    "loggers": {
+        "django-q": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "WARNING"),
+            "propagate": False,
+        },
+    },
 }
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
