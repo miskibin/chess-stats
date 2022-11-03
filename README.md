@@ -102,3 +102,5 @@ Game:
 ## Note
 
 In this project I use logger from my other package. You can check it [here](https://github.com/michalskibinski109/miskibin) if you want to use collored logs in your project.
+### future look
+![image](https://user-images.githubusercontent.com/77834536/199828991-8c290795-5444-48a9-b1dd-607bc16d53e9.png)
