@@ -40,6 +40,16 @@ class QueriesMaker:
         self.logger.debug(f"{data.keys()}")
         return data
 
+    def get_all_reports(self) -> list:
+        self.logger.info(list(Report.objects.all().values("username", "id")))
+        return list(Report.objects.all().values("username"))
+
+    def get_analyzed_games(self) -> int:
+        return Game.objects.filter(report=self.report).count()
+
+    def get_games_num(self) -> int:
+        return Game.objects.filter(report=self.report).count()
+
     def get_username(self) -> str:
         return self.report.username
 

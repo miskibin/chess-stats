@@ -26,9 +26,9 @@
       <td>{{report.engine_depth}}</td>
        
       {% if report.analyzed_games == report.games_num %}
-      <td>SUCCESS</td>
+      <td><span class="badge badge-success">Success</span></td>
       {% elif  report.analyzed_games == -1%}
-      <td>FAILED</td>
+      <td><span class="badge badge-warning">Failed</span></td>
       {% else %}
       <td>{{report.analyzed_games}}/{{report.games_num}}</td>
       {% endif %}

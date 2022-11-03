@@ -1,0 +1,18 @@
+<div class="sidebar-wrapper color-primary">
+  <ul class="nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="#0">
+        <i class="tim-icons icon-chart-pie-36"></i>
+        <p>Dashboard</p>
+      </a>
+    </li>
+    {% for item in object.all_reports %}
+    <li class="nav-item">
+      <a class="nav-link" href="#0">
+        <i class="tim-icons icon-chart-pie-36"></i>
+        <a href="./{{item.id}}">Report {{item.username}}</a>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>

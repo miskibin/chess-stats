@@ -222,11 +222,16 @@ class Game:
         """
         temp = self.time_control.split("+")
         t_c = str(int(temp[0]) // 60) + "+" + str(temp[1])
+        if not self.opening:
+            short_opening = None
+            self._logger.warning(f"There is no opening in game played {self.date}")
+        else:
+            short_opening = self.opening.split(":")[0]
         return {
             "player_elo": self.player.elo,
             "opponent_elo": self.opponent.elo,
             "opening": self.opening,
-            "short_opening": self.opening.split(":")[0],
+            "short_opening": short_opening,
             "result": self.result.value,
             "date": self.date,
             "time_control": t_c,

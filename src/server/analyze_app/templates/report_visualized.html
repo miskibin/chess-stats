@@ -1,34 +1,55 @@
+
+
 {% extends 'base.html' %} {% block content %}
+{% if not object or object.analyzed_games != object.games_num %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>We are creating your report!</strong> please wait 👏
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <i class="tim-icons icon-simple-remove"></i>
+  </button>
+</div>
+{% endif %}
+
+
+
 <h1 class = "display-1" style="text-align: center;">{{object.username}}</h1>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
-<section class="container">
+
+
+<div class="col-lg-8">
+<div class= 'card card-chart'>
       <canvas id="bar_chart"></canvas>
-</section>
+  </div>
+    </div>
 <hr>  
-<section>
-<div>
-  <canvas id="elo_over_time_chart"></canvas>
-</div>
-</section>
+<div class="col-lg-8">
+<div class= 'card card-chart'>
+      <canvas id="elo_over_time_chart"></canvas>
+  </div>
+    </div>
 <hr>  
-<section>
-<div>
-  <canvas id="white_openings_chart"></canvas>
-</div>
-</section>
-<section>
-<div>
-  <canvas id="black_openings_chart"></canvas>
-</div>
-</section>
-<section>
-<div>
-  <canvas id="mistakes_per_phase_chart"></canvas>
-</div>
-</section>
+<div class="col-lg-8">
+<div class= 'card card-chart'>
+      <canvas id="white_openings_chart"></canvas>
+  </div>
+    </div>
+<hr>  
+<div class="col-lg-8">
+<div class= 'card card-chart'>
+      <canvas id="black_openings_chart"></canvas>
+  </div>
+    </div>
+<hr>  
+<div class="col-lg-8">
+<div class= 'card card-chart'>
+      <canvas id="mistakes_per_phase_chart"></canvas>
+  </div>
+    </div>
+<hr>  
+ 
 <h4>{{ object|json_script:"data" }}</h1>
 <hr class="mt-0 mb-4" />
 {% load static %}
