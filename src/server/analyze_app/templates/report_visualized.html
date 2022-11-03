@@ -12,7 +12,7 @@
 
 
 
-<h1 class = "display-1" style="text-align: center;">{{object.username}}</h1>
+<h1 class = "display-1">Report for <span class="text-info">{{object.username}}</span></h1>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -26,7 +26,7 @@
 <div class="col-lg-4"> 
   <div class="card w-45 card-nav-tabs">
       <div class="card-header card-header-success">
-        Quote
+        conclusions
       </div>
       <div class="card-body">
         <blockquote class="blockquote mb-0">
@@ -38,17 +38,34 @@
         <blockquote class="blockquote mb-0">
           <p> ❌ I do not belive that anyone read that text  </p>
         </blockquote>
-    </div>
+      </div>
   </div>
 </div>
-  </div>
 </div>
 <hr>  
-<div class="col-lg-8">
-<div class= 'card card-chart'>
+<div class="row">
+<div class= 'card card-chart col-lg-8'>
       <canvas id="elo_over_time_chart"></canvas>
   </div>
+<div class="col-lg-4"> 
+  <div class="card w-45 card-nav-tabs">
+      <div class="card-header card-header-success">
+        conclusions
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p> ✅  Your ranking is increasing</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p> ✅ some statistic  </p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p> ❌ I do not belive that anyone read that text  </p>
+        </blockquote>
     </div>
+  </div>
+</div>
+</div>
 <hr>  
 <div class="col-lg-8">
 <div class= 'card card-chart'>

@@ -1,18 +1,27 @@
-<div class="sidebar-wrapper color-primary">
-  <ul class="nav">
-    <li class="nav-item active">
-      <a class="nav-link" href="#0">
-        <i class="tim-icons icon-chart-pie-36"></i>
-        <p>Dashboard</p>
-      </a>
-    </li>
-    {% for item in object.all_reports %}
-    <li class="nav-item">
-      <a class="nav-link" href="#0">
-        <i class="tim-icons icon-chart-pie-36"></i>
-        <a href="./{{item.id}}">Report {{item.username}}</a>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+<div class="sidebar" data="blue">
+  <!--
+Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+Tip 2: you can also add an image using data-image tag
+-->
+  <div class="logo">
+    <a href="http://www.creative-tim.com" class="simple-text logo-mini"> MS </a>
+
+    <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+      Michał Skibiński
+    </a>
+  </div>
+  <div class="sidebar-wrapper color-primary">
+    <ul class="nav">
+      {% for item in object.all_reports %}
+      <li class="nav-item">
+        <a class="nav-link" href="#0">
+          <a href="./{{item.id}}" style="font-size: medium" class="display-6"
+            >Report {{item.username}}</a
+          >
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
