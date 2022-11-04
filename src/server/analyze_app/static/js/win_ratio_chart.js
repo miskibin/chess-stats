@@ -33,18 +33,32 @@ function win_ratio_chart() {
     type: "bar",
     data: data,
     options: {
-      responsive: true,
       plugins: {
         legend: {
-          position: "top",
+          position: "bottom",
+
+          labels: {
+            // This more specific font property overrides the global property
+            font: {
+              size: 15,
+            },
+          },
         },
-        title: {
-          display: true,
-          text: "Win ratio",
-          font: {
-            size: 50,
-            weight: "bold",
-            lineHeight: 1.2,
+      },
+      responsive: true,
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 15,
+            },
+          },
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 15,
+            },
           },
         },
       },

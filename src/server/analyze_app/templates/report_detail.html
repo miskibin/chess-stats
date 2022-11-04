@@ -4,21 +4,25 @@
     <tr>
       <th scope="col">game</th>
       <th scope="col">result</th>
-      <th scope="col">opening</th>
+      <th scope="col">player color</th>
       <th scope="col">time_class</th>
+      <th scope="col">date</th>
+      <th scope="col">opening</th>
     </tr>
   </thead>
   {% for game in object %}
   <tbody>
-
     <tr>
       <th scope="row">{{game.id}}</th>
       <td>{{game.result}}</td>
-      <td>{{game.opening}}</td>
+      <td>{{game.player_color}}</td>
       <td>{{game.time_class}}</td>
+      <td>{{game.date}}</td>
+      <td>{{game.opening}}</td>
 
-    {% endfor %}
-  </li>
-</ul>
+      {% endfor %}
+    </tr>
+  </tbody>
+</table>
 
 {% endblock %}

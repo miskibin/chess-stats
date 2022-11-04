@@ -7,10 +7,10 @@ function mistakes_per_phase_chart(mistakes, title) {
     datasets: [
       {
         label: "Inaccurate",
-        backgroundColor: "rgba(0, 132, 0, 0.4)",
+        backgroundColor: "rgba(0, 132, 0, 0.6)",
         borderColor: "rgba(0, 132, 0,1)",
         borderWidth: 1,
-        hoverBackgroundColor: "rgba(0, 132, 0,0.6)",
+        hoverBackgroundColor: "rgba(0, 132, 0,0.8)",
         hoverBorderColor: "rgba(0, 132, 0,1)",
         data: [
           mistakes["Opening"][0],
@@ -20,10 +20,10 @@ function mistakes_per_phase_chart(mistakes, title) {
       },
       {
         label: "mistakes",
-        backgroundColor: "rgba(0, 99, 132, 0.4)",
+        backgroundColor: "rgba(0, 99, 132, 0.6)",
         borderColor: "rgba(0,99,132,1)",
         borderWidth: 1,
-        hoverBackgroundColor: "rgba(0,99,132,0.6)",
+        hoverBackgroundColor: "rgba(0,99,132,0.8)",
         hoverBorderColor: "rgba(0,99,132,1)",
         data: [
           mistakes["Opening"][1],
@@ -33,10 +33,10 @@ function mistakes_per_phase_chart(mistakes, title) {
       },
       {
         label: "blunders",
-        backgroundColor: "rgba(255, 99, 132, 0.4)",
+        backgroundColor: "rgba(255, 99, 132, 0.6)",
         borderColor: "rgba(255,99,132,1)",
         borderWidth: 1,
-        hoverBackgroundColor: "rgba(255,99,132,0.6)",
+        hoverBackgroundColor: "rgba(255,99,132,0.8)",
         hoverBorderColor: "rgba(255,99,132,1)",
         data: [
           mistakes["Opening"][2],
@@ -52,13 +52,14 @@ function mistakes_per_phase_chart(mistakes, title) {
     data: data,
     options: {
       plugins: {
-        title: {
-          display: true,
-          text: title,
-          font: {
-            size: 50,
-            weight: "bold",
-            lineHeight: 1.2,
+        legend: {
+          position: "bottom",
+
+          labels: {
+            // This more specific font property overrides the global property
+            font: {
+              size: 15,
+            },
           },
         },
       },
@@ -66,9 +67,20 @@ function mistakes_per_phase_chart(mistakes, title) {
       scales: {
         x: {
           stacked: true,
+
+          ticks: {
+            font: {
+              size: 15,
+            },
+          },
         },
         y: {
           stacked: true,
+          ticks: {
+            font: {
+              size: 15,
+            },
+          },
         },
       },
     },
@@ -79,5 +91,4 @@ mistakes = JSON.parse(document.getElementById("data").textContent)[
   "mistakes_per_phase"
 ];
 console.log(mistakes);
-
 mistakes_per_phase_chart(mistakes, "Mistakes per phase");

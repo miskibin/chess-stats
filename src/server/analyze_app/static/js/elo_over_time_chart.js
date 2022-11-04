@@ -26,48 +26,38 @@ function elo_over_time_chart(elo_over_time) {
     type: "line",
     data: data,
     options: {
-      tooltips: {
-        backgroundColor: "#fff",
-        titleFontColor: "#333",
-        bodyFontColor: "#666",
-        bodySpacing: 4,
-        xPadding: 12,
-        mode: "nearest",
-        intersect: 0,
-        position: "nearest",
-      },
-      responsive: true,
-      elements: {
-        point: {
-          radius: 5,
+      plugins: {
+        legend: {
+          position: "bottom",
 
-          hoverRadius: 5,
-
-          hoverBorderWidth: 2,
-
-          hoverBackgroundColor: "rgba(246, 15, 36, 0.6)",
-        },
-      },
-      scales: {
-        x: {
-          type: "time",
-          time: {
-            unit: "month",
+          labels: {
+            // This more specific font property overrides the global property
+            font: {
+              size: 15,
+            },
           },
         },
       },
       responsive: true,
-      plugins: {
-        legend: {
-          position: "top",
+      scales: {
+        x: {
+          stacked: true,
+          type: "time",
+          time: {
+            unit: "month",
+          },
+          ticks: {
+            font: {
+              size: 15,
+            },
+          },
         },
-        title: {
-          display: true,
-          text: "your elo over time",
-          font: {
-            size: 50,
-            weight: "bold",
-            lineHeight: 1.2,
+        y: {
+          stacked: true,
+          ticks: {
+            font: {
+              size: 15,
+            },
           },
         },
       },

@@ -1,15 +1,18 @@
 
 
 {% extends 'base.html' %} {% block content %}
-{% if not object or object.analyzed_games != object.games_num %}
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>We are creating your report!</strong> please wait 👏
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <i class="tim-icons icon-simple-remove"></i>
-  </button>
-</div>
-{% endif %}
 
+
+{% if not object.analyzed_games %}
+<div class="alert alert-info" role="alert">
+  Gathering data...
+</div>
+{% elif not object or object.analyzed_games != object.games_num %}
+<div class="alert alert-default" role="alert">
+  We are still analizing games❗ please wait.  ({{object.analyzed_games}}/{{object.games_num}})
+</div>
+
+{% endif %}
 
 
 <h1 class = "display-1">Report for <span class="text-info">{{object.username}}</span></h1>
@@ -20,72 +23,170 @@
 
 
 <div class="row">
-<div class= 'card card-chart col-lg-8'>
-      <canvas id="bar_chart"></canvas>
+  <div class= 'card card-chart col-lg-8'>
+    <div class ='card-header card-header-success'>
+      <h2 class='card-title' style="text-align: center;">Games played</h2>
+    </div>
+    <div class='card-body'>
+        <canvas id="bar_chart"></canvas>
+    </div>
   </div>
-<div class="col-lg-4"> 
-  <div class="card w-45 card-nav-tabs">
-      <div class="card-header card-header-success">
-        conclusions
-      </div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p> ✅  You doing great</p>
-        </blockquote>
-        <blockquote class="blockquote mb-0">
-          <p> ❌ Your performance is much better when you play as white  </p>
-        </blockquote>
-        <blockquote class="blockquote mb-0">
-          <p> ❌ I do not belive that anyone read that text  </p>
-        </blockquote>
-      </div>
+
+
+  <div class="col-lg-4"> 
+    <div class="card w-45 card-nav-tabs">
+        <div class="card-header card-header-success">
+          <h2 class='card-title' style="text-align: center;">conclusions</h2>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p> ✅  You doing great</p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ Your performance is much better when you play as white  </p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ I do not belive that anyone read that text  </p>
+          </blockquote>
+        </div>
+    </div>
   </div>
 </div>
+<hr>  
+
+<hr>  
+<div class="row">
+  <div class= 'card card-chart col-lg-8'>
+    <div class ='card-header card-header-success'>
+      <h2 class='card-title' style="text-align: center;">Your elo over time</h2>
+    </div>
+    <div class='card-body'>
+      <canvas id="elo_over_time_chart"></canvas>
+    </div>
+  </div>
+
+
+  <div class="col-lg-4"> 
+    <div class="card w-45 card-nav-tabs">
+        <div class="card-header card-header-success">
+          <h2 class='card-title' style="text-align: center;">conclusions</h2>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p> ✅  You doing great</p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ Your performance is much better when you play as white  </p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ I do not belive that anyone read that text  </p>
+          </blockquote>
+        </div>
+    </div>
+  </div>
 </div>
 <hr>  
 <div class="row">
-<div class= 'card card-chart col-lg-8'>
-      <canvas id="elo_over_time_chart"></canvas>
-  </div>
-<div class="col-lg-4"> 
-  <div class="card w-45 card-nav-tabs">
-      <div class="card-header card-header-success">
-        conclusions
-      </div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p> ✅  Your ranking is increasing</p>
-        </blockquote>
-        <blockquote class="blockquote mb-0">
-          <p> ✅ some statistic  </p>
-        </blockquote>
-        <blockquote class="blockquote mb-0">
-          <p> ❌ I do not belive that anyone read that text  </p>
-        </blockquote>
+  <div class= 'card card-chart col-lg-8'>
+    <div class ='card-header card-header-success'>
+      <h2 class='card-title' style="text-align: center;">opening score as white</h2>
     </div>
-  </div>
-</div>
-</div>
-<hr>  
-<div class="col-lg-8">
-<div class= 'card card-chart'>
+    <div class='card-body'>
       <canvas id="white_openings_chart"></canvas>
-  </div>
     </div>
+  </div>
+
+
+  <div class="col-lg-4"> 
+    <div class="card w-45 card-nav-tabs">
+        <div class="card-header card-header-success">
+          <h2 class='card-title' style="text-align: center;">conclusions</h2>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p> ✅  You doing great</p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ Your performance is much better when you play as white  </p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ I do not belive that anyone read that text  </p>
+          </blockquote>
+        </div>
+    </div>
+  </div>
+</div>
 <hr>  
-<div class="col-lg-8">
-<div class= 'card card-chart'>
+<div class="row">
+  <div class= 'card card-chart col-lg-8'>
+    <div class ='card-header card-header-success'>
+      <h2 class='card-title' style="text-align: center;">opening score as black</h2>
+    </div>
+    <div class='card-body'>
       <canvas id="black_openings_chart"></canvas>
-  </div>
     </div>
+  </div>
+
+
+  <div class="col-lg-4"> 
+    <div class="card w-45 card-nav-tabs">
+        <div class="card-header card-header-success">
+          <h2 class='card-title' style="text-align: center;">conclusions</h2>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p> ✅  You doing great</p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ Your performance is much better when you play as white  </p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ I do not belive that anyone read that text  </p>
+          </blockquote>
+        </div>
+    </div>
+  </div>
+</div>
 <hr>  
-<div class="col-lg-8">
-<div class= 'card card-chart'>
+<div class="row">
+  <div class= 'card card-chart col-lg-8'>
+    <div class ='card-header card-header-success'>
+      <h2 class='card-title' style="text-align: center;">Mistakes per phase</h2>
+    </div>
+    <div class='card-body'>
       <canvas id="mistakes_per_phase_chart"></canvas>
-  </div>
     </div>
+  </div>
+
+
+  <div class="col-lg-4"> 
+    <div class="card w-45 card-nav-tabs">
+        <div class="card-header card-header-success">
+          <h2 class='card-title' style="text-align: center;">conclusions</h2>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p> ✅  You doing great</p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ Your performance is much better when you play as white  </p>
+          </blockquote>
+          <blockquote class="blockquote mb-0">
+            <p> ❌ I do not belive that anyone read that text  </p>
+          </blockquote>
+        </div>
+    </div>
+  </div>
+</div>
 <hr>  
- 
+
+    
+    
+    
+    
+
+
+
 <h4>{{ object|json_script:"data" }}</h1>
 <hr class="mt-0 mb-4" />
 {% load static %}

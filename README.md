@@ -52,28 +52,21 @@ python src/server/manage.py qcluster
 
 ### create report (you don't need to be logged in)
 
-<img src="https://user-images.githubusercontent.com/77834536/199267740-acb1cbb4-ffbb-4cf8-97fb-23c199e91621.png" width="800" />
-![image](https://user-images.githubusercontent.com/77834536/199975224-dcf98a81-eac0-4f77-8c9c-0231444d1744.png)
+<img src="https://user-images.githubusercontent.com/77834536/199975224-dcf98a81-eac0-4f77-8c9c-0231444d1744.png" width="800" />
 
 ### view statistics
 
-![image](https://user-images.githubusercontent.com/77834536/199974885-1cf19160-a676-452c-a584-df9b2662dc40.png)
-![image](https://user-images.githubusercontent.com/77834536/199974986-d3b0fe91-e5a0-4953-bf27-4834a755a260.png)
-![image](https://user-images.githubusercontent.com/77834536/199975051-ab51dd34-0cd5-4cfa-9d0f-d2d43785f252.png)
-
-<img src="https://user-images.githubusercontent.com/77834536/199268106-5f8f5264-4309-4e69-a57d-e95773fe332e.png" width="800" />
-<img src="https://user-images.githubusercontent.com/77834536/199322726-27a0c203-15a2-49db-ba53-465bc7ceb6b9.png" width="800" />
-<img src="https://user-images.githubusercontent.com/77834536/199354121-cf5f71fc-c09a-4df2-9584-4e872e4d1a3b.png" width="800" />
+<img src="https://user-images.githubusercontent.com/77834536/199974885-1cf19160-a676-452c-a584-df9b2662dc40.png" width="800" />
+<img src="https://user-images.githubusercontent.com/77834536/199974986-d3b0fe91-e5a0-4953-bf27-4834a755a260.png" width="800" />
+<img src="https://user-images.githubusercontent.com/77834536/199975051-ab51dd34-0cd5-4cfa-9d0f-d2d43785f252.png" width="800" />
 
 ### You can check all reports...
 
-<img src="https://user-images.githubusercontent.com/77834536/199268209-236ae7b8-0dd8-4075-8442-25338a8cd8a1.png" width="800" />
-![image](https://user-images.githubusercontent.com/77834536/199975124-7fa990d8-4587-4774-b079-c68efe9900bd.png)
+<img src="https://user-images.githubusercontent.com/77834536/199975124-7fa990d8-4587-4774-b079-c68efe9900bd.png" width="800" />
 
 ### ... and get list of games that are in report
 
-<img src="https://user-images.githubusercontent.com/77834536/199354452-44d45dcb-e3df-4b7a-8086-fbd4bc9ee87e.png" width="800" />
-![image](https://user-images.githubusercontent.com/77834536/199975295-0f1bf105-18c9-41bd-bcb0-0eb00a6ee0d6.png)
+<img src="https://user-images.githubusercontent.com/77834536/199975295-0f1bf105-18c9-41bd-bcb0-0eb00a6ee0d6.png" width="800" />
 
 ## how does it work
 
@@ -108,5 +101,3 @@ Game:
 ## Note
 
 In this project I use logger from my other package. You can check it [here](https://github.com/michalskibinski109/miskibin) if you want to use collored logs in your project.
-### future look
-![image](https://user-images.githubusercontent.com/77834536/199831713-a31bcbff-2a80-4e6e-a1f4-9fb0b66ed748.png)

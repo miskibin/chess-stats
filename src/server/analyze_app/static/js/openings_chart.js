@@ -6,21 +6,21 @@ function openings_chart(openings, title, id) {
       {
         label: "Win",
         data: openings.map((opening) => opening.win),
-        backgroundColor: "rgba(0, 255, 0, 0.2)",
+        backgroundColor: "rgba(0, 255, 0, 0.4)",
         borderColor: "rgba(0, 255, 0, 1)",
         borderWidth: 1,
       },
       {
         label: "Lost",
         data: openings.map((opening) => opening.lost),
-        backgroundColor: "rgba(255, 0, 0, 0.2)",
+        backgroundColor: "rgba(255, 0, 0, 0.4)",
         borderColor: "rgba(255, 0, 0, 1)",
         borderWidth: 1,
       },
       {
         label: "Draw",
         data: openings.map((opening) => opening.draws),
-        backgroundColor: "rgba(0, 0, 255, 0.2)",
+        backgroundColor: "rgba(0, 0, 255, 0.4)",
         borderColor: "rgba(0, 0, 255, 1)",
         borderWidth: 1,
       },
@@ -31,16 +31,32 @@ function openings_chart(openings, title, id) {
     type: "bar",
     data: data,
     options: {
-      responsive: true,
       plugins: {
-        legend: {},
-        title: {
-          display: true,
-          text: title,
-          font: {
-            size: 50,
-            weight: "bold",
-            lineHeight: 1.2,
+        legend: {
+          position: "bottom",
+
+          labels: {
+            // This more specific font property overrides the global property
+            font: {
+              size: 15,
+            },
+          },
+        },
+      },
+      responsive: true,
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 15,
+            },
+          },
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 15,
+            },
           },
         },
       },

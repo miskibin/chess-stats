@@ -41,14 +41,13 @@ class QueriesMaker:
         return data
 
     def get_all_reports(self) -> list:
-        self.logger.info(list(Report.objects.all().values("username", "id")))
-        return list(Report.objects.all().values("username"))
+        return list(Report.objects.all().values("username").distinct())
 
     def get_analyzed_games(self) -> int:
         return Game.objects.filter(report=self.report).count()
 
     def get_games_num(self) -> int:
-        return Game.objects.filter(report=self.report).count()
+        return self.report.games_num
 
     def get_username(self) -> str:
         return self.report.username

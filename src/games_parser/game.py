@@ -76,7 +76,13 @@ class Game:
         game = chess.pgn.read_game(io.StringIO(pgn), Visitor=chess.pgn.BoardBuilder)
         board = chess.Board()
         for index, move in enumerate(game.move_stack):
-            board.push(move)
+            try:
+                board.push(move)
+            except (ValueError, AssertionError) as exc:
+                self._logger.error(
+                    f"Invalid move {move} in game played {self.date} {exc}"
+                )
+                raise exc
             points = sum(self.PIECE_VALUES[str(i)] for i in board.piece_map().values())
             if points < 28:  # if more it is endgame
                 if index > middlegame:
