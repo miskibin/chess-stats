@@ -11,7 +11,7 @@ class InvalidResponseFormatException(Exception):
 class ChessComApiCommunicator(ApiCommunicator):
     def get_games(self, username: str, games: int, time_class: str):
         list_of_games = self.__get_games(username, games, time_class)
-        return super().games_generator(username, list_of_games, time_class)
+        return super().games_generator(username, list_of_games)
 
     def __get_joined_year(self, usr: str) -> int:
         if not usr:

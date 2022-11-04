@@ -38,12 +38,3 @@ class CommunicatorFactory:
             raise ValueError(f"Invalid portal: {portal}")
         communicator_class = self.COMMUNICATORS[portal]
         return communicator_class(self._logger, depth)
-
-
-from miskibin import get_logger
-
-factory = CommunicatorFactory(get_logger(lvl=10))
-communicator = factory.get_communicator("chess.com")
-games = communicator.get_games("pro100wdupecvb", 10, "blitz")
-for game in games:
-    print(game)

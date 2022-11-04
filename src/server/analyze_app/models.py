@@ -3,8 +3,8 @@ from django.db import models
 
 class Report(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    username = models.CharField(max_length=100)
-    site = models.CharField(max_length=100)
+    chess_com_username = models.CharField(max_length=100)
+    lichess_username = models.CharField(max_length=100)
     time_class = models.CharField(max_length=20)
     games_num = models.IntegerField()
     analyzed_games = models.IntegerField(default=0, null=True)

@@ -38,13 +38,12 @@ class ApiCommunicator(ABC):
             self.stockfish = None
 
     def games_generator(
-        self, username: str, list_of_pgns: int, time_class: str
-    ) -> list[Game]:
+        self, username: str, list_of_pgns: int
+    ) -> Generator[Game, None, None]:
         """
         Args:
             username (str): username on given portal (lichess, chess.com, etc.) to get games from
             list_of_pgns (int): number of pgn strings to compute
-            time_class (_type_): time class of games to get (blitz, rapid, bullet, daily)
         returns:
             generator of Game objects, each representing a game played on chess.com
         """

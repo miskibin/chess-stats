@@ -10,7 +10,9 @@ def get_games(
     factory = CommunicatorFactory(logger)
     communicator = factory.get_communicator(report.site, report.engine_depth)
     try:
-        for game in g.get_games(report.username, report.games_num, report.time_class):
+        for game in communicator.get_games(
+            report.username, report.games_num, report.time_class
+        ):
             obj = models.ChessGame(**game.asdict(), report=report)
             report.analyzed_games += 1
             report.save()
