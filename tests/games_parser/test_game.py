@@ -21,7 +21,7 @@ class TestGame:
             username="pro100wdupe",
             logger=self.logger,
             openings=[],
-            site="chess.com",
+            host="chess.com",
         )
 
     def test_init(self):

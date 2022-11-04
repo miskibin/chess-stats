@@ -55,7 +55,7 @@ class ApiCommunicator(ABC):
                 username,
                 self._logger,
                 self.eco,
-                site=self.host,
+                host=self.host,
                 stockfish=self.stockfish,
             )
             yield game
