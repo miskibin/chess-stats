@@ -17,7 +17,11 @@ class TestGame:
         with open(games_file, "r") as f:
             self.pgn = f.read().split("\n\n\n")[0]
         self.game = Game(
-            pgn=self.pgn, username="pro100wdupe", logger=self.logger, openings=[]
+            pgn=self.pgn,
+            username="pro100wdupe",
+            logger=self.logger,
+            openings=[],
+            site="chess.com",
         )
 
     def test_init(self):
