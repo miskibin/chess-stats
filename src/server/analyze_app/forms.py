@@ -7,10 +7,21 @@ class ReportForm(forms.ModelForm):
         choices=[("rapid", "rapid"), ("blitz", "blitz"), ("bullet", "bullet")],
         initial="rapid",
     )
-    username = forms.CharField(initial="Barabasz60", max_length=40)
+    chess_com_username = forms.CharField(
+        initial="Barabasz60",
+        max_length=40,
+        required=False,
+        help_text="leave blank if you don't want to analyze chess.com games",
+    )
+    lichess_username = forms.CharField(
+        initial="pro100wdupe",
+        max_length=40,
+        required=False,
+        help_text="leave blank if you don't want to analyze lichess.org games",
+    )
     games_num = forms.IntegerField(initial=50)
     engine_depth = forms.IntegerField(initial=5)
 
     class Meta:
         model = Report
-        fields = ("username", "games_num", "time_class")
+        fields = ("chess_com_username", "lichess_username", "games_num", "time_class")

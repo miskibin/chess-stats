@@ -41,7 +41,11 @@ class QueriesMaker:
         return data
 
     def get_all_reports(self) -> list:
-        return list(Report.objects.all().values("username").distinct())
+        return list(
+            Report.objects.all()
+            .values("chess_com_username", "lichess_username")
+            .distinct()
+        )
 
     def get_analyzed_games(self) -> int:
         return Game.objects.filter(report=self.report).count()
@@ -49,8 +53,8 @@ class QueriesMaker:
     def get_games_num(self) -> int:
         return self.report.games_num
 
-    def get_username(self) -> str:
-        return self.report.username
+    def get_chess_com_username(self) -> str:
+        return self.report.chess_com_username
 
     def __get_win_ratio(self, color) -> int:
         win, lost, draws = 0, 0, 0

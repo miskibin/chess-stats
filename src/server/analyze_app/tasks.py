@@ -8,10 +8,13 @@ def get_games(
     report: models.Report, logger: Logger = get_logger(lvl=10), *args, **kwargs
 ) -> None:
     factory = CommunicatorFactory(logger)
-    communicator = factory.get_communicator(report.site, report.engine_depth)
+    if report.chess_com_username is not None:
+        site = "chess.com"
+        username = report.chess_com_username
+    communicator = factory.get_communicator(site, report.engine_depth)
     try:
         for game in communicator.get_games(
-            report.username, report.games_num, report.time_class
+            username, report.games_num, report.time_class
         ):
             obj = models.ChessGame(**game.asdict(), report=report)
             report.analyzed_games += 1

@@ -27,6 +27,7 @@ class ApiCommunicator(ABC):
             logger (Logger): logger to log to
             depth (int, optional): depth of stockfish engine. Defaults to 10.
         """
+        self.host = None
         self._logger = logger
         self.eco = self.__set_eco()
         try:
@@ -49,7 +50,14 @@ class ApiCommunicator(ABC):
         """
         self._logger.info(f"Collected {len(list_of_pgns)} games")
         for game in list_of_pgns:
-            game = Game(game, username, self._logger, self.eco, self.stockfish)
+            game = Game(
+                game,
+                username,
+                self._logger,
+                self.eco,
+                site=self.host,
+                stockfish=self.stockfish,
+            )
             yield game
 
     def __set_eco(self) -> list[str]:

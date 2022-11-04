@@ -24,7 +24,8 @@ class ReportCreateView(CreateView):
     def post(self, request):
         form = forms.ReportForm(request.POST)
         report = models.Report(
-            username=form.data["username"],
+            chess_com_username=form.data["chess_com_username"],
+            lichess_username=form.data["lichess_username"],
             time_class=form.data["time_class"],
             games_num=int(form.data["games_num"]),
             engine_depth=int(form.data["engine_depth"]),

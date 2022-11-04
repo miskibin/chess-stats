@@ -7,6 +7,7 @@ class LichessApiCommunicator(ApiCommunicator):
     def __init__(self, logger: Logger, depth: int = 10) -> None:
         super().__init__(logger, depth)
         self.base_url = "https://lichess.org/api/"
+        self.host = "lichess.org"
 
     def __get_games(self, username: str, games: int, time_class: str) -> list[dict]:
         self._logger.info(f"Collecting {games} games from lichess.org")

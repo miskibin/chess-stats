@@ -9,6 +9,10 @@ class InvalidResponseFormatException(Exception):
 
 
 class ChessComApiCommunicator(ApiCommunicator):
+    def __init__(self, logger, depth):
+        super().__init__(logger, depth)
+        self.host = "chess.com"
+
     def get_games(self, username: str, games: int, time_class: str):
         list_of_games = self.__get_games(username, games, time_class)
         return super().games_generator(username, list_of_games)

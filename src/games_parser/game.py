@@ -31,9 +31,11 @@ class Game:
         username: str,
         logger: Logger,
         openings: list,
+        site: str,
         stockfish: Stockfish = None,
     ) -> None:
         self._logger = logger
+        self.site = site
         self._pgn = get_pgn(pgn)
         self.time_control = self.__set_time_control()
         color = bool(self.__set_color(username))
@@ -233,6 +235,7 @@ class Game:
             short_opening = self.opening.split(":")[0]
         return {
             "player_elo": self.player.elo,
+            "site": self.site,
             "opponent_elo": self.opponent.elo,
             "opening": self.opening,
             "short_opening": short_opening,
