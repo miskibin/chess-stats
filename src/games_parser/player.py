@@ -39,6 +39,9 @@ class Player:
             return [0]
         times = []
         for index, move in enumerate(self._pgn.mainline()):
+            if move.clock() is None:
+                self._logger.error("No clock information for move " + str(index))
+                break
             if index % 2 == color:
                 times.append(round(time_left - move.clock() + add_time, 2))
                 time_left = move.clock()

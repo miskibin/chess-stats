@@ -1,28 +1,28 @@
 import json
 import os
-from datetime import datetime
 from logging import Logger
 from pathlib import Path
-
-import chessdotcom
-from chessdotcom.types import ChessDotComError
+from typing import Generator
 from stockfish import Stockfish
 
 from games_parser.game import Game
+from abc import ABC, abstractmethod
+
+
+class InvalidUsernameException(Exception):
+    pass
 
 
 class InvalidResponseFormatException(Exception):
     pass
 
 
-class GamesHolder:
-    """Class to hold all the games played on `Chess.com`of a given player player.
-    TODO extend to lichess.org
-
-    """
-
+class ApiCommunicator(ABC):
     def __init__(self, logger: Logger, depth: int = 10) -> None:
         """
+        Summary:
+            Abstract class for API communication. It is used to get games from chess.com, lichess, etc.
+            Each subclass should implement get_games method.
         Args:
             logger (Logger): logger to log to
             depth (int, optional): depth of stockfish engine. Defaults to 10.
@@ -37,21 +37,20 @@ class GamesHolder:
             )
             self.stockfish = None
 
-    def get_games(self, chess_com_usr: str, games: int, time_class: str) -> list[Game]:
+    def games_generator(
+        self, username: str, list_of_pgns: int, time_class: str
+    ) -> list[Game]:
         """
         Args:
-            chess_com_usr (str): username on chess.com to get games from
-            games (int): number of lastest games to get
+            username (str): username on given portal (lichess, chess.com, etc.) to get games from
+            list_of_pgns (int): number of pgn strings to compute
             time_class (_type_): time class of games to get (blitz, rapid, bullet, daily)
         returns:
             generator of Game objects, each representing a game played on chess.com
         """
-        list_of_games = self.__get_chess_com_games(chess_com_usr, games, time_class)
-        self._logger.info(f"Collected {len(list_of_games)} games from chess.com")
-        for game in list_of_games:
-            game = Game(
-                game["pgn"], chess_com_usr, self._logger, self.eco, self.stockfish
-            )
+        self._logger.info(f"Collected {len(list_of_pgns)} games")
+        for game in list_of_pgns:
+            game = Game(game, username, self._logger, self.eco, self.stockfish)
             yield game
 
     def __set_eco(self) -> list[str]:
@@ -61,44 +60,16 @@ class GamesHolder:
             eco = json.load(f)
         return eco
 
-    def __get_joined_year(self, usr: str) -> int:
-        if not usr:
-            self._logger.error("No username provided")
-            return []
-        try:
-            response = chessdotcom.get_player_profile(usr)
-        except ChessDotComError as err:
-            self._logger.error(f"Failed to get response from chess.com: {err.text}")
-            raise err
-        joined = response.json["player"]["joined"]
-        year = datetime.fromtimestamp(joined).year
-        return year
-
-    def __get_chess_com_response(self, usr: str, y: int, m: int) -> list:
-        try:
-            resp = chessdotcom.get_player_games_by_month(usr, y, m).json
-            games = resp["games"]
-        except (ChessDotComError, KeyError) as err:
-            self._logger.error(f"Failed to get response from chess.com: {err.text}")
-            raise err
-        self._logger.debug(f"In {y}-{m} : {len(games)} games was played")
-        return games
-
-    def __get_chess_com_games(self, usr: str, games_num: int, time_class: str) -> None:
-        joined_year = self.__get_joined_year(usr)
-        games = []
-        for y in range(datetime.now().year, joined_year - 1, -1):
-            if y == datetime.now().year:
-                m = int(datetime.now().month)
-            else:
-                m = 12
-            while m > 0:
-                games_json = self.__get_chess_com_response(usr, y, m)
-
-                for g in games_json:
-                    if len(games) >= games_num:
-                        return games
-                    if g["time_class"] == time_class:
-                        games.append(g)
-                m -= 1
-        return games
+    def get_games(
+        self, username: str, games: int, time_class: str
+    ) -> Generator[Game, None, None]:
+        """
+        Args:
+            username (str): username on given portal (lichess, chess.com, etc.) to get games from
+            games (int): number of lastest games to get
+            time_class (_type_): time class of games to get (blitz, rapid, bullet, daily)
+        returns:
+            generator of Game objects, each representing a game played on chess.com, licess, etc.
+        """
+        self._logger.error(f"Method not implemented in {self.__class__.__name__}")
+        raise NotImplementedError

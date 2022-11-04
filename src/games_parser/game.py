@@ -2,7 +2,6 @@ import io
 from datetime import datetime
 from enum import Enum
 from logging import Logger
-
 import chess
 import chess.pgn
 import numpy as np
@@ -230,7 +229,6 @@ class Game:
         t_c = str(int(temp[0]) // 60) + "+" + str(temp[1])
         if not self.opening:
             short_opening = None
-            self._logger.warning(f"There is no opening in game played {self.date}")
         else:
             short_opening = self.opening.split(":")[0]
         return {

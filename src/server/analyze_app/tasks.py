@@ -1,4 +1,4 @@
-from games_parser.api_communicator import GamesHolder
+from games_parser.communicator_factory import CommunicatorFactory
 from logging import Logger
 from . import models
 from miskibin.utils import get_logger
@@ -7,7 +7,8 @@ from miskibin.utils import get_logger
 def get_games(
     report: models.Report, logger: Logger = get_logger(lvl=10), *args, **kwargs
 ) -> None:
-    g = GamesHolder(logger, depth=report.engine_depth)
+    factory = CommunicatorFactory(logger)
+    communicator = factory.get_communicator(report.site, report.engine_depth)
     try:
         for game in g.get_games(report.username, report.games_num, report.time_class):
             obj = models.ChessGame(**game.asdict(), report=report)
