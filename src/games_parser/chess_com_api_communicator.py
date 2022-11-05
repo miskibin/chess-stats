@@ -17,7 +17,8 @@ class ChessComApiCommunicator(ApiCommunicator):
             self._logger.error("No username provided")
             return []
         url = f"{self.API_URL}player/{usr}"
-        response = self.send_query(url)
+        headers = {"Accept": "application/json"}
+        response = self.send_query(url=url, headers=headers)
         joined = response.json()["joined"]
         year = datetime.fromtimestamp(joined).year
         return year

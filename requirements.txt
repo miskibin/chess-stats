@@ -8,3 +8,4 @@ numpy
 PyYAML
 django-crispy-forms
 python-Levenshtein
+httpx

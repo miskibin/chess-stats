@@ -52,7 +52,7 @@ class ApiCommunicator(ABC):
             resp = requests.get(url=url, headers=headers, params=params)
             resp.raise_for_status()
         except (requests.HTTPError) as err:
-            self._logger.error(f"Failed to get response from {self.API_URL}: {err}")
+            self._logger.error(f"Failed to get response from {url}: {err}")
             raise err
         return resp
 

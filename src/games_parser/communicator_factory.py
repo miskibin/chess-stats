@@ -50,11 +50,11 @@ if __name__ == "__main__":
     from miskibin.utils import get_logger
 
     logger = get_logger(lvl="DEBUG")
-    communicator = CommunicatorFactory(logger).get_communicator("lichesds.org")
+    communicator = CommunicatorFactory(logger).get_communicator("lichess.org")
     games = communicator.get_games("pro100wdupe", 3, "blitz")
     for game in games:
         print(game)
-    communicator = CommunicatorFactory(logger).get_communicator("chdess.com")
+    communicator = CommunicatorFactory(logger).get_communicator("chess.com")
     games = communicator.get_games("Barabasz60", 3, "blitz")
     for game in games:
         print(game)
