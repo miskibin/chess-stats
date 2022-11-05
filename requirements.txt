@@ -1,10 +1,9 @@
-chess.com
 pytest
 miskibin
 django_q
 django
-numpy
 stockfish
 chess
 PyYAML
 django-crispy-forms
+python-Levenshtein

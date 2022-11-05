@@ -3,6 +3,7 @@ import json
 import os
 from logging import getLogger
 from pathlib import Path
+
 import pytest
 
 from games_parser.game import Game, InvalidResultException

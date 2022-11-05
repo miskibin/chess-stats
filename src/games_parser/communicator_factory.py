@@ -1,7 +1,9 @@
+from logging import Logger
+
+from games_parser.api_communicator import ApiCommunicator
 from games_parser.chess_com_api_communicator import ChessComApiCommunicator
 from games_parser.lichess_api_communicator import LichessApiCommunicator
-from games_parser.api_communicator import ApiCommunicator
-from logging import Logger
+from Levenshtein import distance as lev
 
 
 class CommunicatorFactory:
@@ -18,7 +20,7 @@ class CommunicatorFactory:
         "chess.com": ChessComApiCommunicator,
         "lichess.org": LichessApiCommunicator,
         "lichess": LichessApiCommunicator,
-        "chess": ChessComApiCommunicator,
+        "chessdotcom": ChessComApiCommunicator,
     }
 
     def get_communicator(self, portal: str, depth: int = 10) -> ApiCommunicator:
@@ -31,10 +33,28 @@ class CommunicatorFactory:
         Returns:
             ApiCommunicator object for given portal
         """
+        # get closest match
         if portal not in self.COMMUNICATORS:
+            closest_portal = min(
+                self.COMMUNICATORS.keys(), key=lambda x: lev(x, portal)
+            )
             self._logger.error(
-                f"Invalid portal: {portal}. Valid portals are: {self.COMMUNICATORS.keys()}"
+                f"Portal {portal} not supported. Did you mean {closest_portal}?"
             )
             raise ValueError(f"Invalid portal: {portal}")
         communicator_class = self.COMMUNICATORS[portal]
         return communicator_class(self._logger, depth)
+
+
+if __name__ == "__main__":
+    from miskibin.utils import get_logger
+
+    logger = get_logger(lvl="DEBUG")
+    communicator = CommunicatorFactory(logger).get_communicator("lichesds.org")
+    games = communicator.get_games("pro100wdupe", 3, "blitz")
+    for game in games:
+        print(game)
+    communicator = CommunicatorFactory(logger).get_communicator("chdess.com")
+    games = communicator.get_games("Barabasz60", 3, "blitz")
+    for game in games:
+        print(game)

@@ -1,17 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpRequest
-from . import models, forms, queries
-from .tasks import get_games, convert_data
-from django_q.tasks import async_task, result
-from django.views.generic import CreateView
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views.generic import (
-    CreateView,
-    DetailView,
-    ListView,
-    ListView,
-)
+from django.views.generic import CreateView, DetailView, ListView
+from django_q.tasks import async_task, result
 from miskibin.utils import get_logger
+
+from . import forms, models, queries
+from .tasks import convert_data, get_games
 
 LOGGER = get_logger(lvl="DEBUG")
 

@@ -1,11 +1,12 @@
-from .models import Report
-from .models import ChessGame as Game
-from django.db import models
-from django.db.models import F
 from logging import Logger
-from miskibin.utils import get_logger
 from time import time
-from django.db.models import Count
+
+from django.db import models
+from django.db.models import Count, F
+from miskibin.utils import get_logger
+
+from .models import ChessGame as Game
+from .models import Report
 
 
 class QueriesMaker:

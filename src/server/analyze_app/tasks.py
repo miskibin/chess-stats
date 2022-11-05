@@ -1,7 +1,10 @@
-from games_parser.communicator_factory import CommunicatorFactory
 from logging import Logger
-from . import models
+
 from miskibin.utils import get_logger
+
+from games_parser.communicator_factory import CommunicatorFactory
+
+from . import models
 
 
 def get_games(

@@ -1,17 +1,12 @@
 from datetime import datetime
-import chessdotcom
-from chessdotcom.types import ChessDotComError
-from games_parser.api_communicator import ApiCommunicator, InvalidUsernameException
 
-
-class InvalidResponseFormatException(Exception):
-    pass
+from games_parser.api_communicator import ApiCommunicator
+from games_parser.utils import get_time_class
 
 
 class ChessComApiCommunicator(ApiCommunicator):
-    def __init__(self, logger, depth):
-        super().__init__(logger, depth)
-        self.host = "chess.com"
+    HOST = "chess.com"
+    API_URL = "https://api.chess.com/pub/"
 
     def get_games(self, username: str, games: int, time_class: str):
         list_of_games = self.__get_games(username, games, time_class)
@@ -21,22 +16,16 @@ class ChessComApiCommunicator(ApiCommunicator):
         if not usr:
             self._logger.error("No username provided")
             return []
-        try:
-            response = chessdotcom.get_player_profile(usr)
-        except ChessDotComError as err:
-            self._logger.error(f"Failed to get response from chess.com: {err.text}")
-            raise err
-        joined = response.json["player"]["joined"]
+        url = f"{self.API_URL}player/{usr}"
+        response = self.send_query(url)
+        joined = response.json()["joined"]
         year = datetime.fromtimestamp(joined).year
         return year
 
     def __get_chess_com_response(self, usr: str, y: int, m: int) -> list:
-        try:
-            resp = chessdotcom.get_player_games_by_month(usr, y, m).json
-            games = resp["games"]
-        except (ChessDotComError) as err:
-            self._logger.error(f"Failed to get response from chess.com: {err.message}")
-            raise err
+        url = f"{self.API_URL}player/{usr}/games/{y}/{m}/pgn"
+        response = self.send_query(url)
+        games = self.split_pgns(response.text)
         self._logger.debug(f"In {y}-{m} : {len(games)} games was played")
         return games
 
@@ -49,12 +38,13 @@ class ChessComApiCommunicator(ApiCommunicator):
             else:
                 m = 12
             while m > 0:
-                games_json = self.__get_chess_com_response(usr, y, m)
+                games_list = self.__get_chess_com_response(usr, y, m)
 
-                for g in games_json:
+                for g in games_list:
                     if len(games) >= games_num:
                         return games
-                    if g["time_class"] == time_class:
-                        games.append(g["pgn"])
+                    if get_time_class(g) == time_class:
+
+                        games.append(g)
                 m -= 1
         return games

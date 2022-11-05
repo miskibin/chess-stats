@@ -2,13 +2,15 @@ import io
 from datetime import datetime
 from enum import Enum
 from logging import Logger
+from typing import Union
+
 import chess
 import chess.pgn
 import numpy as np
 from stockfish import Stockfish
+
 from games_parser.player import Color, Player
 from games_parser.utils import get_field_value, get_pgn
-from typing import Union
 
 
 class InvalidResultException(Exception):

@@ -1,23 +1,21 @@
 import json
 import os
+from abc import ABC
 from logging import Logger
 from pathlib import Path
 from typing import Generator
+
+import requests
 from stockfish import Stockfish
 
 from games_parser.game import Game
-from abc import ABC, abstractmethod
-
-
-class InvalidUsernameException(Exception):
-    pass
-
-
-class InvalidResponseFormatException(Exception):
-    pass
 
 
 class ApiCommunicator(ABC):
+
+    HOST = None
+    API_URL = None
+
     def __init__(self, logger: Logger, depth: int = 10) -> None:
         """
         Summary:
@@ -27,7 +25,6 @@ class ApiCommunicator(ABC):
             logger (Logger): logger to log to
             depth (int, optional): depth of stockfish engine. Defaults to 10.
         """
-        self.host = None
         self._logger = logger
         self.eco = self.__set_eco()
         try:
@@ -37,6 +34,41 @@ class ApiCommunicator(ABC):
                 f"Failed to load stockfish engine: Do you have it installed?  {err}"
             )
             self.stockfish = None
+
+    def send_query(
+        self, url: str, headers: dict = None, params: dict = None
+    ) -> requests.Response:
+        """
+        Summary:
+            Sends query to given url and returns response.
+        Args:
+            url (str): url to send query to
+            headers (dict, optional): headers to send with query. Defaults to None.
+            params (dict, optional): params to send with query. Defaults to None.
+        Returns:
+            response from given url
+        """
+        try:
+            resp = requests.get(url=url, headers=headers, params=params)
+            resp.raise_for_status()
+        except (requests.HTTPError) as err:
+            self._logger.error(f"Failed to get response from {self.API_URL}: {err}")
+            raise err
+        return resp
+
+    def split_pgns(self, text_pgn: str) -> list[str]:
+        """
+        Summary:
+            Splits pgn string into list of pgn strings.
+        Args:
+            text_pgn (str): pgn string to split
+        Returns:
+            list of pgn strings
+        """
+        pgns = text_pgn.split("\n\n\n")
+        while pgns and len(pgns[-1]) == 0:
+            pgns.pop()
+        return pgns
 
     def games_generator(
         self, username: str, list_of_pgns: int
@@ -55,7 +87,7 @@ class ApiCommunicator(ABC):
                 username,
                 self._logger,
                 self.eco,
-                host=self.host,
+                host=self.HOST,
                 stockfish=self.stockfish,
             )
             yield game
