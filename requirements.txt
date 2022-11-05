@@ -4,6 +4,7 @@ django_q
 django
 stockfish
 chess
+numpy
 PyYAML
 django-crispy-forms
 python-Levenshtein
