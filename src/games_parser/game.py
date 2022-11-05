@@ -213,6 +213,7 @@ class Game:
         """Method returns all data about game  .
         Returns:
             `player_elo` (int): elo of the player
+            `host` (str): site where game was played (lichess, chess.com, etc.)
             `opponent_elo` (int): elo of the opponent
             `opening` (str): opening of the game
             `short_opening` (str): eg. `Ruy Lopez: Open` -> `Ruy Lopez`

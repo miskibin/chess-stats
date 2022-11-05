@@ -1,12 +1,15 @@
-function elo_over_time_chart(elo_over_time) {
-  console.log(elo_over_time);
+function elo_over_time_chart(player_elo_over_time) {
+  console.log(player_elo_over_time);
+
+  console.log(chess_com_data);
   const data = {
+    labels: chess_com_data.map((d) => d.x),
     datasets: [
       {
         label: "chess com elo",
-        data: elo_over_time,
+        data: player_elo_over_time,
         fill: true,
-        backgroundColor: "rgba(72,72,176,0.4)",
+        backgroundColor: "rgba(72,72,176,0.2)",
         borderColor: "#d048b6",
         borderWidth: 4,
         borderDash: [],
@@ -41,7 +44,6 @@ function elo_over_time_chart(elo_over_time) {
       responsive: true,
       scales: {
         x: {
-          stacked: true,
           type: "time",
           time: {
             unit: "month",
@@ -63,12 +65,36 @@ function elo_over_time_chart(elo_over_time) {
       },
     },
   };
-  const myChart = new Chart(
+  return (elo_over_time_chart_object = new Chart(
     document.getElementById("elo_over_time_chart").getContext("2d"),
     config
-  );
+  ));
 }
 player_elo_over_time = JSON.parse(document.getElementById("data").textContent)[
   "player_elo_over_time"
 ];
-elo_over_time_chart(player_elo_over_time);
+var chess_com_data = player_elo_over_time.filter(function (d) {
+  return d.host == "chess.com";
+});
+// get data where host is lichess.org
+var lichess_data = player_elo_over_time.filter(function (d) {
+  return d.host == "lichess.org";
+});
+
+elo_over_time_chart_object = elo_over_time_chart(player_elo_over_time);
+// on click of chess.com toggle
+document.getElementById("chess-com-elo").onclick = function () {
+  elo_over_time_chart_object.data.datasets[0].data = chess_com_data;
+  elo_over_time_chart_object.data.datasets[0].label = "Chess.com Elo";
+  elo_over_time_chart_object.update();
+};
+document.getElementById("lichess-elo").onclick = function () {
+  elo_over_time_chart_object.data.datasets[0].data = lichess_data;
+  elo_over_time_chart_object.data.datasets[0].label = "lichess.org Elo";
+  elo_over_time_chart_object.data.datasets[0].borderColor =
+    "rgba(255, 0, 232, 0.6)";
+  // ovveride the scale
+  elo_over_time_chart_object.options.scales.an;
+
+  elo_over_time_chart_object.update();
+};

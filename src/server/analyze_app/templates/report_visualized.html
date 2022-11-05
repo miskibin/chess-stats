@@ -7,9 +7,9 @@
 <div class="alert alert-info" role="alert">
   Gathering data...
 </div>
-{% elif not object or object.analyzed_games != object.games_num %}
+{% elif not object or object.analyzed_games < object.games_num %}
 <div class="alert alert-default" role="alert">
-  We are still analizing games❗ please wait.  ({{object.analyzed_games}}/{{object.games_num}})
+  We are still analizing games from ❗ please wait.  ({{object.analyzed_games}}/{{object.games_num}})
 </div>
 
 {% endif %}
@@ -55,15 +55,42 @@
 <hr>  
 
 <hr>  
+
 <div class="row">
-  <div class= 'card card-chart col-lg-8'>
-    <div class ='card-header card-header-success'>
-      <h2 class='card-title' style="text-align: center;">Your elo over time</h2>
-    </div>
-    <div class='card-body'>
-      <canvas id="elo_over_time_chart"></canvas>
-    </div>
+  <div class="col-lg-8">
+  <div class="card card-chart">
+  <div class="card-header ">
+  <div class="row">
+  <div class="col-sm-6 text-left">
+  <h2 class="card-title">Performance</h2>
   </div>
+  <div class="col-sm-6">
+  <div class="btn-group btn-group-toggle float-right" name="host" data-toggle="buttons">
+  <label class="btn btn-sm btn-info btn-simple active" id="chess-com-elo">
+  <input type="radio" name="options" checked>
+  <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">chess.com</span>
+  <span class="d-block d-sm-none">
+  <i class="tim-icons icon-single-02"></i>
+  </span>
+  </label>
+  <label class="btn btn-sm btn-info btn-simple" id="lichess-elo">
+  <input type="radio" class="d-none d-sm-none" name="options">
+  <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">lichess.org</span>
+  <span class="d-block d-sm-none">
+  <i class="tim-icons icon-gift-2"></i>
+  </span>
+  </label>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="card-body">
+  <canvas id="elo_over_time_chart"></canvas>
+  </div>
+  </div>
+  </div>
+
+
 
 
   <div class="col-lg-4"> 
@@ -85,6 +112,8 @@
     </div>
   </div>
 </div>
+</div>
+
 <hr>  
 <div class="row">
   <div class= 'card card-chart col-lg-8'>

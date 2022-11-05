@@ -5,6 +5,7 @@ from django.db.models import F
 from logging import Logger
 from miskibin.utils import get_logger
 from time import time
+from django.db.models import Count
 
 
 class QueriesMaker:
@@ -75,13 +76,17 @@ class QueriesMaker:
         return white + black
 
     def get_player_elo_over_time(self) -> list:
-        games = Game.objects.filter(report=self.report).order_by("-date")
+        games = (
+            Game.objects.filter(report=self.report)
+            .annotate(dcount=Count("host"))
+            .order_by("-date")
+        )
         data = []
         day = games[0].date.day
         for game in games:
             if game.date.day != day:
                 day = game.date.day
-                data.append({"x": game.date, "y": game.player_elo})
+                data.append({"x": game.date, "y": game.player_elo, "host": game.host})
         return data
 
     def get_win_ratio_per_opening_and_color(
@@ -146,9 +151,6 @@ class QueriesMaker:
                     games_count -= 1
                 elif phase == 2 and game.phases[1] == game.phases[2]:
                     games_count -= 1
-            self.logger.debug(
-                f"games_count: {games_count}, blunders: {blunders}, mistakes: {mistakes}, inacuracies: {inacuracies}, phase: {phase}"
-            )
             data[phase_name] = [
                 inacuracies / games_count,
                 mistakes / games_count,

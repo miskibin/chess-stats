@@ -19,7 +19,7 @@ class ChessGame(models.Model):
     player_elo = models.IntegerField(null=True, help_text="Player's ELO")
     opponent_elo = models.IntegerField(null=True, help_text="Opponent's ELO")
     opening = models.CharField(max_length=70, null=True, help_text="Opening name")
-    site = models.CharField(
+    host = models.CharField(
         max_length=20, null=True, help_text="Site name eg. chess.com, lichess"
     )
     short_opening = models.CharField(
