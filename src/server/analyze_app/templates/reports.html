@@ -5,7 +5,8 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">created_at</th>
-      <th scope="col">username</th>
+      <th scope="col">chess.com username</th>
+      <th scope="col">lichess username</th>
       <th scope="col">time_class</th>
       <th scope="col">games</th>
       <th scope="col">depth</th>
@@ -20,7 +21,8 @@
         <a href="{{ report.id }}/visualized">{{report.created}}<a/>  
         
           </td>
-      <td>{{report.username}}</td>
+      <td>{{report.chess_com_username}}</td>
+      <td>{{report.lichess_username}}</td>
       <td>{{report.time_class}}</td>
       <td>{{report.games_num}}</td>
       <td>{{report.engine_depth}}</td>

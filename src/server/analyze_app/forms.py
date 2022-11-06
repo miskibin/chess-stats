@@ -6,16 +6,16 @@ from .models import Report
 class ReportForm(forms.ModelForm):
     time_class = forms.ChoiceField(
         choices=[("rapid", "rapid"), ("blitz", "blitz"), ("bullet", "bullet")],
-        initial="rapid",
+        initial="blitz",
     )
     chess_com_username = forms.CharField(
-        initial="Barabasz60",
+        initial="MagnusCarlsen",
         max_length=40,
         required=False,
         help_text="leave blank if you don't want to analyze chess.com games",
     )
     lichess_username = forms.CharField(
-        initial="pro100wdupe",
+        initial="DrNykterstein",
         max_length=40,
         required=False,
         help_text="leave blank if you don't want to analyze lichess.org games",

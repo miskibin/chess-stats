@@ -1,9 +1,7 @@
 function elo_over_time_chart(player_elo_over_time) {
   console.log(player_elo_over_time);
 
-  console.log(chess_com_data);
   const data = {
-    labels: chess_com_data.map((d) => d.x),
     datasets: [
       {
         label: "chess com elo",
@@ -21,6 +19,7 @@ function elo_over_time_chart(player_elo_over_time) {
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
+        tension: 0.4,
       },
     ],
   };
@@ -73,28 +72,28 @@ function elo_over_time_chart(player_elo_over_time) {
 player_elo_over_time = JSON.parse(document.getElementById("data").textContent)[
   "player_elo_over_time"
 ];
-var chess_com_data = player_elo_over_time.filter(function (d) {
+const chess_com_data = player_elo_over_time.filter(function (d) {
   return d.host == "chess.com";
 });
 // get data where host is lichess.org
-var lichess_data = player_elo_over_time.filter(function (d) {
+const lichess_data = player_elo_over_time.filter(function (d) {
   return d.host == "lichess.org";
 });
 
-elo_over_time_chart_object = elo_over_time_chart(player_elo_over_time);
+chart = elo_over_time_chart(chess_com_data);
 // on click of chess.com toggle
 document.getElementById("chess-com-elo").onclick = function () {
-  elo_over_time_chart_object.data.datasets[0].data = chess_com_data;
-  elo_over_time_chart_object.data.datasets[0].label = "Chess.com Elo";
-  elo_over_time_chart_object.update();
+  chart.destroy();
+  chart = elo_over_time_chart(chess_com_data);
+  chart.data.datasets[0].data = chess_com_data;
+  chart.data.datasets[0].label = "Chess.com Elo";
+  chart.update();
 };
 document.getElementById("lichess-elo").onclick = function () {
-  elo_over_time_chart_object.data.datasets[0].data = lichess_data;
-  elo_over_time_chart_object.data.datasets[0].label = "lichess.org Elo";
-  elo_over_time_chart_object.data.datasets[0].borderColor =
-    "rgba(255, 0, 232, 0.6)";
+  chart.destroy();
+  chart = elo_over_time_chart(lichess_data);
+  chart.data.datasets[0].label = "lichess Elo";
+  chart.data.datasets[0].borderColor = "rgba(255, 0, 232, 0.6)";
   // ovveride the scale
-  elo_over_time_chart_object.options.scales.an;
-
-  elo_over_time_chart_object.update();
+  chart.update();
 };

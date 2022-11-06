@@ -55,26 +55,43 @@ class QueriesMaker:
     def get_games_num(self) -> int:
         return self.report.games_num
 
-    def get_chess_com_username(self) -> str:
-        return self.report.chess_com_username
+    def get_username(self) -> str:
+        data = f"{self.report.chess_com_username}"
+        if not self.report.chess_com_username:
+            data = f"{self.report.lichess_username}"
+        return data
 
-    def __get_win_ratio(self, color) -> int:
+    def __get_win_ratio(self, color, host) -> int:
         win, lost, draws = 0, 0, 0
         win = Game.objects.filter(
-            report=self.report, player_color=color, result=F("player_color")
+            report=self.report, player_color=color, host=host, result=F("player_color")
         ).count()
         lost = Game.objects.filter(
-            report=self.report, player_color=color, result=1 - F("player_color")
+            report=self.report,
+            player_color=color,
+            host=host,
+            result=1 - F("player_color"),
         ).count()
         draws = Game.objects.filter(
-            report=self.report, player_color=color, result=0.5
+            report=self.report, player_color=color, host=host, result=0.5
         ).count()
         return [win, draws, lost]
 
     def get_win_ratio_per_color(self) -> list:
-        white = self.__get_win_ratio(0)
-        black = self.__get_win_ratio(1)
-        return white + black
+        host_list = Game.objects.filter(report=self.report).values("host").distinct()
+        data_dict = {}
+        for host in host_list:
+            white = self.__get_win_ratio(0, host["host"])
+            black = self.__get_win_ratio(1, host["host"])
+            data_dict[host["host"]] = {"white": white, "black": black}
+        total_white = [
+            sum([data_dict[host]["white"][i] for host in data_dict]) for i in range(3)
+        ]
+        total_black = [
+            sum([data_dict[host]["black"][i] for host in data_dict]) for i in range(3)
+        ]
+        data_dict["total"] = {"white": total_white, "black": total_black}
+        return data_dict
 
     def get_player_elo_over_time(self) -> list:
         games = (

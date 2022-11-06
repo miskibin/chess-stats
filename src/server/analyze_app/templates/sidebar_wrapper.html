@@ -17,8 +17,10 @@ Tip 2: you can also add an image using data-image tag
       <li class="nav-item">
         <a class="nav-link" href="#0">
           <a href="./{{item.id}}" style="font-size: medium" class="display-6"
-            >Report {{item.username}}</a
+            >Report for: <br />
+            {{item.chess_com_username}} {{item.lichess_username}}</a
           >
+          <hr />
         </a>
       </li>
       {% endfor %}
