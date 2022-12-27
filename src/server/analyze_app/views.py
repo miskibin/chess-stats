@@ -6,7 +6,7 @@ from django_q.tasks import async_task, result
 from miskibin.utils import get_logger
 from .conclusions import ConclusionsMaker
 from . import forms, models, queries
-from .tasks import convert_data, get_games
+from .tasks import get_games
 
 LOGGER = get_logger(lvl="DEBUG")
 

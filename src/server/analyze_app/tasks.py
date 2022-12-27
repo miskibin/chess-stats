@@ -45,12 +45,3 @@ def _update_report(
         report.analyzed_games = -1
         report.save()
         raise exc
-
-
-def convert_data(games: list[models.ChessGame]) -> list[dict]:
-    dict_games = []
-    for game in games:
-        dict_game: dict = game.__dict__
-        dict_game.pop("_state")
-    dict_games.append(dict_game)
-    return dict_games
