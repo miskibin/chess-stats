@@ -12,7 +12,7 @@
 
 ## description
 
-Create reports from your chess games that you played on `chess.com` (in future also `lichess.org`) for free. Track your progress and improve your game. Check your win ratio per opening,
+Create reports from your chess games that you played on `chess.com` and `lichess.org` for free. Track your progress and improve your game. Check your win ratio per opening,
 per time control,per day of the week, check in which stage of the game you are losing the most, and much more.
 
 ## installation
