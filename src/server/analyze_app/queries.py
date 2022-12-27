@@ -3,8 +3,6 @@ from time import time
 
 from django.db import models
 from django.db.models import Count, F
-from miskibin.utils import get_logger
-
 from .models import ChessGame as Game
 from .models import Report
 
@@ -20,7 +18,7 @@ class QueriesMaker:
         self.report = report
         self.logger = logger
         self.white = 0
-        self.black = 0
+        self.black = 1
         self.get_methods = [
             method
             for method in dir(self)
@@ -43,11 +41,20 @@ class QueriesMaker:
         return data
 
     def get_all_reports(self) -> list:
-        return list(
+        reports = list(
             Report.objects.all()
             .values("chess_com_username", "lichess_username")
             .distinct()
         )
+        representative_reports = [
+            str(
+                f"{report['chess_com_username']} {' and '*min(len(report['lichess_username']), 1)}"
+                * min(len(report["chess_com_username"]), 1)
+                + report["lichess_username"] * min(len(report["lichess_username"]), 1)
+            )
+            for report in reports
+        ]
+        return representative_reports
 
     def get_analyzed_games(self) -> int:
         return Game.objects.filter(report=self.report).count()

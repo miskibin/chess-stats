@@ -17,12 +17,12 @@ def get_games(
             for host in [report.chess_com_username, report.lichess_username]
         ]
     )
-    if report.chess_com_username is not None:
+    if report.chess_com_username is not None and report.chess_com_username != "":
         logger.debug("Getting games from chess.com")
         communicator = factory.get_communicator("chess.com", report.engine_depth)
         username = report.chess_com_username
         _update_report(report, logger, username, communicator, games_num_per_host)
-    if report.lichess_username is not None:
+    if report.lichess_username is not None and report.lichess_username != "":
         logger.debug("Getting games from lichess")
         communicator = factory.get_communicator("lichess.org", report.engine_depth)
         username = report.lichess_username

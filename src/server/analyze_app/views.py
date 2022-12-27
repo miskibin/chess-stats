@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView
 from django_q.tasks import async_task, result
 from miskibin.utils import get_logger
-
+from .conclusions import ConclusionsMaker
 from . import forms, models, queries
 from .tasks import convert_data, get_games
 
@@ -61,8 +61,11 @@ class VisualizedReportDetailView(DetailView):
         id = self.kwargs.get("id")
         report = get_object_or_404(models.Report, id=id)
         queries_maker = queries.QueriesMaker(report, LOGGER)
-        # print(queries_maker.asdict().keys())
-        return queries_maker.asdict()
+        data = queries_maker.asdict()
+        conclusion_maker = ConclusionsMaker(data, LOGGER)
+        conclusions = conclusion_maker.asdict()
+        # merge dicts
+        return {**data, **conclusions}
 
     def get_absolute_url(self):
         return reverse("report:report-visualized", kwargs={"id": self.id})

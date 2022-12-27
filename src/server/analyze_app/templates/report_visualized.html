@@ -15,7 +15,7 @@
 {% endif %}
 
 
-<h1 class = "display-1">Report for <span class="text-info">{{object.username}}</span></h1>
+<h1 class = "display-1">Report for <span class="text-info">{{object.chess_com_username}}</span></h1>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -39,15 +39,11 @@
           <h2 class='card-title' style="text-align: center;">conclusions</h2>
         </div>
         <div class="card-body">
+          {% for conclusion in object.win_ratio_per_color_conclusions%}
           <blockquote class="blockquote mb-0">
-            <p> ✅  You doing great</p>
+            <p> {% if conclusion.1 == 1%} ✅ {% else %} ❌ {% endif %} {{conclusion.0}}</p> 
           </blockquote>
-          <blockquote class="blockquote mb-0">
-            <p> ❌ Your performance is much better when you play as white  </p>
-          </blockquote>
-          <blockquote class="blockquote mb-0">
-            <p> ❌ I do not belive that anyone read that text  </p>
-          </blockquote>
+          {% endfor %}
         </div>
     </div>
   </div>
