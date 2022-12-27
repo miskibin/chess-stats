@@ -1,14 +1,3 @@
-var data2 = {
-  "chess.com": {
-    white: [7, 0, 6],
-    black: [6, 1, 5],
-  },
-  "lichess.org": {
-    white: [9, 2, 3],
-    black: [3, 1, 7],
-  },
-};
-
 function win_ratio_chart(win_ratio) {
   const labels = ["Win", "Draw", "Loss"];
   const data = {

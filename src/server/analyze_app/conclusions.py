@@ -36,7 +36,8 @@ class ConclusionsMaker:
         input data: [white_win, white_draws, white_lost, black_win, black_draws, black_lost]
         return: list of 3 conclusions
         """
-        data = self.data["win_ratio_per_color"]
+        data = self.data["win_ratio_per_color"]["total"]
+        data = data["black"] + data["white"]
         if data[0] - data[2] > data[3] - data[5]:
             first = (
                 "You doing better as white. You should learn some openings from black side.",
