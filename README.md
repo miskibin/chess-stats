@@ -17,6 +17,7 @@ per time control,per day of the week, check in which stage of the game you are l
 
 ## installation
 
+
 ```bash
 git clone https://github.com/michalskibinski109/chess_analyse_app.git
 cd chess_analyse_app

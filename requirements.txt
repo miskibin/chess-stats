@@ -9,3 +9,4 @@ PyYAML
 django-crispy-forms
 python-Levenshtein
 requests
+crispy-bootstrap4

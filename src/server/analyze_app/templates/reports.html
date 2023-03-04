@@ -14,28 +14,36 @@
     </tr>
   </thead>
   <tbody>
-    {% for report in object_list %}
+    {% if not object_list %}
     <tr>
-      <th scope="row">{{report.id}}</th>
-      <td>
-        <a href="{{ report.id }}/visualized">{{report.created}}<a/>  
-        
-          </td>
-      <td>{{report.chess_com_username}}</td>
-      <td>{{report.lichess_username}}</td>
-      <td>{{report.time_class}}</td>
-      <td>{{report.games_num}}</td>
-      <td>{{report.engine_depth}}</td>
-       
-      {% if report.analyzed_games == report.games_num %}
-      <td><span class="badge badge-success">Success</span></td>
-      {% elif  report.analyzed_games == -1%}
-      <td><span class="badge badge-warning">Failed</span></td>
-      {% else %}
-      <td>{{report.analyzed_games}}/{{report.games_num}}</td>
-      {% endif %}
+      <td colspan="8">No reports</td>
     </tr>
+
+    {% else %}
+
+      {% for report in object_list %}
+      <tr>
+        <th scope="row">{{report.id}}</th>
+        <td>
+          <a href="{{ report.id }}/visualized">{{report.created}}<a/>  
+          
+            </td>
+        <td>{{report.chess_com_username}}</td>
+        <td>{{report.lichess_username}}</td>
+        <td>{{report.time_class}}</td>
+        <td>{{report.games_num}}</td>
+        <td>{{report.engine_depth}}</td>
+        
+        {% if report.analyzed_games == report.games_num %}
+        <td><span class="badge badge-success">Success</span></td>
+        {% elif  report.analyzed_games == -1%}
+        <td><span class="badge badge-warning">Failed</span></td>
+        {% else %}
+        <td>{{report.analyzed_games}}/{{report.games_num}}</td>
+        {% endif %}
+      </tr>
     {% endfor %}
+    {% endif %}
   </tbody>
 </table>
   {% endblock %}

@@ -48,9 +48,9 @@ INSTALLED_APPS = [
     "analyze_app.apps.AnalyzeAppConfig",
     "django_q",
     "crispy_forms",
+    "crispy_bootstrap4",
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap4"
-
 import os
 
 LOGGING = {
