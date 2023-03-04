@@ -128,6 +128,47 @@ end
 ```
 
 
+### database
+
+
+```mermaid
+---
+title: Chess analyse app database
+---
+
+erDiagram
+REPORT ||--|{ GAME : has
+REPORT {
+    
+    string chess_com_username
+    string lichess_username
+    string time_class
+    int games_num
+    int analyzed_games
+    int engine_depth
+}
+GAME {
+    int player_elo
+    int opponent_elo
+    string opening
+    string short_opening
+    int result
+    datetime date
+    string time_control
+    int player_color
+    int mean_player_time_per_move
+    int mean_opponent_time_per_move
+    int moves
+    string time_class
+    json phases
+    json mistakes
+    datetime created
+}
+```
+
+
+
+
 ## Note
 
 In this project I use logger from my other package. You can check it [here](https://github.com/michalskibinski109/miskibin) if you want to use collored logs in your project.
