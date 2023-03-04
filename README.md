@@ -99,6 +99,35 @@ Game:
 - `phases` - tuple of 3 values, first value is number of moves in opening, second value is number of moves in middle game, third value is number of moves in end game
 - `mistakes` - tuple of 3 values, first value is number of mistakes in opening, second value is number of mistakes in middle game, third value is number of mistakes in end game
 
+
+### architecture
+
+```mermaid
+---
+title: Games parser 
+---
+classDiagram
+
+class ApiCommunicator
+class ChessComCommunicator
+class LichessCommunicator
+
+class CommunicatorFactory
+
+class Game
+class Player
+
+CommunicatorFactory --> ApiCommunicator: create
+
+subgraph api_communicator
+  ApiCommunicator <|-- ChessComCommunicator
+  ApiCommunicator <|-- LichessCommunicator
+  ApiCommunicator o-- Game
+  Game o-- Player
+end
+```
+
+
 ## Note
 
 In this project I use logger from my other package. You can check it [here](https://github.com/michalskibinski109/miskibin) if you want to use collored logs in your project.

@@ -45,7 +45,6 @@ class ChessComApiCommunicator(ApiCommunicator):
                     if len(games) >= games_num:
                         return games
                     if get_time_class(g) == time_class:
-
                         games.append(g)
                 m -= 1
         return games
