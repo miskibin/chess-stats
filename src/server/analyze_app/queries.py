@@ -3,6 +3,7 @@ from time import time
 
 from django.db import models
 from django.db.models import Count, F
+
 from .models import ChessGame as Game
 from .models import Report
 

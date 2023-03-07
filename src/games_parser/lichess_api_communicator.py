@@ -2,7 +2,6 @@ from games_parser.api_communicator import ApiCommunicator
 
 
 class LichessApiCommunicator(ApiCommunicator):
-
     BASE_URL = "https://lichess.org/api/"
     HOST = "lichess.org"
 

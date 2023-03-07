@@ -1,5 +1,7 @@
 from logging import Logger
 
+from django.core.signals import request_finished
+from django.dispatch import receiver
 from miskibin.utils import get_logger
 
 from games_parser.communicator_factory import CommunicatorFactory
@@ -28,6 +30,9 @@ def get_games(
         username = report.lichess_username
         _update_report(report, logger, username, communicator, games_num_per_host)
     logger.info(f"Analyzed {report.analyzed_games} games. Report is ready 😍 ")
+
+
+request_finished.connect(get_games, dispatch_uid="get_games")
 
 
 def _update_report(

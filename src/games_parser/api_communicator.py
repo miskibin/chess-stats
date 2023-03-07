@@ -12,7 +12,6 @@ from games_parser.game import Game
 
 
 class ApiCommunicator(ABC):
-
     HOST = None
     API_URL = None
 
@@ -51,7 +50,7 @@ class ApiCommunicator(ABC):
         try:
             resp = requests.get(url=url, headers=headers, params=params)
             resp.raise_for_status()
-        except (requests.HTTPError) as err:
+        except requests.HTTPError as err:
             self._logger.error(f"Failed to get response from {url}: {err}")
             raise err
         return resp

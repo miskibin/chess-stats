@@ -1,9 +1,10 @@
 from logging import Logger
 
+from Levenshtein import distance as lev
+
 from games_parser.api_communicator import ApiCommunicator
 from games_parser.chess_com_api_communicator import ChessComApiCommunicator
 from games_parser.lichess_api_communicator import LichessApiCommunicator
-from Levenshtein import distance as lev
 
 
 class CommunicatorFactory:

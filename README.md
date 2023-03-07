@@ -104,7 +104,7 @@ Game:
 
 ```mermaid
 ---
-title: Games parser 
+title: Games parser
 ---
 classDiagram
 
@@ -139,7 +139,7 @@ title: Chess analyse app database
 erDiagram
 REPORT ||--|{ GAME : has
 REPORT {
-    
+
     string chess_com_username
     string lichess_username
     string time_class
