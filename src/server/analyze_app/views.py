@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView
 from django_q.tasks import async_task, result
-from miskibin.utils import get_logger
+from easy_logs import get_logger
 
 from . import forms, models, queries
 from .conclusions import ConclusionsMaker
@@ -34,6 +34,19 @@ class ReportCreateView(CreateView):
         return reverse("report:report-list")
 
 
+class ReportDeleteView(DetailView):
+    def get_object(self):
+        id = self.kwargs.get("id")
+        report = get_object_or_404(models.Report, id=id)
+        return report
+
+    def post(self, request, *args, **kwargs):
+        id = self.kwargs.get("id")
+        report = get_object_or_404(models.Report, id=id)
+        report.delete()
+        return redirect("report:report-list")
+
+
 class ReportListView(ListView):
     template_name = "reports.html"
     queryset = models.Report.objects.all()
@@ -57,10 +70,13 @@ class VisualizedReportDetailView(DetailView):
     template_name = "report_visualized.html"
 
     def get_object(self):
-        if not models.ChessGame.objects.filter(report=self.kwargs.get("id")).exists():
-            return {}
         id = self.kwargs.get("id")
         report = get_object_or_404(models.Report, id=id)
+        if not models.ChessGame.objects.filter(report=self.kwargs.get("id")).exists():
+            return {
+                "analyzed_games": report.analyzed_games,
+                "fail_reason": report.fail_reason,
+            }
         queries_maker = queries.QueriesMaker(report, LOGGER)
         data = queries_maker.asdict()
         conclusion_maker = ConclusionsMaker(data, LOGGER)

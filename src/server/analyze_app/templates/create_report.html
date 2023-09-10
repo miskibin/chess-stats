@@ -1,11 +1,23 @@
 {% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
 
-<div class="row justify-content-center">
-  <div class="col-8">
-    <form method="post" novalidate>
-      {% csrf_token %} {{ form|crispy }}
-      <button type="submit" class="btn btn-success">create report</button>
-    </form>
+<div class="row align-items-center justify-content-center m-0">
+  <div class="contianer col-9 m-4">
+      <h1 class="display-3">Create new report</h1>
+      <hr/>
+      <form method="post" class="" novalidate>
+        {% csrf_token %} {{ form|crispy }}
+        <button type="submit" class="btn btn-success mt-4">
+          create report
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger mt-4 float-end"
+          onclick="window.history.back()"
+        >
+          cancel
+        </button>
+      </form>
+    </div>
   </div>
+  {% endblock %}
 </div>
-{% endblock %}

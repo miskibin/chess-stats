@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from miskibin import get_logger
+from easy_logs import get_logger
 
 from games_parser.api_communicator import ApiCommunicator
 from games_parser.game import Game

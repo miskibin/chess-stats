@@ -1,7 +1,12 @@
-{% extends 'base.html' %} {% block content %} {% if not object.analyzed_games %}
+{% extends 'base.html' %} {% block content %}
+{% if not object or object.analyzed_games == 0 %}
 <div class="alert alert-info" role="alert">Gathering data...</div>
-{% elif not object or object.analyzed_games < object.games_num %}
-<div class="alert alert-default" role="alert">
+{% elif object.analyzed_games == -1 %}
+<div class="alert alert-danger" role="alert">
+  Failed to create report: {{object.fail_reason}}
+</div>
+{% elif object.analyzed_games < object.games_num %}
+<div class="alert alert-primary" role="alert">
   We are still analizing games from ❗ please wait.
   ({{object.analyzed_games}}/{{object.games_num}})
 </div>
@@ -21,7 +26,7 @@
       <div class="card-header">
         <div class="row">
           <div class="col-sm-6 text-left">
-            <h2 class="card-title">games playes</h2>
+            <h2 class="card-title">games played</h2>
           </div>
           <div class="col-sm-6">
             <div

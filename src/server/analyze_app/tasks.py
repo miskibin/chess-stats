@@ -1,11 +1,9 @@
 from logging import Logger
 
-from django.core.signals import request_finished
-from django.dispatch import receiver
-from miskibin.utils import get_logger
+from easy_logs import get_logger
 
 from games_parser.communicator_factory import CommunicatorFactory
-
+from games_parser.api_communicator import ApiCommunicator
 from . import models
 
 
@@ -19,24 +17,30 @@ def get_games(
             for host in [report.chess_com_username, report.lichess_username]
         ]
     )
-    if report.chess_com_username is not None and report.chess_com_username != "":
-        logger.debug("Getting games from chess.com")
-        communicator = factory.get_communicator("chess.com", report.engine_depth)
-        username = report.chess_com_username
-        _update_report(report, logger, username, communicator, games_num_per_host)
-    if report.lichess_username is not None and report.lichess_username != "":
-        logger.debug("Getting games from lichess")
-        communicator = factory.get_communicator("lichess.org", report.engine_depth)
-        username = report.lichess_username
-        _update_report(report, logger, username, communicator, games_num_per_host)
+    hosts = {
+        "chess.com": report.chess_com_username,
+        "lichess.org": report.lichess_username,
+    }
+
+    for host, username in hosts.items():
+        if username:
+            communicator = factory.get_communicator(host, report.engine_depth)
+            if not communicator.is_user_valid(username):
+                report.fail_reason = f"User {username} is not valid"
+                report.analyzed_games = -1
+                report.save()
+                return
+            logger.info(f"User {username} is valid. Getting games from {host}")
+            _update_report(report, logger, username, communicator, games_num_per_host)
     logger.info(f"Analyzed {report.analyzed_games} games. Report is ready 😍 ")
 
 
-request_finished.connect(get_games, dispatch_uid="get_games")
-
-
 def _update_report(
-    report: models.Report, logger: Logger, username: str, communicator, games_num: int
+    report: models.Report,
+    logger: Logger,
+    username: str,
+    communicator: ApiCommunicator,
+    games_num: int,
 ) -> None:
     try:
         for game in communicator.get_games(username, games_num, report.time_class):

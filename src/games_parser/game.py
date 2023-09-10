@@ -83,7 +83,7 @@ class Game:
                 board.push(move)
             except (ValueError, AssertionError) as exc:
                 self._logger.error(
-                    f"Invalid move {move} in game played {self.date} {exc}"
+                    f"Invalid move {move} in game with PGN\n:{pgn} \n:  {exc}"
                 )
                 raise exc
             points = sum(self.PIECE_VALUES[str(i)] for i in board.piece_map().values())

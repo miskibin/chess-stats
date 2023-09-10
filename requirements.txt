@@ -1,5 +1,5 @@
 pytest
-miskibin
+easy_logs
 django_q
 django
 stockfish
@@ -9,4 +9,5 @@ PyYAML
 django-crispy-forms
 python-Levenshtein
 requests
-crispy-bootstrap4
+crispy-bootstrap5
+httpx

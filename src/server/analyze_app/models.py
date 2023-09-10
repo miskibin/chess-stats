@@ -9,9 +9,10 @@ class Report(models.Model):
     games_num = models.IntegerField()
     analyzed_games = models.IntegerField(default=0, null=True)
     engine_depth = models.IntegerField(default=10)
+    fail_reason = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.username
+        return self.chess_com_username + " " + self.lichess_username
 
 
 class ChessGame(models.Model):

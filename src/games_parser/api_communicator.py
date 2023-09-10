@@ -4,8 +4,8 @@ from abc import ABC
 from logging import Logger
 from pathlib import Path
 from typing import Generator
-
-import requests
+from abc import abstractmethod, abstractproperty
+import httpx
 from stockfish import Stockfish
 
 from games_parser.game import Game
@@ -34,9 +34,20 @@ class ApiCommunicator(ABC):
             )
             self.stockfish = None
 
+    @abstractmethod
+    def is_user_valid(self, username: str) -> bool:
+        """
+        Summary:
+            Checks if given username is valid.
+        Args:
+            username (str): username to check
+        Returns:
+            True if username is valid, False otherwise
+        """
+
     def send_query(
         self, url: str, headers: dict = None, params: dict = None
-    ) -> requests.Response:
+    ) -> httpx.Response:
         """
         Summary:
             Sends query to given url and returns response.
@@ -47,10 +58,13 @@ class ApiCommunicator(ABC):
         Returns:
             response from given url
         """
+        self._logger.debug(f"Sending query to {url}")
         try:
-            resp = requests.get(url=url, headers=headers, params=params)
+            resp = httpx.get(
+                url=url, headers=headers, params=params, follow_redirects=True
+            )
             resp.raise_for_status()
-        except requests.HTTPError as err:
+        except httpx.HTTPError as err:
             self._logger.error(f"Failed to get response from {url}: {err}")
             raise err
         return resp
@@ -98,6 +112,7 @@ class ApiCommunicator(ABC):
             eco = json.load(f)
         return eco
 
+    @abstractmethod
     def get_games(
         self, username: str, games: int, time_class: str
     ) -> Generator[Game, None, None]:
@@ -109,5 +124,3 @@ class ApiCommunicator(ABC):
         returns:
             generator of Game objects, each representing a game played on chess.com, licess, etc.
         """
-        self._logger.error(f"Method not implemented in {self.__class__.__name__}")
-        raise NotImplementedError

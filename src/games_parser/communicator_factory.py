@@ -48,7 +48,7 @@ class CommunicatorFactory:
 
 
 if __name__ == "__main__":
-    from miskibin.utils import get_logger
+    from easy_logs import get_logger
 
     logger = get_logger(lvl="DEBUG")
     communicator = CommunicatorFactory(logger).get_communicator("lichess.org")

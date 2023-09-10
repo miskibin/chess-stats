@@ -12,5 +12,6 @@ urlpatterns = [
         views.VisualizedReportDetailView.as_view(),
         name="report-visualized",
     ),
+    path("<int:id>/delete", views.ReportDeleteView.as_view(), name="report-delete"),
     # path("<int:id>/games", views, name="report-games"),
 ]
