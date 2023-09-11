@@ -51,7 +51,7 @@ section {
     opacity: 0;
     filter: blur(10px);
     transform: translateX(-100%) !important;
-    transition: all 1s;
+    transition: all 1.2s;
 }
 
 .icon {
