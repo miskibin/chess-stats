@@ -120,7 +120,9 @@ class Game:
     def __set_color(self, username: str) -> Color:
         if username in get_field_value(self._pgn.headers, "White"):
             return Color.WHITE
-        return Color.BLACK
+        if username in get_field_value(self._pgn.headers, "Black"):
+            return Color.BLACK
+        raise ValueError(f"Pgn: {self._pgn} \nUsername: {username}")
 
     def __set_result(self) -> Result:
         result = get_field_value(self._pgn.headers, "Result")

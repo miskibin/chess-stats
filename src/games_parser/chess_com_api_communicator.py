@@ -2,6 +2,7 @@ from datetime import datetime
 
 from games_parser.api_communicator import ApiCommunicator
 from games_parser.utils import get_time_class
+from urllib.parse import urlparse
 
 
 class ChessComApiCommunicator(ApiCommunicator):
@@ -12,7 +13,7 @@ class ChessComApiCommunicator(ApiCommunicator):
         list_of_games = self.__get_games(username, games, time_class)
         return super().games_generator(username, list_of_games)
 
-    def is_user_valid(self, username: str) -> bool:
+    def get_valid_username(self, username: str) -> str | None:
         url = f"{self.API_URL}/player/{username}"
         try:
             res = self.send_query(url)
@@ -20,7 +21,8 @@ class ChessComApiCommunicator(ApiCommunicator):
         except Exception as e:
             self._logger.error(f"Failed to validate user {url} reason: {e}")
             return False
-        return True
+        username = urlparse(res.json()["url"]).path.split("/")[-1]
+        return username
 
     def __get_joined_year(self, usr: str) -> int:
         if not usr:
@@ -65,5 +67,5 @@ if __name__ == "__main__":
 
     logger = get_logger()
     communicator = ChessComApiCommunicator(logger)
-    games = communicator.is_user_valid("barabasz60")
+    games = communicator.get_valid_username("barabasz60")
     print(games)

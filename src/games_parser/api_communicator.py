@@ -35,7 +35,7 @@ class ApiCommunicator(ABC):
             self.stockfish = None
 
     @abstractmethod
-    def is_user_valid(self, username: str) -> bool:
+    def get_valid_username(self, username: str) -> bool:
         """
         Summary:
             Checks if given username is valid.

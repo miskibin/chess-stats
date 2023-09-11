@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "analyze_app.apps.AnalyzeAppConfig",
     "django_q",
     "crispy_forms",
+    "fontawesomefree",
     "crispy_bootstrap5",
 ]
 

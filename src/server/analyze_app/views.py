@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, TemplateView
 from django_q.tasks import async_task, result
 from easy_logs import get_logger
 
@@ -10,6 +10,13 @@ from .conclusions import ConclusionsMaker
 from .tasks import get_games
 
 LOGGER = get_logger(lvl="DEBUG")
+
+
+class IndexView(TemplateView):
+    template_name = "index.html"
+
+    # def get_absolute_url(self):
+    #     return reverse("report:report-detail", kwargs={"id": self.id})
 
 
 class ReportCreateView(CreateView):
@@ -67,7 +74,7 @@ class ReportDetailView(DetailView):
 
 
 class VisualizedReportDetailView(DetailView):
-    template_name = "report_visualized.html"
+    template_name = "visualized_wraper.html"
 
     def get_object(self):
         id = self.kwargs.get("id")

@@ -15,14 +15,14 @@ class LichessApiCommunicator(ApiCommunicator):
         games = self.split_pgns(response.text)
         return games
 
-    def is_user_valid(self, username: str) -> bool:
+    def get_valid_username(self, username: str) -> None | str:
         url = urllib.parse.urljoin(self.BASE_URL, f"/api/user/{username}")
         headers = {"Accept": "application/json"}
         try:
-            self.send_query(url, headers=headers)
+            res = self.send_query(url, headers=headers)
         except Exception as e:
-            return False
-        return True
+            return None
+        return res.json()["username"]
 
     def get_games(self, username: str, games: int, time_class: str):
         list_of_games = self.__get_games(username, games, time_class)
@@ -34,5 +34,5 @@ if __name__ == "__main__":
     from easy_logs import get_logger
 
     lichess = LichessApiCommunicator(get_logger())
-    valid = lichess.is_user_valid("michal")
+    valid = lichess.get_valid_username("michal")
     pprint(valid)

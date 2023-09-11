@@ -1,16 +1,3 @@
-body {
-    font-size: .875rem;
-}
-
-.feather {
-    width: 16px;
-    height: 16px;
-}
-
-/*
-   * Sidebar
-   */
-
 .sidebar {
     position: fixed;
     top: 0;
@@ -40,56 +27,80 @@ body {
     /* Scrollable contents if viewport is shorter than content. */
 }
 
-.sidebar .nav-link {
-    font-weight: 500;
-    color: #333;
+.background-div {
+    width: 100%;
+    border-radius: 5px;
+    position: relative;
+    background-position: center 0;
+    /* Set the desired height for your element */
+    background-image: url('bg-wave.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Adjust as needed */
+    /* Additional background properties like position, attachment, etc. can be added here */
 }
 
-.sidebar .nav-link .feather {
-    margin-right: 4px;
-    color: #727272;
+section {
+    min-height: 90vh;
+    padding: 0;
+    margin: 0;
+    width: 99% !important;
 }
 
-.sidebar .nav-link.active {
-    color: #2470dc;
+.hidden {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(-100%) !important;
+    transition: all 1s;
 }
 
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-    color: inherit;
+.icon {
+    transition: all .5s;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px !important;
+    transform: translateY(100%) !important;
+    transform: translateX(0) !important;
 }
 
-.sidebar-heading {
-    font-size: .75rem;
+.box {
+    transition: all .5s;
 }
 
-/*
-   * Navbar
-   */
 
-.navbar-brand {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-    background-color: rgba(0, 0, 0, .25);
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+.icon:hover {
+    transform: scale(1.05) !important;
 }
 
-.navbar .navbar-toggler {
-    top: .25rem;
-    right: 1rem;
+
+
+.show {
+    filter: None;
+    transform: translateX(0) !important;
+    transform: translateY(0) !important;
+    opacity: 1;
 }
 
-.navbar .form-control {
-    padding: .75rem 1rem;
+.logo:nth-child(2) {
+    transition-delay: 200ms;
 }
 
-.form-control-dark {
-    color: #fff;
-    background-color: rgba(255, 255, 255, .1);
-    border-color: rgba(255, 255, 255, .1);
+.logo:nth-child(3) {
+    transition-delay: 400ms;
 }
 
-.form-control-dark:focus {
-    border-color: transparent;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+.logo:nth-child(4) {
+    transition-delay: 600ms;
+}
+
+.box:nth-child(2) {
+    transition-delay: 200ms;
+}
+
+.box:nth-child(3) {
+    transition-delay: 400ms;
+}
+
+.box:nth-child(4) {
+    transition-delay: 600ms;
 }

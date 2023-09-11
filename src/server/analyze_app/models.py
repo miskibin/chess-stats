@@ -27,11 +27,14 @@ class ChessGame(models.Model):
         max_length=40, null=True, help_text="Short opening name"
     )
     result = models.FloatField(
-        choices=[(1, "white"), (0, "black"), (0.5, "draw")], max_length=10
+        choices=[(0, "white"), (1, "black"), (0.5, "draw")], max_length=10
     )
     date = models.DateTimeField(help_text="Date of the game")
     time_control = models.CharField(max_length=20, help_text="Time control of the game")
-    player_color = models.IntegerField(help_text="Player's color 0-White, 1-Black")
+    player_color = models.IntegerField(
+        choices=[(0, "white"), (1, "black")],
+        help_text="Player's color 0-White, 1-Black",
+    )
     mean_player_time_per_move = models.IntegerField(
         null=True, help_text="Mean player time per move"
     )

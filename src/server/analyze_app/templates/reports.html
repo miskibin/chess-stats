@@ -1,10 +1,21 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block extra_head %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link
+  rel="stylesheet"
+  href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"
+/>
+<script
+  type="text/javascript"
+  src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"
+></script>
+
+{% endblock %} {% block content %}
 <!-- centered container -->
 <div class="row align-items-center justify-content-center m-0">
   <div class="contianer col-9 m-4">
     <h1 class="display-3">All reports</h1>
     <hr />
-    <table class="table">
+    <table class="table table-striped" id="reportsTable">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -56,7 +67,7 @@
           <td>
             <a
               class="btn btn-outline-success"
-              href="{{ report.id }}/visualized"
+              href="/{{ report.id }}/visualized"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +84,7 @@
             </a>
           </td>
           <td>
-            <a class="btn btn-outline-light" href="{{ report.id }}">
+            <a class="btn btn-outline-light" href="/{{ report.id }}">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -125,4 +136,20 @@
     </div>
   </div>
 </div>
+<script>
+  // $(document).ready(function () {
+  //   $("#reportsTable").dataTable(
+  //   // dark theme
+  //   {
+  //     dom: "Bfrtip",
+  //     buttons: ["copy", "csv", "excel", "pdf", "print"],
+  //     responsive: true,
+  //     ordering: false,
+  //     info: false,
+  //     searching: false,
+  //   }
+
+  //   );
+  // });
+</script>
 {% endblock %}

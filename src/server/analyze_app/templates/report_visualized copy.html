@@ -1,0 +1,390 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            <h2 class="card-title">games played</h2>
+          </div>
+          <div class="col-sm-6">
+            <div
+              class="btn-group btn-group-toggle float-right"
+              name="host"
+              data-toggle="buttons"
+            >
+              <label
+                class="btn btn-sm btn-info btn-simple active"
+                id="win-ratio"
+              >
+                <input type="radio" name="options" checked />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >all</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-single-02"></i>
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-info btn-simple"
+                id="chess-com-win-ratio"
+              >
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >chess.com</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-info btn-simple"
+                id="lichess-win-ratio"
+              >
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >lichess.org</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas id="win_ratio_chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card w-45 card-nav-tabs">
+      <div class="card-header card-header-success">
+        <h2 class="card-title" style="text-align: center">conclusions</h2>
+      </div>
+      <div class="card-body">
+        {% for conclusion in object.win_ratio_per_color_conclusions%}
+        <blockquote class="blockquote mb-0">
+          <p>
+            {% if conclusion.1 == 1%} ✅ {% else %} ❌ {% endif %}
+            {{conclusion.0}}
+          </p>
+        </blockquote>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            <h2 class="card-title">elo over time</h2>
+          </div>
+          <div class="col-sm-6">
+            <div
+              class="btn-group btn-group-toggle float-right"
+              name="host"
+              data-toggle="buttons"
+            >
+              <label
+                class="btn btn-sm btn-info btn-simple active"
+                id="chess-com-elo"
+              >
+                <input type="radio" name="options" checked />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >chess.com</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-single-02"></i>
+                </span>
+              </label>
+              <label class="btn btn-sm btn-info btn-simple" id="lichess-elo">
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >lichess.org</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas id="elo_over_time_chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card w-45 card-nav-tabs">
+      <div class="card-header card-header-success">
+        <h2 class="card-title" style="text-align: center">conclusions</h2>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>✅ You doing great</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p>❌ Your performance is much better when you play as white</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p>❌ I do not belive that anyone read that text</p>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            <h2 class="card-title">opening score as white</h2>
+          </div>
+          <div class="col-sm-6">
+            <div
+              class="btn-group btn-group-toggle float-right"
+              name="host"
+              data-toggle="buttons"
+            >
+              <label
+                class="btn btn-sm btn-info btn-simple active"
+                id="win-ratio"
+              >
+                <input type="radio" name="options" checked />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >all</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-single-02"></i>
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-info btn-simple"
+                id="chess-com-win-ratio"
+              >
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >chess.com</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-info btn-simple"
+                id="lichess-win-ratio"
+              >
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >lichess.org</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas id="white_openings_chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card w-45 card-nav-tabs">
+      <div class="card-header card-header-success">
+        <h2 class="card-title" style="text-align: center">conclusions</h2>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>✅ You doing great</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p>❌ Your performance is much better when you play as white</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p>❌ I do not belive that anyone read that text</p>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+<
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            <h2 class="card-title">opening score as black</h2>
+          </div>
+          <div class="col-sm-6">
+            <div
+              class="btn-group btn-group-toggle float-right"
+              name="host"
+              data-toggle="buttons"
+            >
+              <label
+                class="btn btn-sm btn-info btn-simple active"
+                id="win-ratio"
+              >
+                <input type="radio" name="options" checked />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >all</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-single-02"></i>
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-info btn-simple"
+                id="chess-com-win-ratio"
+              >
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >chess.com</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-info btn-simple"
+                id="lichess-win-ratio"
+              >
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >lichess.org</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas id="black_openings_chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card w-45 card-nav-tabs">
+      <div class="card-header card-header-success">
+        <h2 class="card-title" style="text-align: center">conclusions</h2>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>✅ You doing great</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p>❌ Your performance is much better when you play as white</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p>❌ I do not belive that anyone read that text</p>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            <h2 class="card-title">mistakes per phase</h2>
+          </div>
+          <div class="col-sm-6">
+            <div
+              class="btn-group btn-group-toggle float-right"
+              name="host"
+              data-toggle="buttons"
+            >
+              <label
+                class="btn btn-sm btn-info btn-simple active"
+                id="win-ratio"
+              >
+                <input type="radio" name="options" checked />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >all</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-single-02"></i>
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-info btn-simple"
+                id="chess-com-win-ratio"
+              >
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >chess.com</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-info btn-simple"
+                id="lichess-win-ratio"
+              >
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >lichess.org</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <canvas id="mistakes_per_phase_chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card w-45 card-nav-tabs">
+      <div class="card-header card-header-success">
+        <h2 class="card-title" style="text-align: center">conclusions</h2>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>✅ You doing great</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p>❌ Your performance is much better when you play as white</p>
+        </blockquote>
+        <blockquote class="blockquote mb-0">
+          <p>❌ I do not belive that anyone read that text</p>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+
+<h4>{{ object|json_script:"data" }}</h4>
+<hr class="mt-0 mb-4" />

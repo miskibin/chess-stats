@@ -25,11 +25,14 @@ def get_games(
     for host, username in hosts.items():
         if username:
             communicator = factory.get_communicator(host, report.engine_depth)
-            if not communicator.is_user_valid(username):
+            valid_name = communicator.get_valid_username(username)
+            if not valid_name:
                 report.fail_reason = f"User {username} is not valid"
                 report.analyzed_games = -1
                 report.save()
                 return
+            username = valid_name
+            report.save()
             logger.info(f"User {username} is valid. Getting games from {host}")
             _update_report(report, logger, username, communicator, games_num_per_host)
     logger.info(f"Analyzed {report.analyzed_games} games. Report is ready 😍 ")
