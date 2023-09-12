@@ -1,10 +1,14 @@
 {% extends 'base.html' %} {% block extra_head %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script src="../static/js/win_ratio_chart.js" defer></script>
+<script src="../static/js/openings_chart.js" defer></script>
+<script src="../static/js/mistakes_per_phase_chart.js" defer></script>
+<script src="../static/js/elo_over_time_chart.js" defer></script>
 {% endblock %} {% block content %}
 <h4>{{ object|json_script:"data" }}</h4>
+
 <div class="row align-items-center justify-content-center m-0">
   <div class="contianer col-9">
     <h1 class="display-3">
@@ -23,7 +27,11 @@
       ({{object.analyzed_games}}/{{object.games_num}})
     </div>
     {% endif %}
-    <div class="rounded mt-5">{% include 'report_visualized.html' %}</div>
+    <div class="rounded mt-5">
+      {%for statistic_name in object.keys%}
+      <hr class="text-light" />
+      {% include 'report_visualized.html'%} {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}

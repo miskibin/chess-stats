@@ -1,99 +1,170 @@
-function elo_over_time_chart(player_elo_over_time) {
-  console.log(player_elo_over_time);
-
-  const data = {
-    datasets: [
-      {
-        label: "chess com elo",
-        data: player_elo_over_time,
-        fill: true,
-        backgroundColor: "rgba(72,72,176,0.2)",
-        borderColor: "#d048b6",
-        borderWidth: 4,
-        borderDash: [],
-        borderDashOffset: 0.0,
-        pointBackgroundColor: "#d048b6",
-        pointBorderColor: "rgba(255,255,255,0)",
-        pointHoverBackgroundColor: "#d048b6",
-        pointBorderWidth: 20,
-        pointHoverRadius: 4,
-        pointHoverBorderWidth: 15,
-        pointRadius: 4,
-        tension: 0.4,
+$(document).ready(function () {
+  const winRatioData = JSON.parse($("#data").text())["player_elo_over_time"];
+  const chart = createChart(winRatioData);
+  console.log(winRatioData);
+  function createChart(data) {
+    return new Chart($("#player_elo_over_time_chart"), {
+      type: "line", // Set the chart type to "line"
+      data: {
+        labels: data.map((entry) => entry.x), // Use the 'x' values as labels
+        datasets: [
+          {
+            label: "Win Ratio", // Label for the dataset
+            data: data.map((entry) => entry.y), // Use the 'y' values as data points
+            borderColor: "blue", // Line color
+            backgroundColor: "rgba(0, 0, 255, 0.2)", // Line fill color
+            borderWidth: 2, // Line width
+            pointRadius: 5, // Point size
+            pointBackgroundColor: "blue", // Point color
+          },
+        ],
       },
-    ],
-  };
-
-  const config = {
-    type: "line",
-    data: data,
-    options: {
-      plugins: {
-        legend: {
-          position: "bottom",
-
-          labels: {
-            // This more specific font property overrides the global property
-            font: {
-              size: 15,
+      options: {
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              font: {
+                size: 15,
+              },
+            },
+          },
+        },
+        responsive: true,
+        scales: {
+          x: {
+            type: "time",
+            time: {
+              unit: "month",
+            },
+            ticks: {
+              font: {
+                size: 15,
+              },
+            },
+          },
+          y: {
+            stacked: true,
+            ticks: {
+              font: {
+                size: 15,
+              },
             },
           },
         },
       },
-      responsive: true,
-      scales: {
-        x: {
-          type: "time",
-          time: {
-            unit: "month",
-          },
-          ticks: {
-            font: {
-              size: 15,
-            },
-          },
-        },
-        y: {
-          stacked: true,
-          ticks: {
-            font: {
-              size: 15,
-            },
-          },
-        },
-      },
-    },
-  };
-  return (elo_over_time_chart_object = new Chart(
-    document.getElementById("elo_over_time_chart").getContext("2d"),
-    config
-  ));
-}
-player_elo_over_time = JSON.parse(document.getElementById("data").textContent)[
-  "player_elo_over_time"
-];
-const chess_com_data = player_elo_over_time.filter(function (d) {
-  return d.host == "chess.com";
-});
-// get data where host is lichess.org
-const lichess_data = player_elo_over_time.filter(function (d) {
-  return d.host == "lichess.org";
+    });
+  }
+
+  // Initial chart setup
+  $("#player_elo_over_time_all").prop("checked", true);
+  updateChart(winRatioData);
+
+  $("#player_elo_over_time_all").click(() => updateChart(winRatioData));
+  $("#player_elo_over_time_chess_com").click(() =>
+    updateChart(winRatioData.filter((record) => record.host === "chess.com"))
+  );
+  $("#player_elo_over_time_lichess").click(() =>
+    updateChart(winRatioData.filter((record) => record.host === "lichess.org"))
+  );
+
+  function updateChart(data) {
+    chart.data.labels = data.map((entry) => entry.x);
+    chart.data.datasets[0].data = data.map((entry) => entry.y);
+    chart.update();
+  }
 });
 
-chart = elo_over_time_chart(chess_com_data);
-// on click of chess.com toggle
-document.getElementById("chess-com-elo").onclick = function () {
-  chart.destroy();
-  chart = elo_over_time_chart(chess_com_data);
-  chart.data.datasets[0].data = chess_com_data;
-  chart.data.datasets[0].label = "Chess.com Elo";
-  chart.update();
-};
-document.getElementById("lichess-elo").onclick = function () {
-  chart.destroy();
-  chart = elo_over_time_chart(lichess_data);
-  chart.data.datasets[0].label = "lichess Elo";
-  chart.data.datasets[0].borderColor = "rgba(255, 0, 232, 0.6)";
-  // ovveride the scale
-  chart.update();
-};
+// $(document).ready(function () {
+//   function createEloOverTimeChart(data, label, borderColor) {
+//     return new Chart($("#player_elo_over_time"), {
+//       type: "line",
+//       data: {
+//         datasets: [
+//           {
+//             label: label,
+//             data: data,
+//             fill: true,
+//             backgroundColor: "rgba(72,72,176,0.2)",
+//             borderColor: borderColor,
+//             borderWidth: 4,
+//             borderDash: [],
+//             borderDashOffset: 0.0,
+//             pointBackgroundColor: borderColor,
+//             pointBorderColor: "rgba(255,255,255,0)",
+//             pointHoverBackgroundColor: borderColor,
+//             pointBorderWidth: 20,
+//             pointHoverRadius: 4,
+//             pointHoverBorderWidth: 15,
+//             pointRadius: 4,
+//             tension: 0.4,
+//           },
+//         ],
+//       },
+//       options: {
+//         plugins: {
+//           legend: {
+//             position: "bottom",
+//             labels: {
+//               font: {
+//                 size: 15,
+//               },
+//             },
+//           },
+//         },
+//         responsive: true,
+//         scales: {
+//           x: {
+//             type: "time",
+//             time: {
+//               unit: "month",
+//             },
+//             ticks: {
+//               font: {
+//                 size: 15,
+//               },
+//             },
+//           },
+//           y: {
+//             stacked: true,
+//             ticks: {
+//               font: {
+//                 size: 15,
+//               },
+//             },
+//           },
+//         },
+//       },
+//     });
+//   }
+
+//   function updateChart(chart, data, label, borderColor) {
+//     chart.destroy();
+//     chart = createEloOverTimeChart(data, label, borderColor);
+//     chart.data.datasets[0].data = data;
+//     chart.data.datasets[0].label = label;
+//     chart.update();
+//     return chart;
+//   }
+
+//   const playerEloOverTime = JSON.parse($("#data").text())[
+//     "player_elo_over_time"
+//   ];
+//   const chessComData = playerEloOverTime.filter((d) => d.host === "chess.com");
+//   const lichessData = playerEloOverTime.filter((d) => d.host === "lichess.org");
+
+//   let chart = createEloOverTimeChart(chessComData, "Chess.com Elo", "#d048b6");
+
+//   $("#player_elo_over_chess_com").click(function () {
+//     chart = updateChart(chart, chessComData, "Chess.com Elo", "#d048b6");
+//   });
+
+//   $("#player_elo_over_time_lichess").click(function () {
+//     chart = updateChart(
+//       chart,
+//       lichessData,
+//       "lichess Elo",
+//       "rgba(255, 0, 232, 0.6)"
+//     );
+//   });
+// });

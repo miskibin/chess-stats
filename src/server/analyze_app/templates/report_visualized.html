@@ -4,7 +4,10 @@
       <div class="card-header">
         <div class="row">
           <div class="col-sm-6 text-left">
-            <h2 class="card-title">games played</h2>
+            {% load custom_filters %}
+            <h2 class="card-title">
+              {{ statistic_name | snake_to_user_readable }}
+            </h2>
           </div>
           <div class="col-sm-6">
             <div class="btn-group" role="group">
@@ -12,29 +15,37 @@
                 type="radio"
                 class="btn-check"
                 name="btnradio"
-                id="btnradio1"
+                id="{{statistic_name}}_all"
                 autocomplete="off"
                 checked
               />
-              <label class="btn btn-outline-warning" for="btnradio1">All</label>
+              <label
+                class="btn btn-outline-warning"
+                for="{{statistic_name}}_all"
+                >All</label
+              >
               <input
                 type="radio"
                 class="btn-check"
                 name="btnradio"
-                id="btnradio2"
+                id="{{statistic_name}}_chess_com"
                 autocomplete="off"
               />
-              <label class="btn btn-outline-warning" for="btnradio2"
+              <label
+                class="btn btn-outline-warning"
+                for="{{statistic_name}}_chess_com"
                 >Chess.com</label
               >
               <input
                 type="radio"
                 class="btn-check"
                 name="btnradio"
-                id="btnradio3"
+                id="{{statistic_name}}_lichess"
                 autocomplete="off"
               />
-              <label class="btn btn-outline-warning" for="btnradio3"
+              <label
+                class="btn btn-outline-warning"
+                for="{{statistic_name}}_lichess"
                 >lichess</label
               >
             </div>
@@ -42,7 +53,7 @@
         </div>
       </div>
       <div class="card-body">
-        <canvas id="win_ratio_chart"></canvas>
+        <canvas id="{{statistic_name}}_chart"></canvas>
       </div>
     </div>
   </div>
@@ -66,5 +77,3 @@
     </div>
   </div>
 </div>
-
-<hr class="text-light" />

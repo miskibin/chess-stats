@@ -89,7 +89,8 @@ class VisualizedReportDetailView(DetailView):
         conclusion_maker = ConclusionsMaker(data, LOGGER)
         conclusions = conclusion_maker.asdict()
         # merge dicts
-        return {**data, **conclusions}
+        # return {**data, **conclusions}
+        return data
 
     def get_absolute_url(self):
         return reverse("report:report-visualized", kwargs={"id": self.id})
