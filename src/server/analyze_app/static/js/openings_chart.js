@@ -1,6 +1,6 @@
-function openings_chart(openings, title, id) {
+function openings_chart(openings, title) {
   console.log(openings);
-  let data = {
+  const data = {
     labels: openings.map((opening) => opening.opening),
     datasets: [
       {
@@ -26,17 +26,16 @@ function openings_chart(openings, title, id) {
       },
     ],
   };
-  let ctx = document.getElementById(id).getContext("2d");
-  let myChart = new Chart(ctx, {
+
+  const ctx = $("#win_ratio_per_opening_and_color_chart");
+  const myChart = new Chart(ctx, {
     type: "bar",
     data: data,
     options: {
       plugins: {
         legend: {
           position: "bottom",
-
           labels: {
-            // This more specific font property overrides the global property
             font: {
               size: 15,
             },
@@ -63,8 +62,36 @@ function openings_chart(openings, title, id) {
     },
   });
 }
-let openings = JSON.parse(document.getElementById("data").textContent)[
-  "win_ratio_per_opening_and_color"
-];
-openings_chart(openings[0], "Openings score as white", "white_openings_chart");
-openings_chart(openings[1], "Openings score as black", "black_openings_chart");
+
+$(document).ready(function () {
+  const openingsData = JSON.parse($("#data").text())[
+    "win_ratio_per_opening_and_color"
+  ];
+  openings_chart(openingsData[0], "Openings score as white");
+  openings_chart(openingsData[1], "Openings score as black");
+});
+
+function updateChart(data) {
+  chart.data.datasets[0].data = data.white;
+  chart.data.datasets[1].data = data.black;
+  chart.data.datasets[0].label = `White (total ${data.white.reduce(
+    (a, b) => a + b,
+    0
+  )})`;
+  chart.data.datasets[1].label = `Black (total ${data.black.reduce(
+    (a, b) => a + b,
+    0
+  )})`;
+  chart.update();
+}
+$("#win_ratio_per_opening_and_color_all").prop("checked", true);
+updateChart(winRatioData["total"]);
+$("#win_ratio_per_opening_and_color_all").click(() =>
+  updateChart(winRatioData["total"])
+);
+$("#win_ratio_per_opening_and_color_chess_com").click(() =>
+  updateChart(winRatioData["chess.com"])
+);
+$("#win_ratio_per_opening_and_color_lichess").click(() =>
+  updateChart(winRatioData["lichess.org"])
+);

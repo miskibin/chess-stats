@@ -12,25 +12,29 @@
 <div class="row align-items-center justify-content-center m-0">
   <div class="contianer col-9">
     <h1 class="display-3">
-      Report for <span class="text-warning">{{object.username}}</span>
+      Report for <span class="text-warning">{{object.Xusername}}</span>
     </h1>
     <hr />
-    {% if not object or object.analyzed_games == 0 %}
+    {% if not object or object.Xanalyzed_games == 0 %}
     <div class="alert alert-info" role="alert">Gathering data...</div>
-    {% elif object.analyzed_games == -1 %}
+    {% elif object.Xanalyzed_games == -1 %}
     <div class="alert alert-danger" role="alert">
-      Failed to create report: {{object.fail_reason}}
+      Failed to create report: {{object.Xfail_reason}}
     </div>
-    {% elif object.analyzed_games < object.games_num %}
+    {% elif object.Xanalyzed_games < object.Xgames_num %}
     <div class="alert alert-primary" role="alert">
       We are still analizing games from ❗ please wait.
-      ({{object.analyzed_games}}/{{object.games_num}})
+      ({{object.Xanalyzed_games}}/{{object.Xgames_num}})
     </div>
     {% endif %}
-    <div class="rounded mt-5">
+    <div class="rounded mt-5 mb-5">
       {%for statistic_name in object.keys%}
+      <p></p>
+      {% if not statistic_name|first in 'X' %}
+      <p></p>
+      {% include 'report_visualized.html'%}
       <hr class="text-light" />
-      {% include 'report_visualized.html'%} {% endfor %}
+      {% endif %} {% endfor %}
     </div>
   </div>
 </div>

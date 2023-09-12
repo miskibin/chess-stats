@@ -28,6 +28,7 @@ class QueriesMaker:
 
     def asdict(self) -> dict:
         """
+        `X` - means that given field is not ment to be visualized !!!
         This method is used to get the data from the queries.
         it will return a dict with the name of the method (- get_) as key and the data as value.
         eg.
@@ -41,33 +42,33 @@ class QueriesMaker:
         self.logger.debug(f"{data.keys()}")
         return data
 
-    # def get_all_reports(self) -> list:
-    #     reports = list(
-    #         Report.objects.all()
-    #         .values("chess_com_username", "lichess_username")
-    #         .distinct()
-    #     )
-    #     representative_reports = [
-    #         str(
-    #             f"{report['chess_com_username']} {' and '*min(len(report['lichess_username']), 1)}"
-    #             * min(len(report["chess_com_username"]), 1)
-    #             + report["lichess_username"] * min(len(report["lichess_username"]), 1)
-    #         )
-    #         for report in reports
-    #     ]
-    #     return representative_reports
+    def get_Xall_reports(self) -> list:
+        reports = list(
+            Report.objects.all()
+            .values("chess_com_username", "lichess_username")
+            .distinct()
+        )
+        representative_reports = [
+            str(
+                f"{report['chess_com_username']} {' and '*min(len(report['lichess_username']), 1)}"
+                * min(len(report["chess_com_username"]), 1)
+                + report["lichess_username"] * min(len(report["lichess_username"]), 1)
+            )
+            for report in reports
+        ]
+        return representative_reports
 
-    # def get_analyzed_games(self) -> int:
-    #     return Game.objects.filter(report=self.report).count()
+    def get_Xanalyzed_games(self) -> int:
+        return Game.objects.filter(report=self.report).count()
 
-    # def get_games_num(self) -> int:
-    #     return self.report.games_num
+    def get_Xgames_num(self) -> int:
+        return self.report.games_num
 
-    # def get_username(self) -> str:
-    #     data = f"{self.report.chess_com_username}"
-    #     if not self.report.chess_com_username:
-    #         data = f"{self.report.lichess_username}"
-    #     return data
+    def get_Xusername(self) -> str:
+        data = f"{self.report.chess_com_username}"
+        if not self.report.chess_com_username:
+            data = f"{self.report.lichess_username}"
+        return data
 
     def __get_win_ratio(self, color, host) -> int:
         win, lost, draws = 0, 0, 0

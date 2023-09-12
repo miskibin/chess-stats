@@ -81,8 +81,8 @@ class VisualizedReportDetailView(DetailView):
         report = get_object_or_404(models.Report, id=id)
         if not models.ChessGame.objects.filter(report=self.kwargs.get("id")).exists():
             return {
-                "analyzed_games": report.analyzed_games,
-                "fail_reason": report.fail_reason,
+                "Xanalyzed_games": report.analyzed_games,
+                "Xfail_reason": report.fail_reason,
             }
         queries_maker = queries.QueriesMaker(report, LOGGER)
         data = queries_maker.asdict()
