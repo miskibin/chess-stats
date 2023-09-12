@@ -5,6 +5,8 @@
 
 # chess_analyse_app
 
+## [demo](https://michalskibinski109.github.io/chess_analyse_app/)
+
 1. [Description](#description)
 2. [Installation](#installation)
 3. [Usage](#usage)
