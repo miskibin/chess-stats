@@ -1,4 +1,6 @@
 import ChartInterface from "./chartInterface.js";
+Chart.defaults.color = "#DEE2E6";
+Chart.defaults.font.size = 15;
 
 class WinRatioChart extends ChartInterface {
   constructor() {
@@ -12,17 +14,15 @@ class WinRatioChart extends ChartInterface {
         labels: ["Win", "Draw", "Loss"],
         datasets: [
           {
+            backgroundColor: "#ced4da",
+
             data: data.white,
           },
           {
+            backgroundColor: "#3e4752",
             data: data.black,
           },
         ],
-      },
-      options: {
-        plugins: {
-          legend: { position: "bottom" },
-        },
       },
     });
   }

@@ -32,35 +32,6 @@ class OpeningsChart extends ChartInterface {
     return new Chart($(this.chartId), {
       type: "bar",
       data: chartData,
-      options: {
-        plugins: {
-          legend: {
-            position: "bottom",
-            labels: {
-              font: {
-                size: 15,
-              },
-            },
-          },
-        },
-        responsive: true,
-        scales: {
-          x: {
-            ticks: {
-              font: {
-                size: 15,
-              },
-            },
-          },
-          y: {
-            ticks: {
-              font: {
-                size: 15,
-              },
-            },
-          },
-        },
-      },
     });
   }
 

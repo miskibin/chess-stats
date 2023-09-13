@@ -133,25 +133,24 @@ class QueriesMaker:
     #             data.append({"x": game.date, "y": game.player_elo, "host": game.host})
     #     return data
 
-    # def get_mistakes_per_phase(self):
-    #     data = {}
-    #     games = Game.objects.filter(report=self.report)
-    #     for phase, phase_name in enumerate(["Opening", "Middle", "End"]):
-    #         blunders, mistakes, inacuracies = 0, 0, 0
-    #         games_count = games.count()
-    #         if games_count == 0:
-    #             continue
-    #         for game in games:
-    #             inacuracies += game.mistakes[phase][0]
-    #             mistakes += game.mistakes[phase][1]
-    #             blunders += game.mistakes[phase][2]
-    #             if phase == 1 and game.phases[0] == game.phases[1]:
-    #                 games_count -= 1
-    #             elif phase == 2 and game.phases[1] == game.phases[2]:
-    #                 games_count -= 1
-    #         data[phase_name] = [
-    #             inacuracies / games_count,
-    #             mistakes / games_count,
-    #             blunders / games_count,
-    #         ]
-    #     return data
+    def get_mistakes_per_phase(self, games: QuerySet[Game]):
+        data = {}
+        for phase, phase_name in enumerate(["Opening", "Middle", "End"]):
+            blunders, mistakes, inacuracies = 0, 0, 0
+            games_count = games.count()
+            if games_count == 0:
+                continue
+            for game in games:
+                inacuracies += game.mistakes[phase][0]
+                mistakes += game.mistakes[phase][1]
+                blunders += game.mistakes[phase][2]
+                if phase == 1 and game.phases[0] == game.phases[1]:
+                    games_count -= 1
+                elif phase == 2 and game.phases[1] == game.phases[2]:
+                    games_count -= 1
+            data[phase_name] = [
+                inacuracies / games_count,
+                mistakes / games_count,
+                blunders / games_count,
+            ]
+        return data
