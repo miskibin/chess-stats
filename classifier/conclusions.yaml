@@ -1,0 +1,34 @@
+mistakes_per_phase:
+  positive:
+    - You are making small amount of mistakes in the beginning of the game. Focus on avoiding inaccuracies and blunders in the middlegame and endgame.
+    - Your middle game is nearly perfect. Keep up the good work! You could improve even more by focusing on your endgame play.
+    - In the end gmae you are making small amount of mistakes. Focus on avoiding inaccuracies and blunders in the opening.
+
+  neutral:
+    - You are keeping small amount of inaccuracies. But a lot of mistakes. Try to make more chess puzzles and analyze your own games.
+    - Your blunders amount could be lower. However, your opponents are typically making more mistakes than you. Try to focus on your own mistakes and how to avoid them.
+
+  negative:
+    - You are making too much mistakes, blunders and inaccuracies. Make more chess puzzles and analyze your own games. You could also try to get some coaching from a chess expert.
+
+elo_over_time:
+  positive:
+    - Elo rating increasing. Keep it up! You could improve even more by focusing on your weaknesses and practicing regularly.
+    - More wins than losses. Analyze your games to identify your weaknesses and improve.
+    - More wins with White than Black. Study opening theory with White.
+
+  negative:
+    - Elo rating decreasing. Make changes to your training. Identify the reasons for your losses and make some changes to your playing style.
+    - More losses than wins. Identify the reasons for your losses and make some changes to your playing style.
+    - Fewer wins with White than Black. Study opening theory with White.
+
+win_ratio_per_color:
+  positive:
+    - Higher win rate with White. Continue studying opening theory with White.
+    - 50% win rate. Practice regularly and focus on your weaknesses.
+    - 60% win rate. Good chess player. Practice regularly and focus on your weaknesses.
+
+  negative:
+    - Less than 50% win rate with White. Study opening theory with White.
+    - Less than 50% win rate with Black. Study opening theory with Black.
+    - Less than 40% win rate overall. Significantly improve playing skills. Get coaching.

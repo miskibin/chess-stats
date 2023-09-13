@@ -10,6 +10,4 @@ django-crispy-forms
 python-Levenshtein
 requests
 crispy-bootstrap5
-httpx
 fontawesomefree
-pydantic

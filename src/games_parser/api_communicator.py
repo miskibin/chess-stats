@@ -5,7 +5,7 @@ from logging import Logger
 from pathlib import Path
 from typing import Generator
 from abc import abstractmethod, abstractproperty
-import httpx
+import requests
 from stockfish import Stockfish
 
 from games_parser.game import Game
@@ -47,7 +47,7 @@ class ApiCommunicator(ABC):
 
     def send_query(
         self, url: str, headers: dict = None, params: dict = None
-    ) -> httpx.Response:
+    ) -> requests.Response:
         """
         Summary:
             Sends query to given url and returns response.
@@ -60,15 +60,15 @@ class ApiCommunicator(ABC):
         """
         self._logger.debug(f"Sending query to {url}")
         try:
-            resp = httpx.get(
+            resp = requests.get(
                 url=url,
                 headers=headers,
                 params=params,
-                follow_redirects=True,
+                allow_redirects=True,
                 timeout=10,
             )
             resp.raise_for_status()
-        except httpx.HTTPError as err:
+        except requests.HTTPError as err:
             self._logger.error(f"Failed to get response from {url}: {err}")
             raise err
         return resp

@@ -5,13 +5,7 @@
 
 # chess_analyse_app
 
-## [demo](https://michalskibinski109.github.io/chess_analyse_app/)
-
-1. [Description](#description)
-2. [Installation](#installation)
-3. [Usage](#usage)
-4. [examples](#examples)
-5. [how does it work](#how-does-it-work)
+# [demo](https://michalskibinski109.github.io/chess_analyse_app/)
 
 ## description
 
@@ -20,57 +14,27 @@ per time control,per day of the week, check in which stage of the game you are l
 
 ## installation
 
+### 1. Configure and run server 
 
 ```bash
-git clone https://github.com/michalskibinski109/chess_analyse_app.git
-cd chess_analyse_app
-pip install -e .
-pip install -r requirements.txt
+git clone https://github.com/michalskibinski109/chess_analyse_app.git; 
+cd chess_analyse_app; python -m pip install -e .; python -m pip install -r requirements.txt;
+python -m ./src/server/manage.py migrate; python -m ./src/server/manage.py runserver
 ```
 
-### Optionall
+### 2. Run worker
+```bash
+python -m ./src/server/manage.py qcuster
+```
+
+
+### 3. Optionall
 
 If you want stockfish engine to analyze your app and enable some more features, you need to download it from [here](https://stockfishchess.org/download/) and put it in the project folder.
 
-## usage
+### 4. That is it
+Server is runnig in [localhost](localhost:8000) and you can use it.
 
-to initialize database (you need to do it only once)
-
-```bash
-python src/server/manage.py makemigrations; python src/server/manage.py migrate
-```
-
-to run server
-
-```bash
-python src/server/manage.py runserver
-```
-
-to run queuing system
-
-```bash
-python src/server/manage.py qcluster
-```
-
-## examples
-
-### create report (you don't need to be logged in)
-
-<img src="https://user-images.githubusercontent.com/77834536/199975224-dcf98a81-eac0-4f77-8c9c-0231444d1744.png" width="800" />
-
-### view statistics
-
-<img src="https://user-images.githubusercontent.com/77834536/199974885-1cf19160-a676-452c-a584-df9b2662dc40.png" width="800" />
-<img src="https://user-images.githubusercontent.com/77834536/199974986-d3b0fe91-e5a0-4953-bf27-4834a755a260.png" width="800" />
-<img src="https://user-images.githubusercontent.com/77834536/199975051-ab51dd34-0cd5-4cfa-9d0f-d2d43785f252.png" width="800" />
-
-### You can check all reports...
-
-<img src="https://user-images.githubusercontent.com/77834536/199975124-7fa990d8-4587-4774-b079-c68efe9900bd.png" width="800" />
-
-### ... and get list of games that are in report
-
-<img src="https://user-images.githubusercontent.com/77834536/199975295-0f1bf105-18c9-41bd-bcb0-0eb00a6ee0d6.png" width="800" />
 
 ## how does it work
 

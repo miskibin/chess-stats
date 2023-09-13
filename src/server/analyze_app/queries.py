@@ -119,19 +119,17 @@ class QueriesMaker:
                 ).count()
         return openings
 
-    # def get_player_elo_over_time(self) -> list:
-    #     games = (
-    #         Game.objects.filter(report=self.report)
-    #         .annotate(dcount=Count("host"))
-    #         .order_by("-date")
-    #     )
-    #     data = []
-    #     day = games[0].date.day
-    #     for game in games:
-    #         if game.date.day != day:
-    #             day = game.date.day
-    #             data.append({"x": game.date, "y": game.player_elo, "host": game.host})
-    #     return data
+    def get_player_elo_over_time(
+        self, games: QuerySet[Game]
+    ) -> list:  # TODO REfactor this method it retrurns 3 times the same data !!!
+        games = games.annotate(dcount=Count("host")).order_by("-date")
+        data = []
+        day = games[0].date.date()
+        for game in games:
+            if game.date.date() != day:
+                day = game.date.date()
+                data.append({"x": game.date, "y": game.player_elo, "host": game.host})
+        return data
 
     def get_mistakes_per_phase(self, games: QuerySet[Game]):
         data = {}

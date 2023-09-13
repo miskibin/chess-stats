@@ -46,20 +46,9 @@ class MistakesChart extends ChartInterface {
         scales: {
           x: {
             stacked: true,
-
-            ticks: {
-              font: {
-                size: 15,
-              },
-            },
           },
           y: {
             stacked: true,
-            ticks: {
-              font: {
-                size: 15,
-              },
-            },
           },
         },
       },

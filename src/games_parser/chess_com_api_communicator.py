@@ -3,6 +3,7 @@ from datetime import datetime
 from games_parser.api_communicator import ApiCommunicator
 from games_parser.utils import get_time_class
 from urllib.parse import urlparse
+import httpx
 
 
 class ChessComApiCommunicator(ApiCommunicator):
@@ -13,10 +14,28 @@ class ChessComApiCommunicator(ApiCommunicator):
         list_of_games = self.__get_games(username, games, time_class)
         return super().games_generator(username, list_of_games)
 
+    def send_query(
+        self, url: str, headers: dict = None, params: dict = None
+    ) -> httpx.Response:
+        self._logger.debug(f"Sending query to {url}")
+        try:
+            resp = httpx.get(
+                url=url,
+                headers=headers,
+                params=params,
+                follow_redirects=True,
+                timeout=10,
+            )
+            resp.raise_for_status()
+        except httpx.HTTPError as err:
+            self._logger.error(f"Failed to get response from {url}: {err}")
+            raise err
+        return resp
+
     def get_valid_username(self, username: str) -> str | None:
         url = f"{self.API_URL}/player/{username}"
         try:
-            res = self.send_query(url)
+            res = self.send_query(url, headers={"Accept": "application/json"})
             res.raise_for_status()
         except Exception as e:
             self._logger.error(f"Failed to validate user {url} reason: {e}")

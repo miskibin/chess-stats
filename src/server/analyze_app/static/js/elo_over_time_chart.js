@@ -2,55 +2,34 @@ import ChartInterface from "./chartInterface.js";
 
 class EloOverTimeChart extends ChartInterface {
   constructor() {
-    super("win_ratio_per_color");
+    super("player_elo_over_time");
   }
 
   createChart(data) {
+    const lichessData = data.filter((record) => record.host == "lichess.org");
+    const chessComData = data.filter((record) => record.host == "chess.com");
+    console.log(lichessData);
     return new Chart($(this.chartId), {
       type: "line", // Set the chart type to "line"
       data: {
         labels: data.map((entry) => entry.x), // Use the 'x' values as labels
         datasets: [
           {
-            label: "Lichess Win Ratio", // Label for the Lichess dataset
-            data: data.map((entry) => entry.y), // Use Lichess data for the 'y' values
+            label: "Lichess elo", // Label for the Lichess dataset
+            data: lichessData.map((entry) => entry.y), // Use Lichess data for the 'y' values
+            fill: false,
           },
           {
-            label: "Chess.com Win Ratio", // Label for the Chess.com dataset
+            label: "Chess.com elo", // Label for the Chess.com dataset
+            fill: false,
             data: chessComData.map((entry) => entry.y), // Use Chess.com data for the 'y' values
           },
         ],
       },
       options: {
-        plugins: {
-          legend: {
-            position: "bottom",
-            labels: {
-              font: {
-                size: 15,
-              },
-            },
-          },
-        },
-        responsive: true,
         scales: {
           x: {
             type: "time",
-            time: {
-              unit: "month",
-            },
-            ticks: {
-              font: {
-                size: 15,
-              },
-            },
-          },
-          y: {
-            ticks: {
-              font: {
-                size: 15,
-              },
-            },
           },
         },
       },
@@ -59,6 +38,21 @@ class EloOverTimeChart extends ChartInterface {
 
   updateChart(hostName) {
     const data = this.data[hostName];
+    this.chart.data.labels = data.map((entry) => entry.x);
+    if (!data.some((entry) => entry.host == "lichess.org")) {
+      this.chart.data.datasets[0].data = [];
+      this.chart.data.datasets[1].data = data.map((entry) => entry.y);
+    } else if (!data.some((entry) => entry.host == "chess.com")) {
+      this.chart.data.datasets[1].data = [];
+      this.chart.data.datasets[0].data = data.map((entry) => entry.y);
+    } else {
+      this.chart.data.datasets[0].data = data
+        .filter((entry) => entry.host == "lichess.org")
+        .map((entry) => entry.y);
+      this.chart.data.datasets[1].data = data
+        .filter((entry) => entry.host == "chess.com")
+        .map((entry) => entry.y);
+    }
 
     this.chart.update();
   }
