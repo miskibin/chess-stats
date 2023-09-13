@@ -14,10 +14,10 @@ per time control,per day of the week, check in which stage of the game you are l
 
 ## installation
 
-### 1. Configure and run server 
+### 1. Configure and run server
 
 ```bash
-git clone https://github.com/michalskibinski109/chess_analyse_app.git; 
+git clone https://github.com/michalskibinski109/chess_analyse_app.git;
 cd chess_analyse_app; python -m pip install -e .; python -m pip install -r requirements.txt;
 python -m ./src/server/manage.py migrate; python -m ./src/server/manage.py runserver
 ```
