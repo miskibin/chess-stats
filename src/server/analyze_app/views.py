@@ -87,7 +87,7 @@ class VisualizedReportDetailView(DetailView):
         queries_maker = queries.QueriesMaker(report, LOGGER)
         data = queries_maker.asdict()
         conclusion_maker = ConclusionsMaker(data, LOGGER)
-        conclusions = conclusion_maker.asdict()
+        # conclusions = conclusion_maker.asdict()
         # merge dicts
         # return {**data, **conclusions}
         return data

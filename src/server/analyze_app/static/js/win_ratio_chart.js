@@ -1,13 +1,15 @@
-$(document).ready(function () {
-  const labels = ["Win", "Draw", "Loss"];
-  const winRatioData = JSON.parse($("#data").text())["win_ratio_per_color"];
-  const chart = createChart(winRatioData["total"]);
+import ChartInterface from "./chartInterface.js";
 
-  function createChart(data) {
-    return new Chart($("#win_ratio_per_color_chart"), {
+class WinRatioChart extends ChartInterface {
+  constructor() {
+    super("win_ratio_per_color");
+  }
+
+  createChart(data) {
+    return new Chart($(this.chartId), {
       type: "bar",
       data: {
-        labels: labels,
+        labels: ["Win", "Draw", "Loss"],
         datasets: [
           {
             data: data.white,
@@ -25,26 +27,20 @@ $(document).ready(function () {
     });
   }
 
-  function updateChart(data) {
-    chart.data.datasets[0].data = data.white;
-    chart.data.datasets[1].data = data.black;
-    chart.data.datasets[0].label = `White (total ${data.white.reduce(
-      (a, b) => a + b,
-      0
-    )})`;
-    chart.data.datasets[1].label = `Black (total ${data.black.reduce(
-      (a, b) => a + b,
-      0
-    )})`;
-    chart.update();
+  updateChart(hostName) {
+    const data = this.data[hostName];
+    const datasets = this.chart.data.datasets;
+
+    datasets[0].data = data.white;
+    datasets[1].data = data.black;
+
+    datasets[0].label = `White (total ${data.white.reduce((a, b) => a + b)})`;
+    datasets[1].label = `Black (total ${data.black.reduce((a, b) => a + b)})`;
+
+    this.chart.update();
   }
-  $("#win_ratio_per_color_all").prop("checked", true);
-  updateChart(winRatioData["total"]);
-  $("#win_ratio_per_color_all").click(() => updateChart(winRatioData["total"]));
-  $("#win_ratio_per_color_chess_com").click(() =>
-    updateChart(winRatioData["chess.com"])
-  );
-  $("#win_ratio_per_color_lichess").click(() =>
-    updateChart(winRatioData["lichess.org"])
-  );
+}
+
+$(document).ready(() => {
+  new WinRatioChart();
 });

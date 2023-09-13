@@ -12,3 +12,4 @@ requests
 crispy-bootstrap5
 httpx
 fontawesomefree
+pydantic

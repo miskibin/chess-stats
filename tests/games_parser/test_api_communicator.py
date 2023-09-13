@@ -18,7 +18,7 @@ class TestApiCommunicator:
             self.games = file.read().split("\n\n\n")[:-1]
 
     def test_games_generator(self):
-        generator = self.communicator.games_generator("some name", self.games)
+        generator = self.communicator.games_generator("pro100wdupe", self.games)
         assert isinstance(next(generator), Game)
 
     def test__get_eco(self):

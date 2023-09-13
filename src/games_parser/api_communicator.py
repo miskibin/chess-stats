@@ -61,7 +61,11 @@ class ApiCommunicator(ABC):
         self._logger.debug(f"Sending query to {url}")
         try:
             resp = httpx.get(
-                url=url, headers=headers, params=params, follow_redirects=True
+                url=url,
+                headers=headers,
+                params=params,
+                follow_redirects=True,
+                timeout=10,
             )
             resp.raise_for_status()
         except httpx.HTTPError as err:
