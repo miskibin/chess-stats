@@ -29,6 +29,7 @@ class ChartInterface {
     ChartInterface.hosts.forEach((host) => {
       $(this.buttons[host]).click(() => this.updateChart(host));
     });
+    this.updateChart("total");
   }
 
   updateChart(hostName) {

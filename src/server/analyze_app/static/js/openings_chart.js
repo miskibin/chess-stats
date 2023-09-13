@@ -14,12 +14,12 @@ class OpeningsChart extends ChartInterface {
           data: data.map((opening) => opening.win),
         },
         {
-          label: "Lost",
-          data: data.map((opening) => opening.lost),
+          label: "loss",
+          data: data.map((opening) => opening.loss),
         },
         {
-          label: "Draw",
-          data: data.map((opening) => opening.draws),
+          label: "draw",
+          data: data.map((opening) => opening.draw),
         },
       ],
     };

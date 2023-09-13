@@ -108,31 +108,15 @@ class QueriesMaker:
         openings = openings[:max_oppenings]
         for opening in openings:
             opening[default_field_name] = opening.pop(field_name)
-        openings_for_color = self.__get_win_ratio_per_opening(
-            openings, default_field_name, color
-        )
-        return openings_for_color
 
-    def __get_win_ratio_per_opening(self, openings, field_name, color):
         for opening in openings:
-            opening["win"] = Game.objects.filter(
-                report=self.report,
-                player_color=color,
-                opening__contains=opening[field_name],
-                result=F("player_color"),
-            ).count()
-            opening["lost"] = Game.objects.filter(
-                report=self.report,
-                player_color=color,
-                opening__contains=opening[field_name],
-                result=1 - F("player_color"),
-            ).count()
-            opening["draws"] = Game.objects.filter(
-                player_color=color,
-                report=self.report,
-                opening__contains=opening[field_name],
-                result=0.5,
-            ).count()
+            for res, (m, a) in (("win", (1, 0)), ("loss", (-1, 1)), ("draw", (0, 0.5))):
+                opening[res] = Game.objects.filter(
+                    report=self.report,
+                    player_color=color,
+                    opening__contains=opening[default_field_name],
+                    result=m * F("player_color") + a,
+                ).count()
         return openings
 
     # def get_player_elo_over_time(self) -> list:
