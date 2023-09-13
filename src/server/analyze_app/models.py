@@ -44,7 +44,10 @@ class ChessGame(models.Model):
     moves = models.IntegerField(help_text="Number of moves in the game")
     time_class = models.CharField(max_length=10, help_text="eg. rapid, blitz, bullet")
     phases = models.JSONField(help_text="list with phases of the game")
-    mistakes = models.JSONField(
+    player_mistakes = models.JSONField(
         help_text="mistakes of the player in phases of the game"
+    )
+    opponent_mistakes = models.JSONField(
+        help_text="mistakes of the opponent in phases of the game"
     )
     created = models.DateTimeField(auto_now_add=True)

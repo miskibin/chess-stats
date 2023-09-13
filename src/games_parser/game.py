@@ -174,12 +174,12 @@ class Game:
             evaluations.append(evaluation)
         return evaluations
 
-    def __mistakes_per_phase(self):
+    def __mistakes_per_phase(self, color: Color) -> list:
         """
         Returns [
-            opening(inaccuraces, mistakes, blunders),
-            middlegame(inaccuraces, mistakes, blunders),
-            endgame(inaccuraces, mistakes, blunders)
+            opening(inaccuracies, mistakes, blunders),
+            middlegame(inaccuracies, mistakes, blunders),
+            endgame(inaccuracies, mistakes, blunders)
             ]
         """
         mistakes = []
@@ -188,8 +188,8 @@ class Game:
         for phase in self.phases:
             inacc, mist, blund = 0, 0, 0
             for move_num in range(max(prev, 1), min(phase, len(self.evaluations))):
-                if (move_num + self.player.color) % 2 == 0:
-                    loss = -((-self.player.color * 2) + 1) * (
+                if (move_num + color) % 2 == 0:
+                    loss = -((-color * 2) + 1) * (
                         self.evaluations[move_num] - self.evaluations[move_num - 1]
                     )
                     if loss > self.BLUNDER:
@@ -216,21 +216,22 @@ class Game:
     def asdict(self) -> dict:
         """Method returns all data about game  .
         Returns:
-            `player_elo` (int): elo of the player
-            `host` (str): site where game was played (lichess, chess.com, etc.)
-            `opponent_elo` (int): elo of the opponent
-            `opening` (str): opening of the game
-            `short_opening` (str): eg. `Ruy Lopez: Open` -> `Ruy Lopez`
-            `result` (Result): result of the game
-            `date` (datetime): date of the game
-            `time_control` (str): time control of the game
-            `player_color` (Color): color of the player
-            `mean_player_time_per_move` (float): mean time of the player per move
-            `mean_opponent_time_per_move` (float): mean time of the opponent per move
-            `moves` (int): number of moves in the game
-            `time_class` (str): time class of the game
-            `phases` (tuple): phases of the game
-            `mistakes` (tuple): mistakes of the player in phases of the game
+        - `player_elo` (int): elo of the player
+        - `host` (str): site where game was played (lichess, chess.com, etc.)
+        - `opponent_elo` (int): elo of the opponent
+        - `opening` (str): opening of the game
+        - `short_opening` (str): eg. `Ruy Lopez: Open` -> `Ruy Lopez`
+        - `result` (Result): result of the game
+        - `date` (datetime): date of the game
+        - `time_control` (str): time control of the game
+        - `player_color` (Color): color of the player
+        - `mean_player_time_per_move` (float): mean time of the player per move
+        - `mean_opponent_time_per_move` (float): mean time of the opponent per move
+        - `moves` (int): number of moves in the game
+        - `time_class` (str): time class of the game
+        - `phases` (tuple): phases of the game
+        - `player_mistakes` (tuple): mistakes of the player in phases of the game
+        - `opponent_mistakes` (tuple): mistakes of the opponent in phases of the game
         """
         temp = self.time_control.split("+")
         t_c = str(int(temp[0]) // 60) + "+" + str(temp[1])
@@ -257,7 +258,8 @@ class Game:
             ),
             "time_class": self.get_time_class(t_c),
             "phases": self.phases,
-            "mistakes": self.__mistakes_per_phase(),
+            "player_mistakes": self.__mistakes_per_phase(self.player.color.value),
+            "opponent_mistakes": self.__mistakes_per_phase(not self.player.color.value),
         }
 
     def __str__(self) -> str:

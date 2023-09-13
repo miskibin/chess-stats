@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from games_parser.api_communicator import ApiCommunicator
-from games_parser.utils import get_time_class
+from games_parser.utils import get_time_class, is_chess_960
 from urllib.parse import urlparse
 import httpx
 
@@ -75,7 +75,7 @@ class ChessComApiCommunicator(ApiCommunicator):
                 for g in games_list:
                     if len(games) >= games_num:
                         return games
-                    if get_time_class(g) == time_class:
+                    if get_time_class(g) == time_class and not is_chess_960(g):
                         games.append(g)
                 m -= 1
         return games

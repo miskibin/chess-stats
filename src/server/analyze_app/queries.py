@@ -136,20 +136,20 @@ class QueriesMaker:
     def get_mistakes_per_phase(self, games: QuerySet[Game]):
         data = {}
         for phase, phase_name in enumerate(["Opening", "Middle", "End"]):
-            blunders, mistakes, inacuracies = 0, 0, 0
+            blunders, mistakes, inaccuracies = 0, 0, 0
             games_count = games.count()
             if games_count == 0:
                 continue
             for game in games:
-                inacuracies += game.mistakes[phase][0]
-                mistakes += game.mistakes[phase][1]
-                blunders += game.mistakes[phase][2]
+                inaccuracies += game.player_mistakes[phase][0]
+                mistakes += game.player_mistakes[phase][1]
+                blunders += game.player_mistakes[phase][2]
                 if phase == 1 and game.phases[0] == game.phases[1]:
                     games_count -= 1
                 elif phase == 2 and game.phases[1] == game.phases[2]:
                     games_count -= 1
             data[phase_name] = [
-                inacuracies / games_count,
+                inaccuracies / games_count,
                 mistakes / games_count,
                 blunders / games_count,
             ]

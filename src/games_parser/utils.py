@@ -25,7 +25,12 @@ def get_pgn(pgn: str) -> chess.pgn.Game:
     return game
 
 
-def get_time_class(pgn: str) -> str:
+def is_chess_960(pgn: chess.pgn.Game) -> bool:
+    pgn = get_pgn(pgn)
+    return get_field_value(pgn.headers, "Variant") == "Chess960"
+
+
+def get_time_class(pgn: chess.pgn.Game) -> str:
     pgn = get_pgn(pgn)
     temp = get_field_value(pgn.headers, "TimeControl")
     if "/" in temp:  # daily time control

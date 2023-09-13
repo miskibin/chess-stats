@@ -17,20 +17,13 @@ class MistakesChart extends ChartInterface {
             mistakes["End"][0],
           ],
         },
+
         {
           label: "Mistakes",
           data: [
             mistakes["Opening"][1],
             mistakes["Middle"][1],
             mistakes["End"][1],
-          ],
-        },
-        {
-          label: "Blunders",
-          data: [
-            mistakes["Opening"][2],
-            mistakes["Middle"][2],
-            mistakes["End"][2],
           ],
         },
       ],
