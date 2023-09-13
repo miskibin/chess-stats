@@ -5,21 +5,21 @@ class OpeningsChart extends ChartInterface {
     super(fieldName);
   }
 
-  prepareData(data) {
+  prepareData(chartData) {
     return {
-      labels: data.map((opening) => opening.opening),
+      labels: chartData.map((opening) => opening.opening),
       datasets: [
         {
           label: "Win",
-          data: data.map((opening) => opening.win),
+          data: chartData.map((opening) => opening.win),
         },
         {
           label: "loss",
-          data: data.map((opening) => opening.loss),
+          data: chartData.map((opening) => opening.loss),
         },
         {
           label: "draw",
-          data: data.map((opening) => opening.draw),
+          data: chartData.map((opening) => opening.draw),
         },
       ],
     };
@@ -36,8 +36,8 @@ class OpeningsChart extends ChartInterface {
   }
 
   updateChart(hostName) {
-    let data = this.data[hostName];
-    this.chart.data = this.prepareData(data);
+    let chartData = this.data[hostName];
+    this.chart.data = this.prepareData(chartData);
     this.chart.update();
   }
 }

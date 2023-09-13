@@ -8,7 +8,6 @@ class EloOverTimeChart extends ChartInterface {
   createChart(data) {
     const lichessData = data.filter((record) => record.host == "lichess.org");
     const chessComData = data.filter((record) => record.host == "chess.com");
-    console.log(lichessData);
     return new Chart($(this.chartId), {
       type: "line", // Set the chart type to "line"
       data: {
@@ -17,11 +16,14 @@ class EloOverTimeChart extends ChartInterface {
           {
             label: "Lichess elo", // Label for the Lichess dataset
             data: lichessData.map((entry) => entry.y), // Use Lichess data for the 'y' values
-            fill: false,
+            pointRadius: 2,
+            tension: 0.2,
           },
           {
             label: "Chess.com elo", // Label for the Chess.com dataset
             fill: false,
+            pointRadius: 2,
+            tension: 0.2,
             data: chessComData.map((entry) => entry.y), // Use Chess.com data for the 'y' values
           },
         ],

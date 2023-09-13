@@ -54,6 +54,8 @@ class QueriesMaker:
             self.logger.debug(f"Query {method:40} {time() - start:.3f}s")
 
         self.logger.debug(f"{data.keys()}")
+        from pprint import pprint
+
         return data
 
     def get_Xanalyzed_games(self, games: QuerySet[Game]) -> int:
@@ -100,19 +102,19 @@ class QueriesMaker:
         if short:
             field_name = "short_opening"
         openings = (
-            games.filter(report=self.report, player_color=color)
+            games.filter(player_color=color)
             .values(field_name)
-            .annotate(count=models.Count(field_name))
+            .annotate(count=Count(field_name))
         )
         openings = sorted(openings, key=lambda x: x["count"], reverse=True)
         openings = openings[:max_oppenings]
+
         for opening in openings:
             opening[default_field_name] = opening.pop(field_name)
 
         for opening in openings:
             for res, (m, a) in (("win", (1, 0)), ("loss", (-1, 1)), ("draw", (0, 0.5))):
-                opening[res] = Game.objects.filter(
-                    report=self.report,
+                opening[res] = games.filter(
                     player_color=color,
                     opening__contains=opening[default_field_name],
                     result=m * F("player_color") + a,
