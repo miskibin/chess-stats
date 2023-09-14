@@ -1,11 +1,11 @@
-![example workflow](https://github.com/michalskibinski109/chess_analyse_app/actions/workflows/python-app.yml/badge.svg)
+![example workflow](https://github.com/michalskibinski109/chess-stats/actions/workflows/python-app.yml/badge.svg)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 **project still under development**
 
 # Chess stats
 
-# [demo](https://michalskibinski109.github.io/chess_analyse_app/)
+# [demo](https://michalskibinski109.github.io/chess-stats/)
 
 ## description
 
@@ -17,8 +17,8 @@ per time control,per day of the week, check in which stage of the game you are l
 ### 1. Configure and run server
 
 ```bash
-git clone https://github.com/michalskibinski109/chess_analyse_app.git;
-cd chess_analyse_app; python -m pip install -e .; python -m pip install -r requirements.txt;
+git clone https://github.com/michalskibinski109/chess-stats.git;
+cd chess-stats; python -m pip install -e .; python -m pip install -r requirements.txt;
 python -m ./src/server/manage.py migrate; python -m ./src/server/manage.py runserver
 ```
 
