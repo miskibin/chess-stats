@@ -1,12 +1,10 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView, TemplateView
-from django_q.tasks import async_task, result
+from django_q.tasks import async_task
 from easy_logs import get_logger
 
 from . import forms, models, queries
-from .conclusions import ConclusionsMaker
 from .tasks import get_games
 
 LOGGER = get_logger(lvl="DEBUG")
@@ -43,13 +41,13 @@ class ReportCreateView(CreateView):
 
 class ReportDeleteView(DetailView):
     def get_object(self):
-        id = self.kwargs.get("id")
-        report = get_object_or_404(models.Report, id=id)
+        _id = self.kwargs.get("id")
+        report = get_object_or_404(models.Report, id=_id)
         return report
 
     def post(self, request, *args, **kwargs):
-        id = self.kwargs.get("id")
-        report = get_object_or_404(models.Report, id=id)
+        _id = self.kwargs.get("id")
+        report = get_object_or_404(models.Report, id=_id)
         report.delete()
         return redirect("report:report-list")
 
@@ -81,12 +79,14 @@ class VisualizedReportDetailView(DetailView):
         report = get_object_or_404(models.Report, id=id)
         if not models.ChessGame.objects.filter(report=self.kwargs.get("id")).exists():
             return {
-                "Xanalyzed_games": report.analyzed_games,
+                "Xanalyzed_games": {
+                    "total": report.analyzed_games,
+                },
                 "Xfail_reason": report.fail_reason,
             }
         queries_maker = queries.QueriesMaker(report, LOGGER)
         data = queries_maker.asdict()
-        conclusion_maker = ConclusionsMaker(data, LOGGER)
+        # conclusion_maker = ConclusionsMaker(data, LOGGER)
         # conclusions = conclusion_maker.asdict()
         # merge dicts
         # return {**data, **conclusions}

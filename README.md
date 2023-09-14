@@ -3,7 +3,7 @@
 
 **project still under development**
 
-# chess_analyse_app
+# Chess stats
 
 # [demo](https://michalskibinski109.github.io/chess_analyse_app/)
 

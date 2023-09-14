@@ -18,6 +18,10 @@ class ChartInterface {
     this.data = JSON.parse($("#data").text())[fieldName];
 
     this.chartId = `#${fieldName}${this.chartSuffix}`;
+    if (!this.data) {
+      console.log("No data provided for chart initialization");
+      return;
+    }
     this.chart = this.createChart(this.data["total"]);
     /**
      * @property {Object} buttons - A dictionary of button names associated with hosts.
@@ -29,6 +33,7 @@ class ChartInterface {
     ChartInterface.hosts.forEach((host) => {
       $(this.buttons[host]).click(() => this.updateChart(host));
     });
+
     this.updateChart("total");
   }
 

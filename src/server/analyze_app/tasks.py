@@ -12,10 +12,8 @@ def get_games(
 ) -> None:
     factory = CommunicatorFactory(logger)
     games_num_per_host = report.games_num // sum(
-        [
-            1 if host else 0
-            for host in [report.chess_com_username, report.lichess_username]
-        ]
+        1 if host else 0
+        for host in [report.chess_com_username, report.lichess_username]
     )
     hosts = {
         "chess.com": report.chess_com_username,
@@ -27,7 +25,7 @@ def get_games(
             communicator = factory.get_communicator(host, report.engine_depth)
             valid_name = communicator.get_valid_username(username)
             if not valid_name:
-                report.fail_reason = f"User {username} is not valid"
+                report.fail_reason = f"Connection issues or user {username} is invalid"
                 report.analyzed_games = -1
                 report.save()
                 return
