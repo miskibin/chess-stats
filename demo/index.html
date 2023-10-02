@@ -8,11 +8,20 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
-    <link rel="stylesheet" href="./static/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="../src/server/analyze_app/static/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="./static/js/bootstrap.min.js" defer></script>
-    <link rel="stylesheet" href="./static/css/style.css" />
-    <script src="./static/js/script.js" defer></script>
+    <script
+      src="../src/server/analyze_app/static/js/bootstrap.min.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="../src/server/analyze_app/static/css/style.css"
+    />
+    <script src="../src/server/analyze_app/static/js/script.js" defer></script>
   </head>
   <body class="d-flex flex-column h-100 w-100">
     <nav class="navbar bg-primary sticky-top navbar-expand-md rounded">
@@ -20,6 +29,7 @@
         <a class="navbar-brand text-light p-4 pb-0 pt-0" href="/">
           <i class="fa-solid fa-chess-king fa-2x"></i>
           <b class="fs-4">Chess Stats</b>
+          <span class="text-danger display-6 text-center">DEMO</span>
         </a>
         <div class="d-flex">
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -33,7 +43,7 @@
       <div class="background-div">
         <section>
           <div class="row justify-content-center m-0">
-            <h1 class="display-1 text-center m-5 hidden">
+            <h1 class="display-1 text-center m-5">
               <span class="text-danger">W</span>elcome.
             </h1>
             <hr class="col-8" />
@@ -65,7 +75,41 @@
             </div>
           </div>
         </section>
+        <section>
+          <div class="row justify-content-center m-0 mt-5">
+            <div class="col-4 fs-5 m-5 p-4">
+              <h2 class="text-white">
+                Use power of
+                <a
+                  href="https://github.com/michalskibinski109/chess_insight"
+                  class="text-warning"
+                  >chess-insight</a
+                >
+              </h2>
+              <p class="text-muted">
+                Modern bash application for gathering chess data and analyzing
+                chess games. Created by <b>Us</b>!
+              </p>
 
+              <ul class="text-muted">
+                <li>Download games from lichess.org and chess.com</li>
+                <li>
+                  Analyze games using set of custom methods and stockfish-16
+                  engine
+                </li>
+                <li>
+                  Provides methods for exporting list of analyzed games to csv
+                  and json
+                </li>
+              </ul>
+            </div>
+            <img
+              src="../src/server/analyze_app/static/ssc.png"
+              class="col-6 console"
+              alt=""
+            />
+          </div>
+        </section>
         <section class="d-flex flex-column justify-content-center">
           <div class="row align-self-center">
             <div class="row justify-content-center">
@@ -119,7 +163,7 @@
           <div class="row m-2">
             <div class="col-1"></div>
             <img
-              src="./static/ss1.png"
+              src="../src/server/analyze_app/static/ss1.png"
               class="rounded p-2 m-2 bg-primary col-5"
               alt=""
             />
@@ -141,7 +185,7 @@
               report you want.
             </div>
             <img
-              src="./static/ss2.png"
+              src="../src/server/analyze_app/static/ss2.png"
               class="rounded p-2 m-2 bg-primary col-5"
               alt=""
             />
@@ -149,7 +193,7 @@
           <div class="row m-2">
             <div class="col-2"></div>
             <img
-              src="./static/ss3.png"
+              src="../src/server/analyze_app/static/ss3.png"
               class="rounded p-2 m-2 bg-primary col-5"
               alt=""
             />
