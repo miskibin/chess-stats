@@ -11,6 +11,7 @@ class LichessApiCommunicator(ApiCommunicator):
         headers = {"Accept": "application/x-chess-pgn"}
         params = {"max": games, "perfType": time_class, "clocks": "true"}
         url = self.BASE_URL + "/games/user/" + username
+        self._logger.info(f"Sending request to {url}")
         response = self.send_query(url, headers=headers, params=params)
         games = self.split_pgns(response.text)
         return games
@@ -34,5 +35,5 @@ if __name__ == "__main__":
     from easy_logs import get_logger
 
     lichess = LichessApiCommunicator(get_logger())
-    valid = lichess.get_valid_username("michal")
+    valid = lichess.get_games("michal", 1, "blitz")
     pprint(valid)
