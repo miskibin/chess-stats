@@ -23,6 +23,7 @@
 .sidebar-sticky {
     height: calc(100vh - 48px);
     overflow-x: hidden;
+
     overflow-y: auto;
     /* Scrollable contents if viewport is shorter than content. */
 }
@@ -70,9 +71,22 @@ section {
 
 .icon:hover {
     transform: scale(1.05) !important;
+
 }
 
+.console {
+    border-radius: 20px;
+    opacity: 0.92;
+    transform: perspective(50px);
+    backdrop-filter: blur(40px);
+    transition: transform 0.5s;
+    /* Specify the property you want to transition */
+}
 
+.console:hover {
+    transform: rotate3d(1, 0, 2, 10deg);
+    /* Add perspective and specify the angle in degrees */
+}
 
 .show {
     filter: None;

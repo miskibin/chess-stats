@@ -27,6 +27,8 @@ def get_pgn(pgn: str) -> chess.pgn.Game:
 
 def is_chess_960(pgn: chess.pgn.Game) -> bool:
     pgn = get_pgn(pgn)
+    if pgn.headers.get("Variant") is None:
+        return False
     return get_field_value(pgn.headers, "Variant") == "Chess960"
 
 
