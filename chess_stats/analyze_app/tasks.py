@@ -1,16 +1,14 @@
 from logging import Logger
 
 from easy_logs import get_logger
-
-from games_parser.communicator_factory import CommunicatorFactory
-from games_parser.api_communicator import ApiCommunicator
+import chess_insight
+from chess_insight.api_communicator import ApiCommunicator
 from . import models
 
 
 def get_games(
     report: models.Report, logger: Logger = get_logger(lvl=10), *args, **kwargs
 ) -> None:
-    factory = CommunicatorFactory(logger)
     games_num_per_host = report.games_num // sum(
         1 if host else 0
         for host in [report.chess_com_username, report.lichess_username]
@@ -22,8 +20,9 @@ def get_games(
 
     for host, username in hosts.items():
         if username:
-            communicator = factory.get_communicator(host, report.engine_depth)
-            valid_name = communicator.get_valid_username(username)
+            communicator = chess_insight.get_communicator(host, report.engine_depth)
+            # valid_name = communicator.get_valid_username(username) # TODO uncomment
+            valid_name = username
             if not valid_name:
                 report.fail_reason = f"Connection issues or user {username} is invalid"
                 report.analyzed_games = -1
@@ -44,8 +43,10 @@ def _update_report(
     games_num: int,
 ) -> None:
     try:
-        for game in communicator.get_games(username, games_num, report.time_class):
-            obj = models.ChessGame(**game.asdict(), report=report)
+        for game in communicator.games_generator(
+            username, games_num, report.time_class
+        ):
+            obj = models.ChessGame(**game.flatten(), report=report)
             report.analyzed_games += 1
             report.save()
             obj.save()

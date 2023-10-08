@@ -54,7 +54,6 @@ class QueriesMaker:
             self.logger.debug(f"Query {method:40} {time() - start:.3f}s")
 
         self.logger.debug(f"{data.keys()}")
-        from pprint import pprint
 
         return data
 
