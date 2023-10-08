@@ -2,6 +2,11 @@ from collections.abc import Iterable
 from django.db import models, transaction
 
 
+class Color(models.TextChoices):
+    WHITE = "white"
+    BLACK = "black"
+
+
 class Report(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     chess_com_username = models.CharField(max_length=100)
@@ -56,10 +61,11 @@ class ChessGame(models.Model):
     )
 
     player_color = models.CharField(
-        max_length=10, help_text="Player color in the game."
+        max_length=10, help_text="Player color in the game.", choices=Color.choices
     )
-    result = models.JSONField(
-        help_text="Result of the game in the format (result, reason)."
+    result = models.CharField(max_length=60, choices=Color.choices)
+    end_reason = models.CharField(
+        max_length=50, help_text="Reason of the game end. e.g., 'checkmate'"
     )
     time_class = models.CharField(max_length=50, help_text="Time class of the game.")
     time_control = models.CharField(

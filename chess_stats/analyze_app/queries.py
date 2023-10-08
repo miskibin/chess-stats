@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models import Count, F
 from django.db.models.query import QuerySet
 from .models import ChessGame as Game
-from .models import Report
+from .models import Report, Color
 
 
 class QueriesMaker:
@@ -18,8 +18,6 @@ class QueriesMaker:
     def __init__(self, report: Report, logger: Logger) -> None:
         self.report = report
         self.logger = logger
-        self.white = 0
-        self.black = 1
         self.get_methods = [
             method
             for method in dir(self)
@@ -70,28 +68,31 @@ class QueriesMaker:
             return games[0].report.chess_com_username
 
     def get_win_ratio_per_color(self, games: QuerySet[Game]) -> list:
-        white = self.__get_win_ratio(self.white, games)
-        black = self.__get_win_ratio(self.black, games)
+        white = self.__get_win_ratio(Color.WHITE, games)
+        black = self.__get_win_ratio(Color.BLACK, games)
         data_dict = {"white": white, "black": black}
         return data_dict
 
     def __get_win_ratio(self, color, games: QuerySet[Game]) -> int:
+        opponent_color = Color.BLACK if color == Color.WHITE else Color.WHITE
         win = games.filter(
-            report=self.report, player_color=color, result__contains=F("player_color")
+            report=self.report, player_color=color, result=F("player_color")
         ).count()
         lost = games.filter(
             report=self.report,
             player_color=color,
-            result__contains=1 - F("player_color"),
+            result=opponent_color,
         ).count()
-        draws = games.filter(report=self.report, player_color=color, result=0.5).count()
+        draws = (
+            games.filter(report=self.report, player_color=color).count() - win - lost
+        )
         return [win, draws, lost]
 
     def get_win_ratio_per_opening_as_white(self, games: QuerySet[Game]) -> dict:
-        return self.__get_win_ratio_per_opening_for_color(games, self.white)
+        return self.__get_win_ratio_per_opening_for_color(games, Color.WHITE)
 
     def get_win_ratio_per_opening_as_black(self, games: QuerySet[Game]) -> dict:
-        return self.__get_win_ratio_per_opening_for_color(games, self.black)
+        return self.__get_win_ratio_per_opening_for_color(games, Color.BLACK)
 
     def __get_win_ratio_per_opening_for_color(
         self, games: QuerySet[Game], color: int, max_oppenings=5, short=True
