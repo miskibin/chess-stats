@@ -2,13 +2,11 @@ pytest
 easy_logs
 django_q
 django
-stockfish
-chess
 numpy
 PyYAML
 httpx
 django-crispy-forms
-python-Levenshtein
 requests
 crispy-bootstrap5
 fontawesomefree
+chess_insight
