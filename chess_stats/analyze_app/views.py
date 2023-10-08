@@ -90,6 +90,9 @@ class VisualizedReportDetailView(DetailView):
         # conclusions = conclusion_maker.asdict()
         # merge dicts
         # return {**data, **conclusions}
+        from rich import inspect
+
+        inspect(data)
         return data
 
     def get_absolute_url(self):

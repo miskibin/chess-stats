@@ -20,7 +20,11 @@ def get_games(
 
     for host, username in hosts.items():
         if username:
-            communicator = chess_insight.get_communicator(host, report.engine_depth)
+            communicator = chess_insight.get_communicator(
+                host,
+                report.engine_depth,
+                "C:/Users/miskibin/Desktop/chess-stats/stockfish.exe",
+            )
             # valid_name = communicator.get_valid_username(username) # TODO uncomment
             valid_name = username
             if not valid_name:
@@ -46,7 +50,14 @@ def _update_report(
         for game in communicator.games_generator(
             username, games_num, report.time_class
         ):
-            obj = models.ChessGame(**game.flatten(), report=report)
+            opponent = models.SingleGamePlayer(**game.opponent.asdict())
+            player = models.SingleGamePlayer(**game.player.asdict())
+            game_dict = game.asdict()  # remove player and opponent from game_dict
+            del game_dict["player"]
+            del game_dict["opponent"]
+            obj = models.ChessGame(
+                **game_dict, report=report, player=player, opponent=opponent
+            )
             report.analyzed_games += 1
             report.save()
             obj.save()
