@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models import Count, F
 from django.db.models.query import QuerySet
 from .models import ChessGame as Game
-from .models import Report, Color
+from .models import Report, Color, Result
 
 
 class QueriesMaker:
@@ -111,13 +111,14 @@ class QueriesMaker:
 
         for opening in openings:
             opening[default_field_name] = opening.pop(field_name)
-
+        win = Color.WHITE if color == Color.WHITE else Color.BLACK
+        loss = Color.BLACK if color == Color.WHITE else Color.WHITE
         for opening in openings:
-            for res, (m, a) in (("win", (1, 0)), ("loss", (-1, 1)), ("draw", (0, 0.5))):
+            for res, result in (("win", win), ("loss", loss), ("draw", Result.DRAW)):
                 opening[res] = games.filter(
                     player_color=color,
                     opening__contains=opening[default_field_name],
-                    result=m * F("player_color") + a,
+                    result=result,
                 ).count()
         return openings
 
