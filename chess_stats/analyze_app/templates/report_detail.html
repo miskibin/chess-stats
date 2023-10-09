@@ -11,9 +11,10 @@
             <th scope="col">game</th>
             <th scope="col">result</th>
             <th scope="col">player color</th>
-            <th scope="col">time_class</th>
+            <th scope="col">time class</th>
             <th scope="col">date</th>
             <th scope="col">opening</th>
+            <th scope="col">Player elo</th>
           </tr>
         </thead>
         {% for game in object %}
@@ -25,6 +26,7 @@
             <td>{{game.time_class}}</td>
             <td>{{game.date}}</td>
             <td>{{game.opening}}</td>
+            <td>{{game.player.elo}}</td>
 
             {% endfor %}
           </tr>
