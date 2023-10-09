@@ -11,12 +11,12 @@ class AvgMoveTimeChart extends ChartInterface {
         {
           data: Object.values(chartData.player),
           label: "Player",
-          backgroundColor: "#d7B711",
+          // backgroundColor: "#d7B711",
         },
         {
           data: Object.values(chartData.opponent),
           label: "Opponent",
-          backgroundColor: "#e56aa1",
+          // backgroundColor: "#e56aa1",
         },
       ],
     };
