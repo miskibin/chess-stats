@@ -32,6 +32,10 @@ class OpeningsChart extends ChartInterface {
     return new Chart($(this.chartId), {
       type: "bar",
       data: chartData,
+      options: {
+        maintainAspectRatio: false,
+        aspectRatio: 0.7,
+      },
     });
   }
 

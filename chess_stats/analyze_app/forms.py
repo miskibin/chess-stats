@@ -20,7 +20,12 @@ class ReportForm(forms.ModelForm):
         required=False,
         help_text="leave blank if you don't want to analyze lichess.org games",
     )
-    games_num = forms.IntegerField(initial=50)
+    games_num = forms.IntegerField(
+        initial=50,
+        min_value=1,
+        max_value=1000,
+        help_text="number of games to analyze Must be divisible by number of hosts",
+    )
     engine_depth = forms.IntegerField(initial=5)
 
     class Meta:

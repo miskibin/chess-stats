@@ -1,14 +1,29 @@
-<nav class="navbar bg-primary sticky-top navbar-expand-md rounded">
+<!-- <nav class="navbar bg-primary sticky-top navbar-expand-lg rounded">
   <div class="container-fluid">
     <a class="navbar-brand text-light p-4 pb-0 pt-0" href="/">
       <i class="fa-solid fa-chess-king fa-2x"></i>
       <b class="fs-4">Chess Stats</b>
     </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      class="pr-0"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="d-flex">
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="col navbar-nav mr-5 d-flex">
+        <ul class="col navbar navbar-nav mr-5 d-flex">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/reports"
+            <a
+              class="nav-link active text-start"
+              aria-current="page"
+              href="/reports"
               >All reports</a
             >
           </li>
@@ -24,6 +39,46 @@
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+</nav> -->
+
+<nav class="navbar bg-primary sticky-top navbar-expand-lg rounded">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light p-2 pb-0 pt-0" href="/">
+      <i class="fa-solid fa-chess-king fa-2x"></i>
+      <b class="fs-4">Chess Stats</b>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a
+            class="nav-link active text-start"
+            aria-current="page"
+            href="/reports"
+            >All reports</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/create"
+            >Create report</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

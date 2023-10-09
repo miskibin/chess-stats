@@ -24,6 +24,10 @@ class WinRatioChart extends ChartInterface {
           },
         ],
       },
+      options: {
+        maintainAspectRatio: false,
+        aspectRatio: 0.7,
+      },
     });
   }
 

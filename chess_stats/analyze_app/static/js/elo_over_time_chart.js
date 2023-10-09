@@ -29,6 +29,8 @@ class EloOverTimeChart extends ChartInterface {
         ],
       },
       options: {
+        // maintainAspectRatio: false,
+        // aspectRatio: 1,
         scales: {
           x: {
             type: "time",
