@@ -1,25 +1,22 @@
 import ChartInterface from "./chartInterface.js";
 
-class OpeningsChart extends ChartInterface {
-  constructor(fieldName) {
-    super(fieldName);
+class AvgMoveTimeChart extends ChartInterface {
+  constructor() {
+    super("avg_time_per_move");
   }
-
   prepareData(chartData) {
     return {
-      labels: chartData.map((opening) => opening.opening),
+      labels: Object.keys(chartData.player),
       datasets: [
         {
-          label: "Win",
-          data: chartData.map((opening) => opening.win),
+          data: Object.values(chartData.player),
+          label: "Player",
+          backgroundColor: "#d7B711",
         },
         {
-          label: "loss",
-          data: chartData.map((opening) => opening.loss),
-        },
-        {
-          label: "draw",
-          data: chartData.map((opening) => opening.draw),
+          data: Object.values(chartData.opponent),
+          label: "Opponent",
+          backgroundColor: "#e56aa1",
         },
       ],
     };
@@ -27,10 +24,9 @@ class OpeningsChart extends ChartInterface {
 
   createChart(data) {
     const chartData = this.prepareData(data);
-
     return new Chart($(this.chartId), {
       type: "bar",
-      data: chartData,
+      data: {},
       options: {
         maintainAspectRatio: false,
         aspectRatio: 0.7,
@@ -46,6 +42,5 @@ class OpeningsChart extends ChartInterface {
 }
 
 $(document).ready(() => {
-  new OpeningsChart("win_ratio_per_opening_as_white");
-  new OpeningsChart("win_ratio_per_opening_as_black");
+  new AvgMoveTimeChart();
 });

@@ -2,7 +2,7 @@ from logging import Logger
 from time import time
 
 from django.db import models
-from django.db.models import Count, F
+from django.db.models import Count, F, Q
 from django.db.models.query import QuerySet
 from .models import ChessGame as Game
 from .models import Report, Color, Result
@@ -67,6 +67,27 @@ class QueriesMaker:
         if games[0].host == "chess.com":
             return games[0].report.chess_com_username
 
+    def get_avg_time_per_move(self, games: QuerySet[Game]) -> list:
+        avg_time = {
+            "player": {"opening": 0, "middle_game": 0, "end_game": 0},
+            "opponent": {"opening": 0, "middle_game": 0, "end_game": 0},
+        }
+        for game in games:
+            for phase in ["opening", "middle_game", "end_game"]:
+                try:
+                    avg_time["player"][phase] += game.player.avg_move_time[phase]
+                    avg_time["opponent"][phase] += game.opponent.avg_move_time[phase]
+                except KeyError:
+                    self.logger.error(
+                        f"No {phase} in get_avg_time_per_move for game {game.id}"
+                    )
+                    break
+
+        for phase in ["opening", "middle_game", "end_game"]:
+            avg_time["player"][phase] /= games.count()
+            avg_time["opponent"][phase] /= games.count()
+        return avg_time
+
     def get_win_ratio_per_color(self, games: QuerySet[Game]) -> list:
         white = self.__get_win_ratio(Color.WHITE, games)
         black = self.__get_win_ratio(Color.BLACK, games)
@@ -93,6 +114,27 @@ class QueriesMaker:
 
     def get_win_ratio_per_opening_as_black(self, games: QuerySet[Game]) -> dict:
         return self.__get_win_ratio_per_opening_for_color(games, Color.BLACK)
+
+    def get_end_reasons(self, games: QuerySet[Game]) -> dict:
+        # field name end_reason
+        end_reasons = {}
+        end_reasons["win"] = list(
+            games.filter(report=self.report, result=F("player_color"))
+            .exclude(end_reason="unknown")
+            .values("end_reason")
+            .annotate(count=Count("end_reason"))
+        )
+        end_reasons["loss"] = list(
+            games.filter(report=self.report)
+            .exclude(
+                Q(result=F("player_color"))
+                | Q(result=Result.DRAW)
+                | Q(end_reason="unknown")
+            )
+            .values("end_reason")
+            .annotate(count=Count("end_reason"))
+        )
+        return end_reasons
 
     def __get_win_ratio_per_opening_for_color(
         self, games: QuerySet[Game], color: int, max_oppenings=5, short=True
@@ -125,7 +167,7 @@ class QueriesMaker:
     def get_player_elo_over_time(
         self, games: QuerySet[Game]
     ) -> list:  # TODO REfactor this method it retrurns 3 times the same data !!!
-        games = games.annotate(dcount=Count("host")).order_by("-date")
+        games = games.annotate(count=Count("host")).order_by("-date")
         data = []
         day = games[0].date.date()
         for game in games:
@@ -134,24 +176,20 @@ class QueriesMaker:
                 data.append({"x": game.date, "y": game.player.elo, "host": game.host})
         return data
 
-    # def get_mistakes_per_phase(self, games: QuerySet[Game]):
-    #     data = {}
-    #     for phase, phase_name in enumerate(["Opening", "Middle", "End"]):
-    #         blunders, mistakes, inaccuracies = 0, 0, 0
-    #         games_count = games.count()
-    #         if games_count == 0:
-    #             continue
-    #         for game in games:
-    #             inaccuracies += game.player_mistakes[phase][0]
-    #             mistakes += game.player_mistakes[phase][1]
-    #             blunders += game.player_mistakes[phase][2]
-    #             if phase == 1 and game.phases[0] == game.phases[1]:
-    #                 games_count -= 1
-    #             elif phase == 2 and game.phases[1] == game.phases[2]:
-    #                 games_count -= 1
-    #         data[phase_name] = [
-    #             inaccuracies / games_count,
-    #             mistakes / games_count,
-    #             blunders / games_count,
-    #         ]
-    #     return data
+    def get_mistakes_per_phase(self, games: QuerySet[Game]):
+        data = {}
+        for phase_name in ["opening", "middle_game", "end_game"]:
+            blunders, mistakes, inaccuracies = 0, 0, 0
+            games_count = games.count()
+            if games_count == 0:
+                continue
+            for game in games:
+                inaccuracies += game.player.evaluation[phase_name]["inaccuracy"]
+                mistakes += game.player.evaluation[phase_name]["mistake"]
+                blunders += game.player.evaluation[phase_name]["blunder"]
+            data[phase_name] = [
+                inaccuracies / games_count,
+                mistakes / games_count,
+                blunders / games_count,
+            ]
+        return data
