@@ -73,8 +73,18 @@ class QueriesMaker:
         Your average time per move vs your opponent's average time per move.
         Statistic is calculated for each phase of the game. You can see
         when your opponent is spending more time than you and vice versa.
-
-
+        </br>
+        <b>
+        If you see that:
+        </b>
+        <ul class="text-muted">
+        <li>You are spending more time in the opening than your opponent,
+        maybe you should learn more openings.</li>
+        <li>You are spending more time in the end game than your opponent,
+        maybe you should you should learn more end game theory.</li>
+        <li>You are spending more time in the middle game than your opponent,
+        maybe you should you should play more bullet games.</li>
+        </ul>
         """
         avg_time = {
             "player": {"opening": 0, "middle_game": 0, "end_game": 0},

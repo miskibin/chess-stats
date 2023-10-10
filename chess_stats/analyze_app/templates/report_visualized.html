@@ -67,21 +67,5 @@
         {% with s=object|getattr:statistic_name %} {{s.about|safe}} {%endwith%}
       </div>
     </div>
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title">Conclusion</h2>
-      </div>
-      <div class="card-body">
-        {% for conclusion in object.win_ratio_per_color_conclusions %}
-        <blockquote class="blockquote">
-          <p>
-            {% if conclusion.1 == 1 %} ✅ {% else %} ❌ {% endif %}
-            {{conclusion.0 }}
-          </p>
-        </blockquote>
-        <hr class="text-light" />
-        {% endfor %}
-      </div>
-    </div>
   </div>
 </div>
