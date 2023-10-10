@@ -9,13 +9,13 @@ class ReportForm(forms.ModelForm):
         initial="blitz",
     )
     chess_com_username = forms.CharField(
-        initial="MagnusCarlsen",
+        initial="gmhikaru",
         max_length=40,
         required=False,
         help_text="leave blank if you don't want to analyze chess.com games",
     )
     lichess_username = forms.CharField(
-        initial="DrNykterstein",
+        initial="TSMFTXH",
         max_length=40,
         required=False,
         help_text="leave blank if you don't want to analyze lichess.org games",
