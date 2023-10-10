@@ -23,7 +23,7 @@ def get_games(
             communicator = chess_insight.get_communicator(
                 host,
                 report.engine_depth,
-                "C:/Users/miskibin/Desktop/chess-stats/stockfish.exe",
+                "./stockfish.exe",
             )
             # valid_name = communicator.get_valid_username(username) # TODO uncomment
             valid_name = username

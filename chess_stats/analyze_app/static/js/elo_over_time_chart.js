@@ -21,7 +21,6 @@ class EloOverTimeChart extends ChartInterface {
           },
           {
             label: "Chess.com elo", // Label for the Chess.com dataset
-            fill: false,
             pointRadius: 2,
             tension: 0.2,
             data: chessComData.map((entry) => entry.y), // Use Chess.com data for the 'y' values

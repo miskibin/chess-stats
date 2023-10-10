@@ -7,23 +7,31 @@ class MistakesChart extends ChartInterface {
 
   prepareData(mistakes) {
     return {
-      labels: ["Opening", "Middle", "End"],
+      labels: ["opening", "middle_game", "end_game"],
       datasets: [
         {
           label: "Inaccuracies",
           data: [
-            mistakes["Opening"][0],
-            mistakes["Middle"][0],
-            mistakes["End"][0],
+            mistakes["opening"][0],
+            mistakes["middle_game"][0],
+            mistakes["end_game"][0],
           ],
         },
 
         {
           label: "Mistakes",
           data: [
-            mistakes["Opening"][1],
-            mistakes["Middle"][1],
-            mistakes["End"][1],
+            mistakes["opening"][1],
+            mistakes["middle_game"][1],
+            mistakes["end_game"][1],
+          ],
+        },
+        {
+          label: "Blunders",
+          data: [
+            mistakes["opening"][2],
+            mistakes["middle_game"][2],
+            mistakes["end_game"][2],
           ],
         },
       ],

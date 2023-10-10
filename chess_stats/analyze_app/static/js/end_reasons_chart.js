@@ -7,31 +7,30 @@ class OpeningsChart extends ChartInterface {
 
   prepareData(chartData) {
     return {
-      labels: chartData.map((opening) => opening.opening),
+      //   labels: chartData.win.map((data) => data.end_reason),
+      labels: ["mate", "resign", "timeout"],
       datasets: [
         {
           label: "Win",
-          data: chartData.map((opening) => opening.win),
+          data: chartData.win.map((data) => data.count),
         },
         {
           label: "loss",
-          data: chartData.map((opening) => opening.loss),
-        },
-        {
-          label: "draw",
-          data: chartData.map((opening) => opening.draw),
+          data: chartData.loss.map((data) => data.count),
         },
       ],
     };
   }
 
   createChart(data) {
+    console.log(data);
     const chartData = this.prepareData(data);
 
     return new Chart($(this.chartId), {
-      type: "bar",
+      type: "radar",
       data: chartData,
       options: {
+        tension: 0.2,
         maintainAspectRatio: false,
         aspectRatio: 0.7,
       },
@@ -46,6 +45,5 @@ class OpeningsChart extends ChartInterface {
 }
 
 $(document).ready(() => {
-  new OpeningsChart("win_ratio_per_opening_as_white");
-  new OpeningsChart("win_ratio_per_opening_as_black");
+  new OpeningsChart("end_reasons");
 });

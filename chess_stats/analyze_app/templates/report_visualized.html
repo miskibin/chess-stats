@@ -59,9 +59,17 @@
   </div>
 
   <div class="col-12 col-lg-4 p-0 p-lg-1 mt-2 mb-2 m-lg-0">
+    <div class="card mb-2">
+      <div class="card-header">
+        <h2 class="card-title">About</h2>
+      </div>
+      <div class="card-body">
+        {% with s=object|getattr:statistic_name %} {{s.about|safe}} {%endwith%}
+      </div>
+    </div>
     <div class="card">
       <div class="card-header">
-        <h2 class="card-title">Conclusions</h2>
+        <h2 class="card-title">Conclusion</h2>
       </div>
       <div class="card-body">
         {% for conclusion in object.win_ratio_per_color_conclusions %}
