@@ -78,11 +78,11 @@ class QueriesMaker:
         If you see that:
         </b>
         <ul class="text-muted">
-        <li>You are spending more time in the opening than your opponent,
+        <li>You are spending <code>more time in the opening</code> than your opponent,
         maybe you should learn more openings.</li>
-        <li>You are spending more time in the end game than your opponent,
+        <li>You are spending <code>more time in the end game</code> than your opponent,
         maybe you should you should learn more end game theory.</li>
-        <li>You are spending more time in the middle game than your opponent,
+        <li>You are spending <code>more time in the middle game</code> than your opponent,
         maybe you should you should play more bullet games.</li>
         </ul>
         """
