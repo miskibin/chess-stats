@@ -15,7 +15,7 @@ class ReportForm(forms.ModelForm):
         help_text="leave blank if you don't want to analyze chess.com games",
     )
     lichess_username = forms.CharField(
-        initial="TSMFTXH",
+        initial="DrNykterstein",
         max_length=40,
         required=False,
         help_text="leave blank if you don't want to analyze lichess.org games",
