@@ -67,12 +67,21 @@ class QueriesMaker:
 
     def get_win_per_opponent_rating(self, games: QuerySet[Game]) -> dict:
         """
-        Win ratio against lower rated players, similarly rated players, and higher rated players.
+        Analyze your win ratio based on opponent ELO ratings.
+        </br>
+        <b>Insights:</b>
+        <ul class="text-muted">
+        <li><code>Low win ratio against lower-rated</code>: Consider refocusing and avoiding underestimation.</li>
+        <li><code>Inconsistent with similarly rated</code>: Re-evaluate your strategies.</li>
+        <li><code>High losses against higher-rated</code>: Study their tactics to enhance your gameplay.</li>
+        </ul>
         """
 
-        def win_ratio(queryset):
-            wins = queryset.filter(result=F("player_color")).count()
-            return (wins / queryset.count()) * 100 if queryset.exists() else 0
+        def game_results(queryset):
+            win = queryset.filter(result=F("player_color")).count()
+            draw = queryset.filter(result="draw").count()
+            loss = queryset.count() - win - draw
+            return [win, draw, loss]
 
         lower_games = games.filter(opponent__elo__lt=F("player__elo") - 10)
         similar_games = games.filter(
@@ -82,9 +91,9 @@ class QueriesMaker:
         higher_games = games.filter(opponent__elo__gt=F("player__elo") + 10)
 
         return {
-            "lower_ratio": win_ratio(lower_games),
-            "similar_ratio": win_ratio(similar_games),
-            "higher_ratio": win_ratio(higher_games),
+            "lower_ratio": game_results(lower_games),
+            "similar_ratio": game_results(similar_games),
+            "higher_ratio": game_results(higher_games),
         }
 
     def get_Xusername(self, games: QuerySet[Game]) -> str:
@@ -133,7 +142,21 @@ class QueriesMaker:
 
     def get_win_ratio_per_color(self, games: QuerySet[Game]) -> list:
         """
-        Your win ratio as white vs your win ratio as black. <br/>
+        Your win ratio when playing as white compared to when playing as black.
+        By evaluating your performance based on your color, you can gain insights
+        into potential biases or strengths in your gameplay.
+        </br>
+        <b>
+        If you notice that:
+        </b>
+        <ul class="text-muted">
+        <li>You have a <code>higher win ratio as white</code> than as black,
+        consider studying opening strategies for black</li>
+        <li>Your <code>win ratio as black exceeds that as white</code>,
+        Review and expand your opening repertoire when playing as white.</li>
+        <li>Your win ratios are <code>approximately equal for both colors</code>,
+        it indicates a well-rounded performance</li>
+        </ul>
         """
         white = self.__get_win_ratio(Color.WHITE, games)
         black = self.__get_win_ratio(Color.BLACK, games)

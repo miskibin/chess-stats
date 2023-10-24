@@ -8,28 +8,28 @@ class EloOverTimeChart extends ChartInterface {
   createChart(data) {
     const lichessData = data.filter((record) => record.host == "lichess.org");
     const chessComData = data.filter((record) => record.host == "chess.com");
+
     return new Chart($(this.chartId), {
-      type: "line", // Set the chart type to "line"
+      type: "line",
       data: {
-        labels: data.map((entry) => entry.x), // Use the 'x' values as labels
         datasets: [
           {
-            label: "Lichess elo", // Label for the Lichess dataset
-            data: lichessData.map((entry) => entry.y), // Use Lichess data for the 'y' values
+            label: "Lichess elo",
+            data: lichessData.map((entry) => ({ x: entry.x, y: entry.y })),
             pointRadius: 2,
             tension: 0.2,
+            fill: false,
           },
           {
-            label: "Chess.com elo", // Label for the Chess.com dataset
+            label: "Chess.com elo",
+            data: chessComData.map((entry) => ({ x: entry.x, y: entry.y })),
             pointRadius: 2,
             tension: 0.2,
-            data: chessComData.map((entry) => entry.y), // Use Chess.com data for the 'y' values
+            fill: false,
           },
         ],
       },
       options: {
-        // maintainAspectRatio: false,
-        // aspectRatio: 1,
         scales: {
           x: {
             type: "time",
@@ -41,21 +41,17 @@ class EloOverTimeChart extends ChartInterface {
 
   updateChart(hostName) {
     const data = this.data[hostName];
-    this.chart.data.labels = data.map((entry) => entry.x);
-    if (!data.some((entry) => entry.host == "lichess.org")) {
-      this.chart.data.datasets[0].data = [];
-      this.chart.data.datasets[1].data = data.map((entry) => entry.y);
-    } else if (!data.some((entry) => entry.host == "chess.com")) {
-      this.chart.data.datasets[1].data = [];
-      this.chart.data.datasets[0].data = data.map((entry) => entry.y);
-    } else {
-      this.chart.data.datasets[0].data = data
-        .filter((entry) => entry.host == "lichess.org")
-        .map((entry) => entry.y);
-      this.chart.data.datasets[1].data = data
-        .filter((entry) => entry.host == "chess.com")
-        .map((entry) => entry.y);
-    }
+    const lichessData = data.filter((record) => record.host == "lichess.org");
+    const chessComData = data.filter((record) => record.host == "chess.com");
+
+    this.chart.data.datasets[0].data = lichessData.map((entry) => ({
+      x: entry.x,
+      y: entry.y,
+    }));
+    this.chart.data.datasets[1].data = chessComData.map((entry) => ({
+      x: entry.x,
+      y: entry.y,
+    }));
 
     this.chart.update();
   }
