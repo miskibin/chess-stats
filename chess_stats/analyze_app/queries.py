@@ -59,6 +59,9 @@ class QueriesMaker:
     def get_Xanalyzed_games(self, games: QuerySet[Game]) -> int:
         return games.filter(report=self.report).count()
 
+    def get_Xprofessional(self, games: QuerySet[Game]) -> int:
+        return self.report.professional
+
     def get_Xgames_num(self, games: QuerySet[Game]) -> int:
         return len(games)
 
