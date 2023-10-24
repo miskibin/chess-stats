@@ -22,6 +22,7 @@ class Report(models.Model):
     analyzed_games = models.IntegerField(default=0, null=True)
     engine_depth = models.IntegerField(default=10)
     fail_reason = models.CharField(max_length=100, null=True, blank=True)
+    professional = models.BooleanField()
 
     def __str__(self):
         return self.chess_com_username + " " + self.lichess_username

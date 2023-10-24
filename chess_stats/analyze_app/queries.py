@@ -1,7 +1,7 @@
 from logging import Logger
 from time import time
 
-from django.db import models
+from datetime import datetime
 from django.db.models import Count, F, Q
 from django.db.models.query import QuerySet
 from .models import ChessGame as Game
@@ -205,7 +205,7 @@ class QueriesMaker:
         """
         games = games.annotate(count=Count("host")).order_by("-date")
         data = []
-        day = games[0].date.date()
+        day = -1
         for game in games:
             if game.date.date() != day:
                 day = game.date.date()
