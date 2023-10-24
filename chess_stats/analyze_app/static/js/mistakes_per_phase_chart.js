@@ -43,6 +43,8 @@ class MistakesChart extends ChartInterface {
       type: "bar",
       data: this.prepareData(data),
       options: {
+        maintainAspectRatio: false,
+        aspectRatio: 0.7,
         responsive: true,
         scales: {
           x: {

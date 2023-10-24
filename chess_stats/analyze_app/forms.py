@@ -27,16 +27,18 @@ class ReportForm(forms.ModelForm):
         help_text="number of games to analyze Must be divisible by number of hosts",
     )
     professional = forms.BooleanField(
-        help_text="Wether or not You are professional player."
+        help_text="Wether or not You are professional player.",
+        initial=False,
     )
     engine_depth = forms.IntegerField(initial=5)
 
     class Meta:
         model = Report
         fields = (
+            "time_class",
             "chess_com_username",
             "lichess_username",
             "games_num",
-            "time_class",
             "professional",
+            "engine_depth",
         )

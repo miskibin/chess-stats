@@ -12,17 +12,17 @@ class OpponentRatingChart extends ChartInterface {
         {
           label: "Higher rated opponent",
           data: chartData.higher_ratio, // Assuming the ratio is in percentage. Subtract from 100 to get loss ratio.
-          backgroundColor: ["#66EE99", "#447788", "#EE4455"],
+          backgroundColor: ["#36AC59", "#916336", "#914558"],
         },
         {
-          label: "Simmilar rated opponent",
+          label: "Similar rated opponent (+- 10 elo)",
           data: chartData.similar_ratio, // Assuming the ratio is in percentage.
-          backgroundColor: ["#66EE99", "#447788", "#EE4455"],
+          backgroundColor: ["#36AC59", "#916336", "#914558"],
         },
         {
           label: "Lower rated opponent",
           data: chartData.lower_ratio, // Assuming the ratio is in percentage.
-          backgroundColor: ["#66EE99", "#447788", "#EE4455"],
+          backgroundColor: ["#36AC59", "#916336", "#914558"],
         },
       ],
     };

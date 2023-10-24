@@ -30,6 +30,7 @@ class ReportCreateView(CreateView):
             time_class=form.data["time_class"],
             games_num=int(form.data["games_num"]),
             engine_depth=int(form.data["engine_depth"]),
+            professional=bool(form.data.get("professional", False)),
         )
         report.save()
         async_task(get_games, report)
