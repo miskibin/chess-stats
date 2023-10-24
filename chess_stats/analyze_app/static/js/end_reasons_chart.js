@@ -27,7 +27,7 @@ class OpeningsChart extends ChartInterface {
     const chartData = this.prepareData(data);
 
     return new Chart($(this.chartId), {
-      type: "radar",
+      type: "bar",
       data: chartData,
       options: {
         tension: 0.2,

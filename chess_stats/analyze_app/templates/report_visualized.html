@@ -58,12 +58,15 @@
     </div>
   </div>
 
-  <div class="col-12 col-lg-4 p-0 p-lg-1 mt-2 mb-2 m-lg-0">
-    {% if object.Xprofessional.total %}
-    <div class="card mb-2" style="display: none">
-      {% else %}
+  {% if object.Xprofessional.total %}
+  <div
+    class="col-12 col-lg-4 p-0 p-lg-1 mt-2 mb-2 m-lg-0"
+    style="display: none"
+  >
+    {% else %}
+    <div class="col-12 col-lg-4 p-0 p-lg-1 mt-2 mb-2 m-lg-0">
+      {% endif %}
       <div class="card mb-2">
-        {% endif %}
         <div class="card-header">
           <h2 class="card-title">About</h2>
         </div>
@@ -73,5 +76,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
