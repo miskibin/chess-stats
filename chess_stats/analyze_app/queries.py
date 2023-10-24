@@ -65,6 +65,28 @@ class QueriesMaker:
     def get_Xgames_num(self, games: QuerySet[Game]) -> int:
         return len(games)
 
+    def get_win_per_opponent_rating(self, games: QuerySet[Game]) -> dict:
+        """
+        Win ratio against lower rated players, similarly rated players, and higher rated players.
+        """
+
+        def win_ratio(queryset):
+            wins = queryset.filter(result=F("player_color")).count()
+            return (wins / queryset.count()) * 100 if queryset.exists() else 0
+
+        lower_games = games.filter(opponent__elo__lt=F("player__elo") - 10)
+        similar_games = games.filter(
+            opponent__elo__gte=F("player__elo") - 10,
+            opponent__elo__lte=F("player__elo") + 10,
+        )
+        higher_games = games.filter(opponent__elo__gt=F("player__elo") + 10)
+
+        return {
+            "lower_ratio": win_ratio(lower_games),
+            "similar_ratio": win_ratio(similar_games),
+            "higher_ratio": win_ratio(higher_games),
+        }
+
     def get_Xusername(self, games: QuerySet[Game]) -> str:
         if games[0].host == "lichess.org":
             return games[0].report.lichess_username
