@@ -262,10 +262,20 @@ class QueriesMaker:
 
     def get_mistakes_per_phase(self, games: QuerySet[Game]):
         """
-        Mistakes that you made in each phase of the game. <br/>
-        Keep in mind that this statistic is based on the engine evaluation. <br/>
-        Higher engine depths means more accurate evaluation. <br/>
+        Retrieve the average mistakes made during each phase of the game.
+        - Categorized into: 'opening', 'middle_game', and 'end_game'.
+        - The statistics are derived from engine evaluations.
+        <br/>
+        <b>Note:</b> A deeper engine evaluation ensures more precise assessments.
+        <br/>
+        <b>Insights:</b>
+        <ul class="text-muted">
+        <li><code>Frequent mistakes in the opening:</code> Consider revisiting and learning opening theories.</li>
+        <li><code>mistakes in the middle game:</code> You might need to improve your tactical vision or positional understanding.</li>
+        <li><code>Blunders in the end game:</code> Focus on endgame techniques and familiarize yourself with common endgame patterns.</li>
+        </ul>
         """
+
         data = {}
         for phase_name in ["opening", "middle_game", "end_game"]:
             blunders, mistakes, inaccuracies = 0, 0, 0
