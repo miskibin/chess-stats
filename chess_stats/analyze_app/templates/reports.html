@@ -48,8 +48,18 @@
           <tr>
             <th scope="row">{{report.id}}</th>
             <td>{{report.created}}</td>
-            <td><code> {{report.chess_com_username}}</code></td>
-            <td><code> {{report.lichess_username}}</code></td>
+            <td>
+              <a
+                href="https://www.chess.com/member/{{ report.chess_com_username }}"
+              >
+                <code>{{ report.chess_com_username }}</code>
+              </a>
+            </td>
+            <td>
+              <a href="https://lichess.org/@/{{ report.lichess_username }}">
+                <code>{{ report.lichess_username }}</code>
+              </a>
+            </td>
             {% if report.analyzed_games == report.games_num %}
             <td><span class="alert alert-success p-1">Success</span></td>
             {% elif report.analyzed_games == -1%}
