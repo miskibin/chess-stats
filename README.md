@@ -1,8 +1,6 @@
 ![example workflow](https://github.com/michalskibinski109/chess-stats/actions/workflows/python-app.yml/badge.svg)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
-**project still under development**
-
 # Chess stats
 
 # [demo](https://michalskibinski109.github.io/chess-stats/)
@@ -24,7 +22,7 @@ python -m ./src/server/manage.py migrate; python -m ./src/server/manage.py runse
 
 ### 2. Run worker
 ```bash
-python -m ./src/server/manage.py qcuster
+python -m ./src/server/manage.py qcluster
 ```
 
 
