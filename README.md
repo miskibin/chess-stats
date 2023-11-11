@@ -15,7 +15,7 @@ per time control,per day of the week, check in which stage of the game you are l
 ### 1. Configure and run server
 
 ```bash
-git clone https://github.com/michalskibinski109/chess-stats.git; cd chess-stats;  python -m pip install -r requirements.txt; python  ./src/server/manage.py runserver
+git clone https://github.com/michalskibinski109/chess-stats.git; cd chess-stats;  python -m pip install -r requirements.txt; python  ./chess_stats/manage.py runserver
 ```
 
 ### 2. Run worker
