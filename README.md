@@ -20,7 +20,7 @@ git clone https://github.com/michalskibinski109/chess-stats.git; cd chess-stats;
 
 ### 2. Run worker
 ```bash
- cd chess-stats; python -m ./chess_stats/manage.py qcluster
+ cd chess-stats; python  ./chess_stats/manage.py qcluster
 ```
 
 
