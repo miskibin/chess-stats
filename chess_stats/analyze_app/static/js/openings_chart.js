@@ -34,6 +34,20 @@ class OpeningsChart extends ChartInterface {
       options: {
         maintainAspectRatio: false,
         aspectRatio: 0.7,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Result",
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Number of games",
+            },
+          },
+        },
       },
     });
   }

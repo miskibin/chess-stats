@@ -7,7 +7,7 @@ class MistakesChart extends ChartInterface {
 
   prepareData(mistakes) {
     return {
-      labels: ["opening", "middle_game", "end_game"],
+      labels: ["opening", "middle game", "end game"],
       datasets: [
         {
           label: "Inaccuracies",
@@ -49,9 +49,17 @@ class MistakesChart extends ChartInterface {
         scales: {
           x: {
             stacked: true,
+            title: {
+              display: true,
+              text: "Game Phase",
+            },
           },
           y: {
             stacked: true,
+            title: {
+              display: true,
+              text: "Avg number of different mistakes per phase",
+            },
           },
         },
       },

@@ -1,12 +1,19 @@
 import ChartInterface from "./chartInterface.js";
 
+const camelCaseToSentenceCase = (camelCaseString) => {
+  let result = camelCaseString.replace(/_/g, " ");
+  return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
 class AvgMoveTimeChart extends ChartInterface {
   constructor() {
     super("avg_time_per_move");
   }
   prepareData(chartData) {
     return {
-      labels: Object.keys(chartData.player),
+      labels: Object.keys(chartData.player).map((key) =>
+        camelCaseToSentenceCase(key)
+      ),
       datasets: [
         {
           data: Object.values(chartData.player),
@@ -30,6 +37,20 @@ class AvgMoveTimeChart extends ChartInterface {
       options: {
         maintainAspectRatio: false,
         aspectRatio: 0.7,
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: "Time (s)",
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Game Phase",
+            },
+          },
+        },
       },
     });
   }

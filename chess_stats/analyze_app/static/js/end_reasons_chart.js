@@ -33,6 +33,20 @@ class OpeningsChart extends ChartInterface {
         tension: 0.2,
         maintainAspectRatio: false,
         aspectRatio: 0.7,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "End reason",
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Number of games",
+            },
+          },
+        },
       },
     });
   }

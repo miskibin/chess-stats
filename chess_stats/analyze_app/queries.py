@@ -180,14 +180,20 @@ class QueriesMaker:
 
     def get_win_ratio_per_opening_as_white(self, games: QuerySet[Game]) -> dict:
         """
-        Your win ratio for each opening as white. <br/>
-        You can see which openings are the most successful for you. <br/>
+        Some as above but for white.
         """
         return self.__get_win_ratio_per_opening_for_color(games, Color.WHITE)
 
     def get_win_ratio_per_opening_as_black(self, games: QuerySet[Game]) -> dict:
         """
-        Same as above but for black. <br/>
+        Your win ratio for each opening as black. <br/>
+        You can see which openings are the most successful for you. <br/>
+        <b>Insights:</b>
+        <ul class="text-muted">
+        <li><code>High score ratio only in one opening</code>: You might be playing too many games in that opening. Consider expanding your opening repertoire.
+        Otherwise opponents will be able to prepare against you.</li>
+        <li><code>Low ratio in some openings you like</code>: Study it harder. Play against computer or friends.</li>
+        <li><code>High ratio in some openings you don't like</code>: Study how you could change your first moves to get to the opening you like.</li>
         """
         return self.__get_win_ratio_per_opening_for_color(games, Color.BLACK)
 
@@ -195,6 +201,15 @@ class QueriesMaker:
         """
         Reasons why the game ended. <br/>
         IMPORTANT: <b>Lichess Api does not provide this data.</b>
+        </br>
+        <b>
+        If you notice that:
+        </b>
+        <ul class="text-muted">
+        <li><code>You loose a lot of games on time</code>, consider playing longer time controls.</li>
+        <li><code>You loose a lot of games on checkmate</code>, consider doing more tactics.</li>
+        <li><code>You loose a lot of games on resignation</code>, consider playing till the end. It costs you nothing.</li>
+        </ul>
         """
         # field name end_reason
         end_reasons = {}
@@ -250,6 +265,15 @@ class QueriesMaker:
         """
         You can see how your elo changed over time. <br/>
         For most active players Lichess rating is about 200 points higher than chess.com rating.
+        <br/>
+        <b>Note:</b> A deeper engine evaluation ensures more precise assessments.
+        <br/>
+        <b>Insights:</b>
+        <ul class="text-muted">
+        <li><code>Sharp increase in elo</code>: You are probably underrated. Keep playing and your elo will stabilize.</li>
+        <li><code>Sharp decrease in elo</code>: You are probably overrated. Keep playing and your elo will stabilize.</li>
+        <li><code>Stable elo</code>: You are probably rated correctly. Keep playing and your elo will stabilize.</li>
+
         """
         games = games.annotate(count=Count("host")).order_by("-date")
         data = []

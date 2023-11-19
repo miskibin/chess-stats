@@ -35,6 +35,16 @@ class EloOverTimeChart extends ChartInterface {
         scales: {
           x: {
             type: "time",
+            title: {
+              display: true,
+              text: "Date",
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "ELO points",
+            },
           },
         },
       },
