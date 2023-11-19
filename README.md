@@ -1,8 +1,6 @@
 ![example workflow](https://github.com/michalskibinski109/chess-stats/actions/workflows/python-app.yml/badge.svg)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
-**project still under development**
-
 # Chess stats
 
 # [demo](https://michalskibinski109.github.io/chess-stats/)
@@ -17,14 +15,12 @@ per time control,per day of the week, check in which stage of the game you are l
 ### 1. Configure and run server
 
 ```bash
-git clone https://github.com/michalskibinski109/chess-stats.git;
-cd chess-stats; python -m pip install -e .; python -m pip install -r requirements.txt;
-python -m ./src/server/manage.py migrate; python -m ./src/server/manage.py runserver
+git clone https://github.com/michalskibinski109/chess-stats.git; cd chess-stats;  python -m pip install -r requirements.txt; python  ./chess_stats/manage.py migrate; python  ./chess_stats/manage.py runserver
 ```
 
 ### 2. Run worker
 ```bash
-python -m ./src/server/manage.py qcuster
+ cd chess-stats; python  ./chess_stats/manage.py qcluster
 ```
 
 
