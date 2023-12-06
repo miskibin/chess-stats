@@ -28,4 +28,4 @@ jobs:
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
-        run: python ./chess_states/manage.py test analyze_app -v 2
+        run: python chess_stats/manage.py test analyze_app -v 2
