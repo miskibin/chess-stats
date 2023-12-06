@@ -35,8 +35,18 @@ def get_games(
             username = valid_name
             report.save()
             logger.info(f"User {username} is valid. Getting games from {host}")
-            _update_report(report, logger, username, communicator, games_num_per_host)
+            try:
+                _update_report(
+                    report, logger, username, communicator, games_num_per_host
+                )
+            except Exception as exc:
+                logger.error(exc)
+                report.analyzed_games = -1
+                report.fail_reason = str(exc)
+                report.save()
+                raise exc
     logger.info(f"Analyzed {report.analyzed_games} games. Report is ready 😍 ")
+    report.games_num = report.analyzed_games
 
 
 def _update_report(
@@ -46,24 +56,16 @@ def _update_report(
     communicator: ApiCommunicator,
     games_num: int,
 ) -> None:
-    try:
-        for game in communicator.games_generator(
-            username, games_num, report.time_class
-        ):
-            opponent = models.SingleGamePlayer(**game.opponent.asdict())
-            player = models.SingleGamePlayer(**game.player.asdict())
-            game_dict = game.asdict()  # remove player and opponent from game_dict
-            del game_dict["player"]
-            del game_dict["opponent"]
-            obj = models.ChessGame(
-                **game_dict, report=report, player=player, opponent=opponent
-            )
-            report.analyzed_games += 1
-            report.save()
-            obj.save()
-            logger.debug(f"Analyzed {report.analyzed_games} games")
-    except Exception as exc:
-        logger.error(exc)
-        report.analyzed_games = -1
+    for game in communicator.games_generator(username, games_num, report.time_class):
+        opponent = models.SingleGamePlayer(**game.opponent.asdict())
+        player = models.SingleGamePlayer(**game.player.asdict())
+        game_dict = game.asdict()  # remove player and opponent from game_dict
+        del game_dict["player"]
+        del game_dict["opponent"]
+        obj = models.ChessGame(
+            **game_dict, report=report, player=player, opponent=opponent
+        )
+        report.analyzed_games += 1
         report.save()
-        raise exc
+        obj.save()
+        logger.debug(f"Analyzed {report.analyzed_games} games")

@@ -63,7 +63,7 @@ class QueriesMaker:
         return self.report.professional
 
     def get_Xgames_num(self, games: QuerySet[Game]) -> int:
-        return len(games)
+        return self.report.games_num
 
     def get_win_per_opponent_rating(self, games: QuerySet[Game]) -> dict:
         """
