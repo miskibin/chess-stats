@@ -1,7 +1,7 @@
 pytest
 easy_logs
 django_q
-django
+django==4.2.5
 numpy
 PyYAML
 httpx
