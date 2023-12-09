@@ -71,4 +71,4 @@ end
 
 ## Note
 
-In this project I use logger from my other package. You can check it [here](https://github.com/michalskibinski109/miskibin) if you want to use collored logs in your project.
+In this project I use logger from my other package. You can check it [here](https://github.com/michalskibinski109/easy_logs) if you want to use colored logs in your project.

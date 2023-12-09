@@ -2,7 +2,7 @@ from django.test import TestCase
 from ..models import ChessGame, Report, SingleGamePlayer, Color, Result
 from ..queries import QueriesMaker
 from django.utils import timezone
-from miskibin import get_logger
+from easy_logs import get_logger
 
 
 class QueryTest(TestCase):
