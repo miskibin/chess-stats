@@ -1,201 +1,171 @@
-{% extends 'base.html' %} {% block extra_head %}
-<link rel="stylesheet" href="../static/css/style.css" />
-<script src="../static/js/script.js" defer></script>
-{% endblock %} {% block content %}
-<div class="container-fluid">
-  <main class="flex-shrink-0 m-0">
-    <div class="background-div">
-      <section>
-        <div class="row justify-content-center m-0">
-          <h1 class="display-1 text-center m-5">
-            <span class="text-danger">W</span>elcome.
-          </h1>
-          <hr class="col-8" />
-          <p class="m-1 m-lg-4 col-10 col-lg-0 fs-4">
-            We are free and
-            <span class="text-warning"> open source </span> chess analysis app.
-            We provide you with the best analysis of your games. Whenewer you
-            feel stuck and you don't know what to do to improve your game, we
-            are here to help you. We are using the latest
-            <code>stockfish-16</code> engine, AI algorithms and data
-            visualizations to help you understand your games. We are also
-            providing you with the best
-            <span class="text-warning">user interface</span> to make your
-            journey as easy as possible.
-          </p>
-          <div class="row justify-content-center text-center">
-            <div class="col-12 col-lg-2 hidden logo m-0 m-lg-4">
-              <i class="icon fas fa-circle-check fa-10x p-3 text-primary"></i>
-              <p class="display-6 text-center">Easy</p>
-            </div>
-            <div class="col-12 col-lg-2 hidden logo m-0 m-lg-4">
-              <i class="icon fas fa-brain fa-10x p-3 text-primary"></i>
-              <p class="display-6 text-center">Smart</p>
-            </div>
-            <div class="col-12 col-lg-2 hidden logo m-0 m-lg-4">
-              <i class="icon fas fa-lock bg-primary fa-10x p-3 text-dark"></i>
-              <p class="display-6 text-center">Secure</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div class="row justify-content-center m-0 mt-5">
-          <div class="col-12 col-lg-4 fs-5 m-0 m-lg-5 p-4">
-            <h2 class="text-white">
-              Use power of
-              <a
-                href="https://github.com/michalskibinski109/chess_insight"
-                class="text-warning"
-                >chess-insight</a
-              >
-            </h2>
-            <p class="text-muted">
-              Modern bash application for gathering chess data and analyzing
-              chess games. Created by <b>Us</b>!
+{% extends 'base.html' %}
+{% block extra_head %}
+  <link rel="stylesheet" href="../static/css/style.css" />
+  <script src="../static/js/script.js" defer></script>
+{% endblock extra_head %}
+{% block content %}
+  <div class="container-fluid">
+    <main class="flex-shrink-0 m-0">
+      <div class="background-div">
+        <section>
+          <div class="row justify-content-center m-0">
+            <h1 class="display-1 text-center m-5">
+              <span class="text-danger">W</span>elcome.
+            </h1>
+            <hr class="col-8" />
+            <p class="m-1 m-lg-4 col-10 col-lg-0 fs-4">
+              We are free and
+              <span class="text-warning">open source</span> chess analysis app.
+              We provide you with the best analysis of your games. Whenewer you
+              feel stuck and you don't know what to do to improve your game, we
+              are here to help you. We are using the latest
+              <code>stockfish-16</code> engine, AI algorithms and data
+              visualizations to help you understand your games. We are also
+              providing you with the best
+              <span class="text-warning">user interface</span> to make your
+              journey as easy as possible.
             </p>
-
-            <ul class="text-muted">
-              <li>Download games from lichess.org and chess.com</li>
-              <li>
-                Analyze games using set of custom methods and stockfish-16
-                engine
-              </li>
-              <li>
-                Provides methods for exporting list of analyzed games to csv and
-                json
-              </li>
-            </ul>
-          </div>
-          <img
-            src="../static/ssc.png"
-            class="col-11 col-lg-6 console m-0 my-3 m-lg-2"
-            alt=""
-          />
-        </div>
-      </section>
-      <section class="d-flex flex-column justify-content-center">
-        <div class="row align-self-center">
-          <div class="row justify-content-center">
-            <div
-              class="col-10 col-lg-3 rounded bg-primary fs-5 border m-1 m-lg-5 p-4"
-            >
-              <h2 class="text-white">Track Your Chess Progress</h2>
-              <p class="text-muted">
-                Unlock the power of data with our tool! Create detailed reports
-                of your chess games from
-                <code>chess.com</code>
-                and
-                <code>lichess.org</code>
-                for <b>free</b>. Discover your strengths and weaknesses, analyze
-                your strategies, and improve your game.
-              </p>
-            </div>
-            <div
-              class="col-10 col-lg-3 rounded bg-primary fs-5 border m-1 m-lg-5 p-4"
-            >
-              <h2 class="text-white">Winning Insights</h2>
-              <p class="text-muted">
-                Get the winning edge! Check your win ratio per opening, per time
-                control, and even per day of the week. Identify where you excel
-                and where you need to focus your efforts to become a better
-                chess player.
-              </p>
-            </div>
-            <div
-              class="col-10 col-lg-3 rounded bg-dark fs-5 border m-1 m-lg-5 p-4"
-            >
-              <h2 class="text-white">Game Analysis Made Easy</h2>
-              <p class="text-muted">
-                Experience the convenience of in-depth game analysis. Our tool
-                breaks down your games into phases and highlights your mistakes,
-                helping you learn and grow as a chess player.
-              </p>
+            <div class="row justify-content-center text-center">
+              <div class="col-12 col-lg-2 hidden logo m-0 m-lg-4">
+                <i class="icon fas fa-circle-check fa-10x p-3 text-primary"></i>
+                <p class="display-6 text-center">Easy</p>
+              </div>
+              <div class="col-12 col-lg-2 hidden logo m-0 m-lg-4">
+                <i class="icon fas fa-brain fa-10x p-3 text-primary"></i>
+                <p class="display-6 text-center">Smart</p>
+              </div>
+              <div class="col-12 col-lg-2 hidden logo m-0 m-lg-4">
+                <i class="icon fas fa-lock bg-primary fa-10x p-3 text-dark"></i>
+                <p class="display-6 text-center">Secure</p>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="col-12 row align-items-center justify-content-center">
-          <a
-            class="btn btn-success col-10 col-lg-3 m-1 my-5 m-lg-5 p-2 fs-5"
-            href="/create/"
-          >
-            <i class="fa-solid fa-chess-king fa-2x"></i>
-            <span class="fs-4">Get started</span>
-          </a>
-          <a
-            class="btn btn-warning col-10 col-lg-3 m-1 mb-5 m-lg-5 p-2 fs-5"
-            href="https://github.com/michalskibinski109/chess-stats"
-          >
-            <i class="fa-brands fa-github fa-2x"></i>
-            <span class="fs-4"> github page </span>
-          </a>
-        </div>
-      </section>
-      <section class="d-flex flex-column">
-        <div class="row m-2">
-          <div class="col-0 col-lg-1"></div>
-          <img
-            src="../static/ss1.png"
-            class="rounded p-2 m-2 bg-primary col-11 col-lg-5"
-            alt=""
-          />
-          <div
-            class="col-11 col-lg-4 text-center fs-5 p-5 text-muted hidden box"
-          >
-            <h3 class="display-5">Powerfull visualizations</h3>
-            Improve with our interactive visualizations. We provide you with the
-            many different Unique charts and graphs to help you understand your
-            games. You can filter games by sources and seed them combined.
+        </section>
+        <section>
+          <div class="row justify-content-center m-0 mt-5">
+            <div class="col-12 col-lg-4 fs-5 m-0 m-lg-5 p-4">
+              <h2 class="text-white">
+                Use power of
+                <a href="https://github.com/michalskibinski109/chess_insight"
+                   class="text-warning">chess-insight</a>
+              </h2>
+              <p class="text-muted">
+                Modern bash application for gathering chess data and analyzing
+                chess games. Created by <b>Us</b>!
+              </p>
+              <ul class="text-muted">
+                <li>Download games from lichess.org and chess.com</li>
+                <li>
+                  Analyze games using set of custom methods and stockfish-16
+                  engine
+                </li>
+                <li>
+                  Provides methods for exporting list of analyzed games to csv and
+                  json
+                </li>
+              </ul>
+            </div>
+            <img src="../static/ssc.png"
+                 class="col-11 col-lg-6 console m-0 my-3 m-lg-2"
+                 alt="" />
           </div>
-        </div>
-        <div class="row m-2">
-          <div class="col-0 col-lg-1"></div>
-          <div
-            class="col-11 col-lg-5 text-center fs-5 p-5 text-muted hidden box"
-          >
-            <h3 class="display-5">All reports in one place</h3>
-            You can create many different reports and save them in one place.
-            Come back to them anytime you want. You can also share them with
-            your friends. You can see list of all games with details in any
-            report you want.
+        </section>
+        <section class="d-flex flex-column justify-content-center">
+          <div class="row align-self-center">
+            <div class="row justify-content-center">
+              <div class="col-10 col-lg-3 rounded bg-primary fs-5 border m-1 m-lg-5 p-4">
+                <h2 class="text-white">Track Your Chess Progress</h2>
+                <p class="text-muted">
+                  Unlock the power of data with our tool! Create detailed reports
+                  of your chess games from
+                  <code>chess.com</code>
+                  and
+                  <code>lichess.org</code>
+                  for <b>free</b>. Discover your strengths and weaknesses, analyze
+                  your strategies, and improve your game.
+                </p>
+              </div>
+              <div class="col-10 col-lg-3 rounded bg-primary fs-5 border m-1 m-lg-5 p-4">
+                <h2 class="text-white">Winning Insights</h2>
+                <p class="text-muted">
+                  Get the winning edge! Check your win ratio per opening, per time
+                  control, and even per day of the week. Identify where you excel
+                  and where you need to focus your efforts to become a better
+                  chess player.
+                </p>
+              </div>
+              <div class="col-10 col-lg-3 rounded bg-dark fs-5 border m-1 m-lg-5 p-4">
+                <h2 class="text-white">Game Analysis Made Easy</h2>
+                <p class="text-muted">
+                  Experience the convenience of in-depth game analysis. Our tool
+                  breaks down your games into phases and highlights your mistakes,
+                  helping you learn and grow as a chess player.
+                </p>
+              </div>
+            </div>
           </div>
-          <img
-            src="../static/ss2.png"
-            class="rounded p-2 m-2 bg-primary col-11 col-lg-5"
-            alt=""
-          />
-        </div>
-        <div class="row m-2">
-          <div class="col-0 col-lg-1"></div>
-          <img
-            src="../static/ss3.png"
-            class="rounded p-2 m-2 bg-primary col-11 col-lg-5"
-            alt=""
-          />
-          <div
-            class="col-11 col-lg-4 text-center fs-5 p-5 text-muted hidden box"
-          >
-            <h3 class="display-5">Highly customizable</h3>
-            Play with our varius custom options to create the best report for
-            your needs. You can choose engine depth
-            <b>We are using latest <code>stockfish-16</code></b> number of
-            games. Different sources such as <code>chess.com</code>,
-            <code>lichess.org</code> and more to come.
+          <div class="col-12 row align-items-center justify-content-center">
+            <a class="btn btn-success col-10 col-lg-3 m-1 my-5 m-lg-5 p-2 fs-5"
+               href="/create/">
+              <i class="fa-solid fa-chess-king fa-2x"></i>
+              <span class="fs-4">Get started</span>
+            </a>
+            <a class="btn btn-warning col-10 col-lg-3 m-1 mb-5 m-lg-5 p-2 fs-5"
+               href="https://github.com/michalskibinski109/chess-stats">
+              <i class="fa-brands fa-github fa-2x"></i>
+              <span class="fs-4">github page</span>
+            </a>
           </div>
-        </div>
-      </section>
-      <footer class="mt-auto rounded border" style="display: block">
-        <div class="text-center p-3">
-          © 2023 Copyright:
-          <a
-            class="text-white"
-            href="https://github.com/michalskibinski109/chess-stats"
-            >Michal Skibinski</a
-          >
-        </div>
-      </footer>
-    </div>
-    {% endblock %}
-  </main>
-</div>
+        </section>
+        <section class="d-flex flex-column">
+          <div class="row m-2">
+            <div class="col-0 col-lg-1"></div>
+            <img src="../static/ss1.png"
+                 class="rounded p-2 m-2 bg-primary col-11 col-lg-5"
+                 alt="" />
+            <div class="col-11 col-lg-4 text-center fs-5 p-5 text-muted hidden box">
+              <h3 class="display-5">Powerfull visualizations</h3>
+              Improve with our interactive visualizations. We provide you with the
+              many different Unique charts and graphs to help you understand your
+              games. You can filter games by sources and seed them combined.
+            </div>
+          </div>
+          <div class="row m-2">
+            <div class="col-0 col-lg-1"></div>
+            <div class="col-11 col-lg-5 text-center fs-5 p-5 text-muted hidden box">
+              <h3 class="display-5">All reports in one place</h3>
+              You can create many different reports and save them in one place.
+              Come back to them anytime you want. You can also share them with
+              your friends. You can see list of all games with details in any
+              report you want.
+            </div>
+            <img src="../static/ss2.png"
+                 class="rounded p-2 m-2 bg-primary col-11 col-lg-5"
+                 alt="" />
+          </div>
+          <div class="row m-2">
+            <div class="col-0 col-lg-1"></div>
+            <img src="../static/ss3.png"
+                 class="rounded p-2 m-2 bg-primary col-11 col-lg-5"
+                 alt="" />
+            <div class="col-11 col-lg-4 text-center fs-5 p-5 text-muted hidden box">
+              <h3 class="display-5">Highly customizable</h3>
+              Play with our varius custom options to create the best report for
+              your needs. You can choose engine depth
+              <b>We are using latest <code>stockfish-16</code></b> number of
+              games. Different sources such as <code>chess.com</code>,
+              <code>lichess.org</code> and more to come.
+            </div>
+          </div>
+        </section>
+        <footer class="mt-auto rounded border" style="display: block">
+          <div class="text-center p-3">
+            © 2023 Copyright:
+            <a class="text-white"
+               href="https://github.com/michalskibinski109/chess-stats">Michal Skibinski</a>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>
+{% endblock %}
