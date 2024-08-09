@@ -3,7 +3,7 @@
 
 # Chess stats
 
-# [demo](https://michalskibinski109.github.io/chess-stats/)
+# [demo](https://miskibin.github.io/chess-stats/)
 
 ## description
 
